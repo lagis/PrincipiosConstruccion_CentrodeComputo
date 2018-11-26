@@ -13,7 +13,7 @@ import java.util.List;
  * @author ferc
  */
 public interface InterfaceInventarioHardware {
-  public void registrarEquipo(Equipo nuevoEquipo);
+  public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, String marca, String responsableUbicacion);
   public List<DictamenMantenimiento> generarReporteMantinimiento(Date fecha);
   public List<Equipo> consultarEquipoDisponible();  
 }

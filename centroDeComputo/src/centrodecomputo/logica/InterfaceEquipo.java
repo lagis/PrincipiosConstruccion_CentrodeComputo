@@ -15,8 +15,17 @@ import java.util.List;
 public interface InterfaceEquipo {
   
   public void registrarPrestamoEquipo(Prestamo prestamo);
-  public void registrarDictamen(DictamenMantenimiento dictamen);
-  public List<DictamenMantenimiento> generarReporteMantenimiento(Date fehca);
+  public void registrarDictamen(String nombreTecnico, String apellidoPaternoTecnico,
+      String apellidoMaternoTecnico, Date fecha, String region,
+          String telefono, String correo, String entidadAcademica, String tipoBorrado,  
+              String observaciones, String tipoDictamen, String descripcion);
   public List<Prestamo> consultarPrestamo();
   public boolean consultarDisponibilidad();
+  public int consultarId();
+  public String consultarModelo();
+  public String consultarNumeroSerie();
+  public String consultarTipoEquipo();
+  public String consultarMarca();
+  public String responsableUbicacion();
+  
 }

@@ -12,11 +12,31 @@ import java.util.Date;
  * @author ferc
  */
 public class Prestamo {
-  private Date fehca;
-  private String nombrePrestamo;
+  private Date fechaPrestamo;
+  private String nombrePrestatario;
   private Date devolucion;
   
-  public void registrarDevolucion(Date devolucion){
+  
+  public Prestamo(Date fecha, String prestatario){
+    this.fechaPrestamo = fecha;
+    this.nombrePrestatario = prestatario;
+  }
+  public Prestamo(Date fecha, String prestatario, Date devolucion){
+    this.fechaPrestamo = fecha;
+    this.nombrePrestatario = prestatario;
     this.devolucion = devolucion;
+  }  
+  
+  public Date consultarFechaPrestamo(){
+    return this.fechaPrestamo;
   }    
+  
+  public String consultarPrestatario(){
+    return this.nombrePrestatario;
+  }
+  
+  public Date consultarDevolucion(){
+    return this.devolucion;
+  }
+  
 }
