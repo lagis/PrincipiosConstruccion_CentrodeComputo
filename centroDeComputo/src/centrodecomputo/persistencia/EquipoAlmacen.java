@@ -6,6 +6,7 @@
 package centrodecomputo.persistencia;
 
 import centrodecomputo.logica.DictamenMantenimiento;
+import centrodecomputo.logica.Equipo;
 import centrodecomputo.logica.Prestamo;
 import java.util.List;
 
@@ -49,6 +50,11 @@ public class EquipoAlmacen implements PersistenciaEquipo{
   
   @Override
   public List<DictamenMantenimiento> consultarListaDictamen(int id) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public Equipo consultarEquipo(int id) {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
   

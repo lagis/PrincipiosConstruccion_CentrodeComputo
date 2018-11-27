@@ -10,11 +10,13 @@
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/EquipoAlmacen.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/logica/Software.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/logica/DictamenMantenimiento.java</file>
+            <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/SoftwareAlmacen.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/ConexioBasedeDatos.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/CentroDeComputo.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/PersistenciaEquipo.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/logica/InterfaceInventarioHardware.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/GenericDao.java</file>
+            <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/persistencia/PersistenciaSoftware.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/logica/Equipo.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/centroDeComputo/src/centrodecomputo/logica/InventarioHardware.java</file>
         </group>

@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package centrodecomputo.logica;
+package centrodecomputo.persistencia;
 
-import centrodecomputo.persistencia.PersistenciaSoftware;
-import centrodecomputo.persistencia.SoftwareAlmacen;
+import centrodecomputo.logica.Equipo;
+import centrodecomputo.logica.Software;
 import java.util.List;
 
 /**
  *
- * @author ferc
+ * @author PREDATOR 15 G9-78Q
  */
-public class InventarioSoftware implements InterfaceSoftware{
-  private List<Software> inventario;
-  private PersistenciaSoftware persistencia 
-      = new SoftwareAlmacen();
+public class SoftwareAlmacen implements PersistenciaSoftware{
 
-  @Override
-  public void actualizarNumeroLicencias(String cantidad) {
+  public SoftwareAlmacen() {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
@@ -58,6 +54,5 @@ public class InventarioSoftware implements InterfaceSoftware{
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
- 
   
 }

@@ -5,6 +5,8 @@
  */
 package centrodecomputo.logica;
 
+import centrodecomputo.persistencia.EquipoAlmacen;
+import centrodecomputo.persistencia.PersistenciaEquipo;
 import java.util.List;
 
 /**
@@ -13,5 +15,10 @@ import java.util.List;
  */
 public class InventarioHardware {
   private List<Equipo> inventario;
+  private PersistenciaEquipo persistencia = new EquipoAlmacen();
+  
+    public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo,String marca, String responsableUbicacion) {
+    this.persistencia.registrarEquipo(modelo, numeroSerie, tipoEquipo, marca, responsableUbicacion);
+  }
   
 }

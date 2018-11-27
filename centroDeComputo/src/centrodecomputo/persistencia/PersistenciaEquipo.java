@@ -19,5 +19,9 @@ public interface PersistenciaEquipo {
   public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, String marca, String responsableUbicacion);
   public List<Prestamo> consultarPrestamos(int id);
   public List<DictamenMantenimiento> consultarListaDictamen(int id);
+  public Equipo consultarEquipo(int id);
+  /* todo
+  métodos para registrar y consultar citas y mantenimientos.
+  */
   
 }

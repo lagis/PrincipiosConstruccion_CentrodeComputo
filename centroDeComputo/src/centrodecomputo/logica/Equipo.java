@@ -27,7 +27,6 @@ public class Equipo implements InterfaceEquipo{
   private String marca;
   private String responsableUbicacion;
   private boolean disponibilidad;
-  private PersistenciaEquipo persistencia = new EquipoAlmacen();
   
 
   /**
@@ -112,10 +111,6 @@ public class Equipo implements InterfaceEquipo{
   @Override
   public boolean consultarDisponibilidad() {
     return this.disponibilidad;
-  }
-
-  public void registrarEquipo() {
-    this.persistencia.registrarEquipo(this.modelo, this.numeroSerie, this.tipoEquipo, this.marca, this.responsableUbicacion);
   }
 
   @Override
