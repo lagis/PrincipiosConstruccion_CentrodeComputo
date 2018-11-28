@@ -25,17 +25,17 @@ public class InventarioSoftware implements InterfaceSoftware{
 
   @Override
   public void registrarSoftware(String nombre, String version, int numeroLicencias, String observaciones, String tipoSoftware) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    this.persistencia.registrarSoftware(nombre, version, numeroLicencias, observaciones, tipoSoftware);
   }
 
   @Override
   public Software consultarSoftware(int idSoftware) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return this.persistencia.consultarSoftware(idSoftware);
   }
 
   @Override
   public List<Software> consultarListaSoftware() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return this.persistencia.consultarListaSoftware();
   }
 
   @Override

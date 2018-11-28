@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author PREDATOR 15 G9-78Q
  */
-public interface PersistenciaEquipo {
+public interface PersistenciaEquipo<T> {
  
   public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, String marca, String responsableUbicacion);
   public List<Prestamo> consultarPrestamos(int id);

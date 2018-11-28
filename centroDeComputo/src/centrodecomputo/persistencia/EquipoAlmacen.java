@@ -8,13 +8,17 @@ package centrodecomputo.persistencia;
 import centrodecomputo.logica.DictamenMantenimiento;
 import centrodecomputo.logica.Equipo;
 import centrodecomputo.logica.Prestamo;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  *
  * @author PREDATOR 15 G9-78Q
  */
-public class EquipoAlmacen implements PersistenciaEquipo{
+public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquipo<T>{
   
   
 /**
@@ -28,7 +32,38 @@ public class EquipoAlmacen implements PersistenciaEquipo{
   
   @Override
   public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, String marca, String responsableUbicacion) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Connection miConexion = this.conectar();
+    PreparedStatement stp = null;
+    try {
+     
+      System.out.println("llegó aquí 1");
+      String insert = "INSERT INTO centro_de_computo.equipo(numero_serie, tipo_equipo, responsable_ubicacion,  marca, modelo) VALUES(?,?,?,?,?)";
+      
+      stp = miConexion.prepareStatement(insert);
+      
+      stp.setString(1, numeroSerie);
+      stp.setString(2, tipoEquipo);
+      stp.setString(3, responsableUbicacion);
+      stp.setString(4, marca);
+      stp.setString(5, modelo);
+      System.out.println("llegó aquí 2");
+      stp.executeUpdate();
+      
+      System.out.println("se guardó");
+      
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      System.out.println(e);
+      e.printStackTrace();
+    } finally {
+      try {
+        stp.close();
+        miConexion.close();
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
   }
 
 /**
@@ -57,5 +92,6 @@ public class EquipoAlmacen implements PersistenciaEquipo{
   public Equipo consultarEquipo(int id) {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
+
   
 }
