@@ -49,8 +49,7 @@ public class CentroDeComputo extends Application {
   public static void main(String[] args) {
     launch(args);
     InterfaceInventarioHardware iih = new InventarioHardware();
-    iih.registrarEquipo("predator 15", "apr-g17", "laptop", "acer", "cc1");
-    System.out.println("holi");
+    iih.registrarEquipo("predator 117", "apr-g17", "laptop", "acer", "cc1");
   }
   
 }

@@ -36,8 +36,8 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
     PreparedStatement stp = null;
     try {
      
-      System.out.println("llegó aquí 1");
-      String insert = "INSERT INTO centro_de_computo.equipo(numero_serie, tipo_equipo, responsable_ubicacion,  marca, modelo) VALUES(?,?,?,?,?)";
+      String insert = "INSERT INTO centro_de_computo.equipo(numero_serie, tipo_equipo, "
+        + "responsable_ubicacion,  marca, modelo) VALUES(?,?,?,?,?)";
       
       stp = miConexion.prepareStatement(insert);
       
@@ -46,11 +46,8 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
       stp.setString(3, responsableUbicacion);
       stp.setString(4, marca);
       stp.setString(5, modelo);
-      System.out.println("llegó aquí 2");
       stp.executeUpdate();
-      
-      System.out.println("se guardó");
-      
+      miConexion.commit();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       System.out.println(e);

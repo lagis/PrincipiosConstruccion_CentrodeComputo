@@ -32,9 +32,7 @@ public abstract class GenericDao<T> {
       // Registrar JDBC driver
       Class.forName("com.mysql.jdbc.Driver");
       String url = String.format(DB_URL, host, port, bd);
-      System.out.println("casi conectó");
       res = DriverManager.getConnection(url, usuario, pass);
-      System.out.println("Se conectó");
     } catch (SQLException sqe) {
       sqe.printStackTrace();
     } catch (ClassNotFoundException e) {
