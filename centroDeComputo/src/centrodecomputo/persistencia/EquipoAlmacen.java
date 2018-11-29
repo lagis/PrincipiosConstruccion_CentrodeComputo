@@ -10,6 +10,7 @@ import centrodecomputo.logica.Equipo;
 import centrodecomputo.logica.Prestamo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +23,7 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   
   
 /**
- * Registra un equipo nuevo dentro del inventario.
+ * Registra un equipo nuevo dentro de la base de datos.
  * @param modelo String con el modelo del equipo.
  * @param numeroSerie String con el número de serie del equipo.
  * @param tipoEquipo String con el tipo de equipo que se va a registrar.
@@ -85,9 +86,84 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
+  /**
+   * Consulta un equipo registrado en la Base de datos.
+   * @param id entero correspondiente al identificador el Equio.
+   * @return Retorna un objeto de tipo Equipo.
+   */
   @Override
   public Equipo consultarEquipo(int id) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Equipo equipo = null;
+    Connection miConexion = this.conectar();
+    PreparedStatement stp = null;
+    
+    try {
+     stp = miConexion.prepareStatement("SELECT * FROM centro_de_computo.equipo WHERE idequipo = ?");
+     stp.setInt(1, id);
+     ResultSet resultadoQuery = stp.executeQuery();
+     resultadoQuery.next();
+     String modelo = resultadoQuery.getString("modelo");
+     String numeroSerie = resultadoQuery.getString("numero_serie");
+     String tipoEquipo = resultadoQuery.getString("tipo_equipo");
+     String marca = resultadoQuery.getString("marca");
+     String responsable = resultadoQuery.getString("responsable_ubicacion");
+     byte disponibilidad = resultadoQuery.getByte("disponibilidad");
+     equipo = new Equipo(id, modelo, numeroSerie,
+        tipoEquipo, marca, responsable, disponibilidad);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        miConexion.close();
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      return equipo;
+    }
+
+    
+  }
+
+  /**
+   * Recupera todos los Equipos almacenados en la Base de datos.
+   * @return Retorna una lista con los equipos almacenados.
+   */
+  @Override
+  public List<Equipo> consultarListaEquipo() {
+    List<Equipo> listaDeEquipos = null;
+    Connection miConexion = this.conectar();
+    PreparedStatement stp = null;
+    try {
+     stp = miConexion.prepareStatement("SELECT * FROM centro_de_computo.equipo");
+     ResultSet resultadoQuery = stp.executeQuery();
+     
+     while (resultadoQuery.next()) {
+      
+       int id = resultadoQuery.getInt("idequipo");
+       String modelo = resultadoQuery.getString("modelo");
+       String numeroSerie = resultadoQuery.getString("numero_serie");
+       String tipoEquipo = resultadoQuery.getString("tipo_equipo");
+       String marca = resultadoQuery.getString("marca");
+       String responsable = resultadoQuery.getString("responsable_ubicacion");
+       byte disponibilidad = resultadoQuery.getByte("disponibilidad");
+       listaDeEquipos.add(new Equipo(id, modelo, numeroSerie,
+              tipoEquipo, marca, responsable, disponibilidad));
+
+     }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        miConexion.close();
+      } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      return listaDeEquipos;
+    }
+
   }
 
   

@@ -26,7 +26,7 @@ public class Equipo implements InterfaceEquipo{
   private String tipoEquipo;
   private String marca;
   private String responsableUbicacion;
-  private boolean disponibilidad;
+  private byte disponibilidad;
   
 
   /**
@@ -35,7 +35,7 @@ public class Equipo implements InterfaceEquipo{
    */
   
   public Equipo(int identificador, String modelo, String numeroSerie,
-      String tipoEquipo, String marca, String responsableUbicacion, boolean disponibilidad){
+      String tipoEquipo, String marca, String responsableUbicacion, byte disponibilidad){
     this.modelo = modelo;
     this.numeroSerie = numeroSerie;
     this.tipoEquipo = tipoEquipo;
@@ -52,7 +52,11 @@ public class Equipo implements InterfaceEquipo{
     this.tipoEquipo = tipoEquipo;
     this.marca = marca;
     this.responsableUbicacion = responsableUbicacion;
-    this.disponibilidad = true;
+    this.disponibilidad = 1;
+  }
+
+  public Equipo() {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
   
   
@@ -109,7 +113,7 @@ public class Equipo implements InterfaceEquipo{
   
   
   @Override
-  public boolean consultarDisponibilidad() {
+  public byte consultarDisponibilidad() {
     return this.disponibilidad;
   }
 

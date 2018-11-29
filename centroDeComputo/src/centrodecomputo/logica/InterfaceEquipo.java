@@ -20,7 +20,7 @@ public interface InterfaceEquipo {
           String telefono, String correo, String entidadAcademica, String tipoBorrado,  
               String observaciones, String tipoDictamen, String descripcion);
   public List<Prestamo> consultarPrestamo();
-  public boolean consultarDisponibilidad();
+  public byte consultarDisponibilidad();
   public int consultarId();
   public String consultarModelo();
   public String consultarNumeroSerie();

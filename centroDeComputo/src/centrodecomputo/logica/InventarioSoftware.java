@@ -35,7 +35,8 @@ public class InventarioSoftware implements InterfaceSoftware{
 
   @Override
   public List<Software> consultarListaSoftware() {
-    return this.persistencia.consultarListaSoftware();
+    this.inventario = this.persistencia.consultarListaSoftware();
+    return this.inventario;
   }
 
   @Override

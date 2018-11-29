@@ -32,8 +32,14 @@ public class InventarioHardware implements InterfaceInventarioHardware{
   }
 
   @Override
-  public List<Equipo> consultarEquipoDisponible() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public List<Equipo> consultarListaEquipo() {
+    this.inventario = this.persistencia.consultarListaEquipo();
+    return this.inventario;
+  }
+
+  @Override
+  public Equipo consultarEquipo(int id) {
+    return this.persistencia.consultarEquipo(id);
   }
     
     

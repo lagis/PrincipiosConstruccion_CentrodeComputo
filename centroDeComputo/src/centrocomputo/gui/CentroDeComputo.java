@@ -5,8 +5,10 @@
  */
 package centrocomputo.gui;
 
+import centrodecomputo.logica.Equipo;
 import centrodecomputo.logica.InterfaceInventarioHardware;
 import centrodecomputo.logica.InventarioHardware;
+import java.util.List;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,7 +51,12 @@ public class CentroDeComputo extends Application {
   public static void main(String[] args) {
     launch(args);
     InterfaceInventarioHardware iih = new InventarioHardware();
-    iih.registrarEquipo("predator 117", "apr-g17", "laptop", "acer", "cc1");
+   // iih.registrarEquipo("predator 117", "apr-g17", "laptop", "acer", "cc1");
+    List<Equipo> le = iih.consultarListaEquipo();
+    System.out.println(" terminó");
+    
+    
+    //System.out.println(le.get(2).consultarId());
   }
   
 }

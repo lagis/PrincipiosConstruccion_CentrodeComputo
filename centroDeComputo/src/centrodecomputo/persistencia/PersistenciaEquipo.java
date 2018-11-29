@@ -20,8 +20,6 @@ public interface PersistenciaEquipo<T> {
   public List<Prestamo> consultarPrestamos(int id);
   public List<DictamenMantenimiento> consultarListaDictamen(int id);
   public Equipo consultarEquipo(int id);
-  /* todo
-  métodos para registrar y consultar citas y mantenimientos.
-  */
+  public List<Equipo> consultarListaEquipo();
   
 }
