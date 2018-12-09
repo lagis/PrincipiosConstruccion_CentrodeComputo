@@ -35,6 +35,7 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, String marca, String responsableUbicacion) {
     Connection miConexion = this.conectar();
     PreparedStatement stp = null;
+    
     try {
      
       String insert = "INSERT INTO centro_de_computo.equipo(numero_serie, tipo_equipo, "
@@ -96,7 +97,6 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
     Equipo equipo = null;
     Connection miConexion = this.conectar();
     PreparedStatement stp = null;
-    
     try {
      stp = miConexion.prepareStatement("SELECT * FROM centro_de_computo.equipo WHERE idequipo = ?");
      stp.setInt(1, id);
@@ -110,6 +110,7 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
      byte disponibilidad = resultadoQuery.getByte("disponibilidad");
      equipo = new Equipo(id, modelo, numeroSerie,
         tipoEquipo, marca, responsable, disponibilidad);
+      
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -135,21 +136,23 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
     List<Equipo> listaDeEquipos = null;
     Connection miConexion = this.conectar();
     PreparedStatement stp = null;
+    int i = 0;
     try {
+      
+      
      stp = miConexion.prepareStatement("SELECT * FROM centro_de_computo.equipo");
      ResultSet resultadoQuery = stp.executeQuery();
      
      while (resultadoQuery.next()) {
-      
-       int id = resultadoQuery.getInt("idequipo");
-       String modelo = resultadoQuery.getString("modelo");
-       String numeroSerie = resultadoQuery.getString("numero_serie");
-       String tipoEquipo = resultadoQuery.getString("tipo_equipo");
-       String marca = resultadoQuery.getString("marca");
-       String responsable = resultadoQuery.getString("responsable_ubicacion");
-       byte disponibilidad = resultadoQuery.getByte("disponibilidad");
-       listaDeEquipos.add(new Equipo(id, modelo, numeroSerie,
-              tipoEquipo, marca, responsable, disponibilidad));
+       
+       System.out.println(i++);
+       
+       Equipo equipo = new Equipo(resultadoQuery.getInt("idequipo"), resultadoQuery.getString("modelo"), resultadoQuery.getString("numero_serie"),
+              resultadoQuery.getString("tipo_equipo"), resultadoQuery.getString("marca"), 
+                  resultadoQuery.getString("responsable_ubicacion"), resultadoQuery.getByte("disponibilidad"));
+       
+       listaDeEquipos.add(equipo);
+       
 
      }
     } catch (SQLException e) {
