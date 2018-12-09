@@ -17,16 +17,16 @@ import java.util.logging.Logger;
  */
 public class ConexioBasedeDatos {
   
-  private static Connection connection;
+  private static Connection conexion;
 
-  private static void makeConnection() {
+  private static void crearCnexion() {
     try {
       String url = "jdbc:mysql://localhost/";
-      String databaseName = "tienda";
+      String databaseName = "centro_de_computo";
       String userName = "root";
       String password = "";
 
-      connection = (Connection) DriverManager.getConnection(url + databaseName, userName, password);
+      conexion = (Connection) DriverManager.getConnection(url + databaseName, userName, password);
     } catch (SQLException ex) {
       java.util.logging.Logger.getLogger(ConexioBasedeDatos.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -37,9 +37,9 @@ public class ConexioBasedeDatos {
    * @return conexión a la base de datos
    */
   
-  public static Connection getDataBaseConnection() {
-    makeConnection();
-    return ConexioBasedeDatos.connection;
+  public static Connection obtenerConexionBaseDatos() {
+    crearCnexion();
+    return ConexioBasedeDatos.conexion;
 
   }
   
@@ -47,11 +47,11 @@ public class ConexioBasedeDatos {
    * Cierra la conexión a la base de datos
    */
   
-  public static void closeConnection() {
-    if (connection != null) {
+  public static void cerrarConexion() {
+    if (conexion != null) {
       try {
-        if (!connection.isClosed()) {
-          connection.close();
+        if (!conexion.isClosed()) {
+          conexion.close();
         }
       } catch (SQLException ex) {
         Logger.getLogger(ConexioBasedeDatos.class.getName()).log(Level.SEVERE, null, ex);
