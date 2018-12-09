@@ -22,8 +22,8 @@ public abstract class GenericDao<T> {
   
   
   protected Connection conectar() {
-    String usuario = Credenciales.usuario;
-    String pass = Credenciales.password;
+    String usuario = "root";
+    String pass = "IriNando2403.";
     String bd = Credenciales.baseDatos;
     String host = Credenciales.host;
     int port = Credenciales.port;
