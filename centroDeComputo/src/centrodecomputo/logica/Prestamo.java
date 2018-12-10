@@ -5,38 +5,71 @@
  */
 package centrodecomputo.logica;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author ferc
  */
-public class Prestamo {
-  private Date fechaPrestamo;
-  private String nombrePrestatario;
-  private Date devolucion;
-  
-  
-  public Prestamo(Date fecha, String prestatario){
-    this.fechaPrestamo = fecha;
-    this.nombrePrestatario = prestatario;
-  }
-  public Prestamo(Date fecha, String prestatario, Date devolucion){
-    this.fechaPrestamo = fecha;
-    this.nombrePrestatario = prestatario;
-    this.devolucion = devolucion;
-  }  
-  
-  public Date consultarFechaPrestamo(){
-    return this.fechaPrestamo;
-  }    
-  
-  public String consultarPrestatario(){
-    return this.nombrePrestatario;
+public class Prestamo{
+
+  private String nombreSolicitante;
+  private String matricula;
+  private String fechaPrestamo;
+  private String horaPrestamo;
+  private String equipo;
+  private String FechaDevolucion;
+  private String horaDevolucion;
+  private String salon;
+
+  public Prestamo(String nombreSolicitante, String matricula, String fechaPrestamo, String horaPrestamo, String equipo, String FechaDevolucion, String horaDevolucion, String salon) {
+    this.nombreSolicitante = nombreSolicitante;
+    this.matricula = matricula;
+    this.fechaPrestamo = fechaPrestamo;
+    this.horaPrestamo = horaPrestamo;
+    this.equipo = equipo;
+    this.FechaDevolucion = FechaDevolucion;
+    this.horaDevolucion = horaDevolucion;
+    this.salon = salon;
   }
   
-  public Date consultarDevolucion(){
-    return this.devolucion;
+
+  public Prestamo(){
+    
   }
+
+  public String consultarNombreSolicitante() {
+    return nombreSolicitante;
+  }
+
+  public String consultarMatricula() {
+    return matricula;
+  }
+
+  public String consultarFechaPrestamo() {
+    return fechaPrestamo;
+  }
+
+  public String consultarHoraPrestamo() {
+    return horaPrestamo;
+  }
+
+  public String consultarFechaDevolucion() {
+    return FechaDevolucion;
+  }
+
+  public String consultarHoraDevolucion() {
+    return horaDevolucion;
+  }
+
+  public String consultarSalon() {
+    return salon;
+  }
+
   
+  
+ 
 }
