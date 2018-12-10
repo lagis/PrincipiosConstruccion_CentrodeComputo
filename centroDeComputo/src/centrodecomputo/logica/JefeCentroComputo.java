@@ -5,6 +5,8 @@
  */
 package centrodecomputo.logica;
 
+import centrodecomputo.dao.PersonalDao;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,19 +14,23 @@ import java.util.List;
  * @author marai
  */
 public class JefeCentroComputo {
-
+  public PersonalDao personalDao;
 
   public JefeCentroComputo() {
-  
+    this.personalDao = new PersonalDao();
   }
   
   public void registrarUsuario(Usuario nuevoUsuario){
     
   }
   
-  public List<Usuario> verUsuarios(){
+  public void registrarPersonal(Personal nuevoOersonal){
     
-    return null;
+  }
+  
+  public List<Personal> verPersonal(){
+    List<Personal> lista = personalDao.obternerTodoPersonal();
+    return lista;
   }
   
   public void editarUsuario(Usuario usuario){

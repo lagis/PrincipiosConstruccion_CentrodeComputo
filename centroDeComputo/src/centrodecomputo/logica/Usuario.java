@@ -5,6 +5,7 @@
  */
 package centrodecomputo.logica;
 
+import centrodecomputo.dao.PersonalDao;
 import centrodecomputo.dao.UsuarioDao;
 
 /**
@@ -12,22 +13,26 @@ import centrodecomputo.dao.UsuarioDao;
  * @author marai
  */
 public class Usuario {
+
   private String numeroDePersonal;
   private String contrasenia;
-  
-  public Usuario(String numeroDePersonal,String contrasenia){
+
+  public Usuario(String numeroDePersonal, String contrasenia) {
     this.numeroDePersonal = numeroDePersonal;
     this.contrasenia = contrasenia;
   }
-  
-  public void iniciarSesion(String numeroDePersonal, String contrasenia){
+
+  public String iniciarSesion() {
     UsuarioDao user = new UsuarioDao();
-    if(user.obtenerUsuario(numeroDePersonal) != null){
-      
+    PersonalDao personal = new PersonalDao();
+    String puesto = null;
+   
+    if(user.obtenerContrasenia(this.numeroDePersonal).equals(this.contrasenia)){
+      puesto = personal.obteberPuesto(Integer.parseInt(this.numeroDePersonal));
     }
-    
+    return puesto;
   }
-  
+
   public String getNumeroDePersonal() {
     return numeroDePersonal;
   }
@@ -35,5 +40,5 @@ public class Usuario {
   public String getContrasenia() {
     return contrasenia;
   }
-  
+
 }

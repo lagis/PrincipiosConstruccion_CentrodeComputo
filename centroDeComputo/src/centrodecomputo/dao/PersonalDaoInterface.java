@@ -13,9 +13,9 @@ import java.util.List;
  * @author marai
  */
 public interface PersonalDaoInterface {
-  public Personal obtenerPersoanal(String numeroPersonal);
+  public Personal obtenerPersonal(int numeroPersonal);
   public List<Personal> obternerTodoPersonal();
   public void registrarPersonal(Personal personal);
   public void actualizarPersonal(Personal personal);
-  public String obteberPuesto(String numeroPersonal);
+  public String obteberPuesto(int numeroPersonal);
 }

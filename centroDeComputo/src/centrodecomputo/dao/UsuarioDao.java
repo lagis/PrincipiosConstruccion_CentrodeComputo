@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author marai
  */
 public class UsuarioDao implements UsuarioDaoInterface{
-  
+  String password;
   private String query;
   private Connection conexion;
   
@@ -27,52 +27,36 @@ public UsuarioDao(){
   
 }
   
-
-
   @Override
-  public Usuario obtenerUsuario(String numeroDePersonal) {
-    Usuario usuario = null;
-    query = "SELECT * FROM usuario WHERE personal.numeroDePersonal = ? ";
+  public String obtenerContrasenia(String numeroDePersonal) {
+   // String password = null;
+    query = "SELECT contrasenia FROM usuario WHERE nombre_usuario = ? ";
     conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
     
     try{
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setString(1, numeroDePersonal);  
       ResultSet result=statement.executeQuery();
-      usuario = new Usuario(result.getString("numeroDePersonal"), 
-              result.getString("contrasenia"));
+      result.next();
+      password = result.getString("contrasenia");
     } catch(SQLException ex){
-     Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       ConexioBasedeDatos.cerrarConexion();
     }
     
-    return usuario;
+    return password;
   }
 
   @Override
-  public void atualizarUsuario(Usuario usuario) {
-   query = "UPDATE usuario SET contrasenia = ?  WHERE idpersonal = ?";
+  public void registrarUsuario(Usuario usuario) {
+   query = "INSERT INTO usuario(contrasenia,nombre_usuario,personal_idpersonal) VALUES(?,?,?);";
    conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
    try{
      PreparedStatement statement = conexion.prepareStatement(query);
      statement.setString(1, usuario.getContrasenia());
      statement.setString(2, usuario.getNumeroDePersonal());
-   } catch(SQLException ex){
-      Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      ConexioBasedeDatos.cerrarConexion();
-    }
-  }
-
-  @Override
-  public void registrarUsuario(Usuario usuario) {
-   query = "INSERT INTO usuario( personal_idpersonal,contrasenia) VALUES(?,?);";
-   conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
-   try{
-     PreparedStatement statement = conexion.prepareStatement(query);
-     statement.setString(1, usuario.getNumeroDePersonal());
-     statement.setString(2, usuario.getContrasenia());
+     statement.setInt(3, Integer.parseInt(usuario.getNumeroDePersonal()));
    } catch(SQLException ex){
       Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {

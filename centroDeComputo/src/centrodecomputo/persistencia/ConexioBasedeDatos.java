@@ -25,8 +25,9 @@ public class ConexioBasedeDatos {
       String databaseName = "centro_de_computo";
       String userName = "root";
       String password = "";
+      String properties="?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-      conexion = (Connection) DriverManager.getConnection(url + databaseName, userName, password);
+      conexion = (Connection) DriverManager.getConnection(url+databaseName+properties,userName,password);
     } catch (SQLException ex) {
       java.util.logging.Logger.getLogger(ConexioBasedeDatos.class.getName()).log(Level.SEVERE, null, ex);
     }
