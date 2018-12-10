@@ -22,11 +22,11 @@ public abstract class GenericDao<T> {
   
   
   protected Connection conectar() {
-    String usuario = "root";
-    String pass = "IriNando2403.";
-    String bd = Credenciales.baseDatos;
-    String host = Credenciales.host;
-    int port = Credenciales.port;
+    String usuario = Credenciales.USUARIO;
+    String pass = Credenciales.PASSWORD;
+    String bd = Credenciales.BASEDATOS;
+    String host = Credenciales.HOST;
+    int port = Credenciales.PORT;
     Connection res = null;
     try {
       // Registrar JDBC driver
