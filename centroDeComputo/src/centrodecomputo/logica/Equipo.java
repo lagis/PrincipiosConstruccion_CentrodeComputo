@@ -26,7 +26,7 @@ public class Equipo implements InterfaceEquipo{
   private String tipoEquipo;
   private String marca;
   private String responsableUbicacion;
-  private byte disponibilidad;
+  private String disponibilidad;
   
 
   /**
@@ -35,7 +35,7 @@ public class Equipo implements InterfaceEquipo{
    */
   
   public Equipo(int identificador, String modelo, String numeroSerie,
-      String tipoEquipo, String marca, String responsableUbicacion, byte disponibilidad){
+      String tipoEquipo, String marca, String responsableUbicacion, String disponibilidad){
     this.modelo = modelo;
     this.numeroSerie = numeroSerie;
     this.tipoEquipo = tipoEquipo;
@@ -52,7 +52,6 @@ public class Equipo implements InterfaceEquipo{
     this.tipoEquipo = tipoEquipo;
     this.marca = marca;
     this.responsableUbicacion = responsableUbicacion;
-    this.disponibilidad = 1;
   }
 
   public Equipo() {
@@ -113,37 +112,37 @@ public class Equipo implements InterfaceEquipo{
   
   
   @Override
-  public byte consultarDisponibilidad() {
+  public String getDisponibilidad() {
     return this.disponibilidad;
   }
 
   @Override
-  public int consultarId() {
+  public int getIdentificador() {
     return this.identificador;
   }
 
   @Override
-  public String consultarModelo() {
+  public String getModelo() {
     return this.modelo;
   }
 
   @Override
-  public String consultarNumeroSerie() {
+  public String getNumeroSerie() {
     return this.numeroSerie;
   }
 
   @Override
-  public String consultarTipoEquipo() {
+  public String getTipoEquipo() {
     return this.tipoEquipo;
   }
 
   @Override
-  public String consultarMarca() {
+  public String getMarca() {
     return this.marca;
   }
 
   @Override
-  public String responsableUbicacion() {
+  public String getResponsableUbicacion() {
     return this.responsableUbicacion;
   }
   

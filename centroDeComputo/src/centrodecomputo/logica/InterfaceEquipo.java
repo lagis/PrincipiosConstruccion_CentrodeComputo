@@ -20,12 +20,12 @@ public interface InterfaceEquipo {
           String telefono, String correo, String entidadAcademica, String tipoBorrado,  
               String observaciones, String tipoDictamen, String descripcion);
   public List<Prestamo> consultarPrestamo();
-  public byte consultarDisponibilidad();
-  public int consultarId();
-  public String consultarModelo();
-  public String consultarNumeroSerie();
-  public String consultarTipoEquipo();
-  public String consultarMarca();
-  public String responsableUbicacion();
+  public String getDisponibilidad();
+  public int getIdentificador();
+  public String getModelo();
+  public String getNumeroSerie();
+  public String getTipoEquipo();
+  public String getMarca();
+  public String getResponsableUbicacion();
   
 }
