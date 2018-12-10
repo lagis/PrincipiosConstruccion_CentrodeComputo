@@ -82,6 +82,7 @@ public class AdministrarPrestamosController implements Initializable {
 
   @FXML
   private void accionBotonAceptar(ActionEvent event) {
+    
   }
 
   @FXML

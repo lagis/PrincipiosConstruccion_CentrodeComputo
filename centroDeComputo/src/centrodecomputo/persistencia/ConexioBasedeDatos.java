@@ -19,7 +19,7 @@ public class ConexioBasedeDatos {
   
   private static Connection conexion;
 
-  private static void crearCnexion() {
+  private static void crearConexion() {
     try {
       String url = "jdbc:mysql://localhost/";
       String databaseName = "centro_de_computo";
@@ -39,7 +39,7 @@ public class ConexioBasedeDatos {
    */
   
   public static Connection obtenerConexionBaseDatos() {
-    crearCnexion();
+    crearConexion();
     return ConexioBasedeDatos.conexion;
 
   }

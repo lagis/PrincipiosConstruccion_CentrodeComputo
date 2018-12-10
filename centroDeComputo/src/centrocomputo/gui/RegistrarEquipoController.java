@@ -67,6 +67,6 @@ public class RegistrarEquipoController implements Initializable {
     String responsableUbicacion = (String) this.cbResponsable.getValue();
   
     this.inventario.registrarEquipo(modelo, numeroSerie, tipoEquipo, marca, responsableUbicacion);
-    
+   
   }
   }
