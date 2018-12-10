@@ -6,6 +6,7 @@
 package centrodecomputo.logica;
 
 import centrodecomputo.dao.PersonalDao;
+import centrodecomputo.dao.UsuarioDao;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +15,19 @@ import java.util.List;
  * @author marai
  */
 public class JefeCentroComputo {
-  public PersonalDao personalDao;
+  private PersonalDao personalDao;
 
   public JefeCentroComputo() {
     this.personalDao = new PersonalDao();
   }
   
   public void registrarUsuario(Usuario nuevoUsuario){
-    
+    UsuarioDao user = new UsuarioDao();
+    user.registrarUsuario(nuevoUsuario);
   }
   
-  public void registrarPersonal(Personal nuevoOersonal){
-    
+  public void registrarPersonal(Personal personal){
+    personalDao.registrarPersonal(personal);
   }
   
   public List<Personal> verPersonal(){
@@ -33,7 +35,7 @@ public class JefeCentroComputo {
     return lista;
   }
   
-  public void editarUsuario(Usuario usuario){
-    
+  public void editarUsuario(Personal personal){
+    personalDao.actualizarPersonal(personal);
   }
 }

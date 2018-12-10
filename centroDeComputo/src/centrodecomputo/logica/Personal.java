@@ -37,9 +37,10 @@ public class Personal {
     return correo;
   }
 
-  public String getNumeroTelefonico() {
+  public String getTelefono() {
     return telefono;
   }
+
 
   public String getPuesto() {
     return puesto;

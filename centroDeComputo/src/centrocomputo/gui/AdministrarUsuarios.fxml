@@ -6,30 +6,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root id="AnchorPane" prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centrocomputo.gui.AdministrarUsuariosController">
+<AnchorPane fx:id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centrocomputo.gui.AdministrarUsuariosController">
    <children>
-      <Button fx:id="buttonCancelar" layoutX="36.0" layoutY="321.0" mnemonicParsing="false" text="Cancelar">
+      <Button fx:id="buttonCancelar" layoutX="968.0" layoutY="643.0" mnemonicParsing="false" text="Cancelar">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="buttonVer" layoutX="36.0" layoutY="61.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="Ver">
+      <Button fx:id="buttonEditar" layoutX="63.0" layoutY="643.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="Editar">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="buttonEditar" layoutX="36.0" layoutY="123.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="Editar">
+      <Button fx:id="buttonRegistrar" layoutX="173.0" layoutY="643.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="Nuevo">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="buttonRegistrar" layoutX="36.0" layoutY="186.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" text="Nuevo">
-         <font>
-            <Font size="13.0" />
-         </font></Button>
-      <TableView layoutX="123.0" layoutY="50.0" prefHeight="300.0" prefWidth="354.0">
+      <TableView fx:id="tabla" layoutX="49.0" layoutY="50.0" prefHeight="565.0" prefWidth="971.0">
         <columns>
-          <TableColumn prefWidth="103.0" text="No. Personal" />
-          <TableColumn prefWidth="145.0" text="Nombre" />
-            <TableColumn prefWidth="105.0" text="Puesto" />
+          <TableColumn fx:id="columnNumero" prefWidth="103.0" text="No. Personal" />
+          <TableColumn fx:id="columnNombre" prefWidth="303.0" text="Nombre" />
+            <TableColumn fx:id="columnCorreo" prefWidth="240.0" text="Correo" />
+            <TableColumn fx:id="columnTelefono" prefWidth="174.0" text="Teléfono" />
+            <TableColumn fx:id="columnPuesto" prefWidth="150.0" text="Puesto" />
         </columns>
       </TableView>
    </children>
-</fx:root>
+</AnchorPane>

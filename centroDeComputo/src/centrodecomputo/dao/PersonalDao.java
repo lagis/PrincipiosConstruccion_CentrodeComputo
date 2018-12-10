@@ -89,7 +89,7 @@ public class PersonalDao implements PersonalDaoInterface {
      statement.setInt(1, personal.getIdPersonal());
      statement.setString(2, personal.getNombre());
      statement.setString(3, personal.getCorreo());
-     statement.setString(4, personal.getNumeroTelefonico());
+     statement.setString(4, personal.getTelefono());
      statement.setString(5, personal.getPuesto());
    } catch(SQLException ex){
       Logger.getLogger(PersonalDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +107,7 @@ public class PersonalDao implements PersonalDaoInterface {
      PreparedStatement statement = conexion.prepareStatement(query);
      statement.setString(1, personal.getNombre());
      statement.setString(2, personal.getCorreo());
-     statement.setString(3, personal.getNumeroTelefonico());
+     statement.setString(3, personal.getTelefono());
      statement.setString(4, personal.getPuesto());
      statement.setInt(5, personal.getIdPersonal());
    } catch(SQLException ex){
