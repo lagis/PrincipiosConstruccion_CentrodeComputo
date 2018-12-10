@@ -11,16 +11,11 @@ import java.util.List;
  *
  * @author marai
  */
-public class JefeCentroComputo extends Usuario{
-  private String nombreJefeCentroComputo;
+public class JefeCentroComputo {
+
+
+  public JefeCentroComputo() {
   
-  /**
-   *
-   */
-  public JefeCentroComputo(String nombre, String numeroDePersonal, String contrasenia){
-    super(numeroDePersonal,contrasenia,"Jefe de sentro de computo");
-    this.nombreJefeCentroComputo = nombre;
-    
   }
   
   public void registrarUsuario(Usuario nuevoUsuario){

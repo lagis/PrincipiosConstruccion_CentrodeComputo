@@ -11,8 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,30 +27,12 @@ public UsuarioDao(){
   
 }
   
-  @Override
-  public String obtenerPuesto(String numeroDePersonal) {
-    String puesto = null;
-    query = "SELECT puesto FROM usuario WHERE numeroDePersonal = ?";
-    conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
-    
-    try{
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setString(1, numeroDePersonal);  
-      ResultSet result=statement.executeQuery();
-      puesto = result.getString("puesto");
-    } catch(SQLException ex){
-      Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      ConexioBasedeDatos.cerrarConexion();
-    }
-    
-    return puesto;
-  }
+
 
   @Override
   public Usuario obtenerUsuario(String numeroDePersonal) {
     Usuario usuario = null;
-    query = "SELECT * FROM usuario WHERE numeroDePersonal = ?";
+    query = "SELECT * FROM usuario WHERE personal.numeroDePersonal = ? ";
     conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
     
     try{
@@ -60,7 +40,7 @@ public UsuarioDao(){
       statement.setString(1, numeroDePersonal);  
       ResultSet result=statement.executeQuery();
       usuario = new Usuario(result.getString("numeroDePersonal"), 
-              result.getString("contrasenia"),result.getString("puesto"));
+              result.getString("contrasenia"));
     } catch(SQLException ex){
      Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
@@ -72,13 +52,12 @@ public UsuarioDao(){
 
   @Override
   public void atualizarUsuario(Usuario usuario) {
-   query = "UPDATE usuario SET contrasenia = ? , puesto = ? WHERE numeroDePersonal = ?";
+   query = "UPDATE usuario SET contrasenia = ?  WHERE idpersonal = ?";
    conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
    try{
      PreparedStatement statement = conexion.prepareStatement(query);
      statement.setString(1, usuario.getContrasenia());
-     statement.setString(2, usuario.getPuesto());
-     statement.setString(3, usuario.getNumeroDePersonal());
+     statement.setString(2, usuario.getNumeroDePersonal());
    } catch(SQLException ex){
       Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
@@ -88,43 +67,17 @@ public UsuarioDao(){
 
   @Override
   public void registrarUsuario(Usuario usuario) {
-    query = "INSERT INTO usuario( numeroDePersonal,contrasenia,puesto) VALUES(?,?,?);";
+   query = "INSERT INTO usuario( personal_idpersonal,contrasenia) VALUES(?,?);";
    conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
    try{
      PreparedStatement statement = conexion.prepareStatement(query);
      statement.setString(1, usuario.getNumeroDePersonal());
      statement.setString(2, usuario.getContrasenia());
-     statement.setString(3, usuario.getPuesto());
    } catch(SQLException ex){
       Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       ConexioBasedeDatos.cerrarConexion();
     }
-  }
-
-  @Override
-  public List<Usuario> obtenerTodosUsuarios() {
-    ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-    Usuario usuario;
-    query = "SELECT * FROM usuario";
-    conexion = ConexioBasedeDatos.obtenerConexionBaseDatos();
-    
-    try{
-      PreparedStatement statement = conexion.prepareStatement(query);
-      ResultSet result=statement.executeQuery();
-      
-      while(result.next()){
-        usuario = new Usuario(result.getString("numeroDePersonal"), 
-              result.getString("contrasenia"),result.getString("puesto"));
-        listaUsuarios.add(usuario);
-      }
-    } catch(SQLException ex){
-      Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-      ConexioBasedeDatos.cerrarConexion();
-    }
-    
-    return listaUsuarios;
   }
   
 }

@@ -9,11 +9,10 @@ package centrodecomputo.logica;
  *
  * @author marai
  */
-public class Tecnico extends Usuario{
-  private String nombreTecnico; 
-  
-  public Tecnico(String nombre, String numeroDePersonal, String contrasenia){
-    super(numeroDePersonal,contrasenia,"Tecnico");
-    this.nombreTecnico = nombre;
+public class Tecnico{
+
+  public Tecnico() {
+    
   }
+
 }

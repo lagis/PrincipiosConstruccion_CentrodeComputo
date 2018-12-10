@@ -13,9 +13,7 @@ import java.util.List;
  * @author marai
  */
 public interface UsuarioDaoInterface {
-  public String obtenerPuesto(String numeroDePersonal);
   public Usuario obtenerUsuario(String numeroDePersonal);
-  public List<Usuario> obtenerTodosUsuarios();
   public void atualizarUsuario(Usuario usuario);
   public void registrarUsuario(Usuario usuario);
 }

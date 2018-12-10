@@ -14,12 +14,10 @@ import centrodecomputo.dao.UsuarioDao;
 public class Usuario {
   private String numeroDePersonal;
   private String contrasenia;
-  private String puesto;
   
-  public Usuario(String numeroDePersonal,String contrasenia, String puesto){
+  public Usuario(String numeroDePersonal,String contrasenia){
     this.numeroDePersonal = numeroDePersonal;
     this.contrasenia = contrasenia;
-    this.puesto = puesto;
   }
   
   public void iniciarSesion(String numeroDePersonal, String contrasenia){
@@ -36,10 +34,6 @@ public class Usuario {
 
   public String getContrasenia() {
     return contrasenia;
-  }
-
-  public String getPuesto() {
-    return puesto;
   }
   
 }
