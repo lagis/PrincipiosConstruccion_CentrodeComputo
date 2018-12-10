@@ -8,11 +8,8 @@ package centrocomputo.gui;
 import centrodecomputo.logica.JefeCentroComputo;
 import centrodecomputo.logica.Personal;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -59,11 +56,7 @@ public class AdministrarUsuariosController implements Initializable {
    this.columnPuesto.setCellValueFactory(new PropertyValueFactory<>("correo"));
    this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
    this.columnCorreo.setCellValueFactory(new PropertyValueFactory<>("puesto"));
-    try {
-      this.llenarTabla(jefe.verPersonal());
-    } catch (SQLException ex) {
-      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+   this.llenarTabla(jefe.verPersonal());
   }
   
   public void llenarTabla(List<Personal> lista) {

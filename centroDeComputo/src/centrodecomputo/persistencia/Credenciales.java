@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package centrodecomputo.persistencia;
 
 /**
+ *
  * @author PREDATOR 15 G9-78Q
  */
 public class Credenciales {
@@ -15,4 +15,5 @@ public class Credenciales {
   static public final String BASEDATOS = "centro_de_computo";
   static public final String HOST = "localhost";
   static public final int PORT = 3306;
+  
 }

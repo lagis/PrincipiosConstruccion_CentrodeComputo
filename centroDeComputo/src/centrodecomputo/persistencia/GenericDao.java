@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package centrodecomputo.persistencia;
 
 import centrodecomputo.logica.DictamenMantenimiento;
@@ -14,15 +13,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Conexion a la base de datos.
  *
  * @author PREDATOR 15 G9-78Q
  */
 public abstract class GenericDao<T> {
-
   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-  static final String DB_URL = "jdbc:mysql://";
-
+  static final String DB_URL = "jdbc:mysql://";	
+  
+  
   protected Connection conectar() {
     String usuario = Credenciales.USUARIO;
     String pass = Credenciales.PASSWORD;
@@ -48,4 +46,6 @@ public abstract class GenericDao<T> {
     }
     return res;
   }
+  
+  
 }
