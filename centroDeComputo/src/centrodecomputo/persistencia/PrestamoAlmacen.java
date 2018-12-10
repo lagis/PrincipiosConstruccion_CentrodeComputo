@@ -51,11 +51,11 @@ public class PrestamoAlmacen implements PersistenciaPrestamo {
 
   @Override
   public boolean agregarPrestamo(String nombreSolicitante, String matricula, String fechaPrestamo, String horaPrestamo, String equipo, String salon) {
-    query = "\"INSERT INTO centro_de_computo.prestamo (numero_prestamo,nombre_solicitante,matricula_solicitante,fecha_prestamo,hora_prestamo,equipo_numero_inventario,salon, \" +\n"
-            + "\"VALUES(?, ?, ?, ?, ?,?,?);\"";
-    try {
-      PreparedStatement statement = connection.prepareStatement(query);
+    query = "INSERT INTO centro_de_computo.prestamo (numero_prestamo,nombre_solicitante,matricula_solicitante,fecha_prestamo,hora_prestamo,equipo_numero_inventario,salon VALUES(?, ?, ?, ?, ?,?,?)";
+    
+    try {connection.prepareStatement(query);
 
+      PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, null);
       statement.setString(2, nombreSolicitante);
       statement.setString(3, matricula);
@@ -63,6 +63,14 @@ public class PrestamoAlmacen implements PersistenciaPrestamo {
       statement.setString(5, horaPrestamo);
       statement.setString(6, equipo);
       statement.setString(7, salon);
+      statement.executeUpdate();
+      
+      query="UPDATE centro_de_computo.equipo SET estado = false where numero_inventario = ?";
+      statement = connection.prepareStatement(query);
+      statement.setString(1, equipo);
+      statement.executeUpdate();
+      
+     connection.commit();
     } catch (SQLException ex) {
       Logger.getLogger(PrestamoAlmacen.class.getName()).log(Level.SEVERE, null, ex);
     } finally {

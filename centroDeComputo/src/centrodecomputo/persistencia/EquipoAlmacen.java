@@ -41,9 +41,8 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
      
       
       stp = miConexion.prepareStatement("INSERT INTO centro_de_computo.equipo (numero_inventario, tipo_equipo, marca, " +
-          "modelo, numero_serie) " +
-              "VALUES(?, ?, ?, ?, ?);");
-      
+          "modelo, numero_serie) " + "VALUES(?, ?, ?, ?, ?);");
+
       stp.setString(1, numeroSerie);
       stp.setString(2, tipoEquipo);
       stp.setString(3, marca);

@@ -20,7 +20,7 @@ public class CentroDeComputo extends Application {
   
   @Override
   public void start(Stage primaryStage) throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("InventarioHardware.fxml"));    
+    Parent root = FXMLLoader.load(getClass().getResource("AdministrarPrestamos.fxml"));    
     Scene scene = new Scene(root);
         
     primaryStage.setScene(scene);
