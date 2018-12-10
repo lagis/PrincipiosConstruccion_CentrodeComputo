@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 /**
  * FXML Controller class
@@ -22,15 +25,45 @@ import javafx.scene.control.TableView;
 public class AdministrarUsuariosController implements Initializable {
   
   @FXML
-  private TableView tabla;
+  private TableColumn<Personal,String> columnNumero;
+  
+  @FXML
+  private TableColumn<Personal,String> columnNombre;
+
+  @FXML
+  private TableColumn<Personal,String> columnPuesto;
+  
+  @FXML
+  private TableColumn<Personal,String> columnTelefono;
+  
+  @FXML
+  private TableColumn<Personal,String> columnCorreo;
+  
+  @FXML
+  private TableView<Personal> tabla;
+  
+  JefeCentroComputo jefe = new JefeCentroComputo();
+  
 
   /**
    * Initializes the controller class.
+   * @param url
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-   JefeCentroComputo jefe = new JefeCentroComputo();
-   List<Personal> lista = jefe.verPersonal();
-  }  
+   this.columnNumero.setCellValueFactory(new PropertyValueFactory<>("idPersonal"));
+   this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+   this.columnPuesto.setCellValueFactory(new PropertyValueFactory<>("correo"));
+   this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+   this.columnCorreo.setCellValueFactory(new PropertyValueFactory<>("puesto"));
+   this.llenarTabla(jefe.verPersonal());
+  }
+  
+  public void llenarTabla(List<Personal> lista) {
+    tabla.getItems().clear();
+    for (Personal persona : lista) {
+      tabla.getItems().add(persona);
+    }
+  }
   
 }
