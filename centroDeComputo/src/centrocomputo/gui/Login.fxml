@@ -24,7 +24,6 @@
          </font>
       </Label>
       <TextField fx:id="textField" layoutX="301.0" layoutY="110.0" />
-      <TextField fx:id="contraseniaTextField" layoutX="301.0" layoutY="179.0" />
       <Button fx:id="loginBoton" layoutX="250.0" layoutY="258.0" mnemonicParsing="false" onAction="#loginButtonAction" text="Iniciar Sesión">
          <font>
             <Font size="14.0" />
