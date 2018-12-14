@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import logica.Personal;
 import logica.PersonalInterface;
 
@@ -30,9 +33,10 @@ import logica.PersonalInterface;
  *
  * @author marai
  */
+
 public class LoginController implements Initializable {
 
-  private PersonalInterface personal;
+  private PersonalInterface personal = new Personal();
   
   @FXML
   private TextField textField;
@@ -42,45 +46,63 @@ public class LoginController implements Initializable {
 
   @FXML
   private Button loginBoton;
+  
+  public final int longMax = 20;
 
+  
+  
   @FXML
   private void loginButtonAction(ActionEvent event) throws IOException, SQLException {
     String usuario = textField.getText();
     String contrasenia = passwordtField.getText();
     
-    if (camposVacios()) {
-      enviarMensaje("Campos vacios", "Ingrese datos a los campos.");
-    } else {
-      this.personal = new Personal(usuario,contrasenia);
-      if (personal.comprobarUsuario()) {
-        if(personal.comprobarContrasenia()) {
-          System.out.println("Funciona.");
-          //this.abrirVentana("AdministrarUsuarios.fxml");
-          //this.cerrarLogin();
-        } else {
-          enviarMensaje("Error","Contraseña no valida.");
-        }        
+    if (this.validarPassowrd() && this.validarUser()) {
+
+      if (this.personal.comprobarPersonal(Integer.parseInt(usuario), contrasenia)) {
+        System.out.println("Inicio");
+        User.enviarUsuario(usuario);
+        String puesto = this.personal.obtenerPuesto(Integer.parseInt(usuario));
+        User.enviarPuesto(puesto);
+        this.abrirVentana("Menu.fxml");
+        this.cerrarLogin();
       } else {
-        enviarMensaje("Error","Usario no encontrado");
+        JOptionPane.showMessageDialog(null, "Contraseña y/o usuario inválidos");
       }
+    } else {
+      JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");
     }
   }
 
   public void abrirVentana(String ventana) {
-    Parent panel;
-    Stage stage = new Stage();
+    Stage stageEquipo = new Stage();
+    Parent paneEquipo;
     try {
-      panel = FXMLLoader.load(getClass().getResource(ventana));
-      Scene sceneEquipo = new Scene(panel);
-      stage.setScene(sceneEquipo);
-      stage.show();
+      paneEquipo = FXMLLoader.load(getClass().getResource(ventana));
+      Scene sceneEquipo = new Scene(paneEquipo);
+      stageEquipo.setScene(sceneEquipo);
+      stageEquipo.show();
     } catch (IOException ex) {
-      //TODO
+      ex.printStackTrace();
     }
   }
+
+  
+  private boolean validarPassowrd(){
+    Pattern patron = Pattern.compile("[^ ]+");
+    Matcher encaja = patron.matcher(this.passwordtField.getText());
+    return encaja.matches() && this.passwordtField.getText().length() <= this.longMax;
+  }
+  
+  private boolean validarUser(){
+    Pattern patron = Pattern.compile("[0-9]+");
+    Matcher encaja = patron.matcher(this.textField.getText());
+    return encaja.matches() && this.textField.getText().length() <= this.longMax;
+  }
+  
   
   private boolean camposVacios(){
-    return textField.getText().trim().isEmpty() || passwordtField.getText().trim().isEmpty();
+    return textField.getText().trim().isEmpty() 
+        && passwordtField.getText().trim().isEmpty();
   }
 
   public void cerrarLogin() {
@@ -98,6 +120,7 @@ public class LoginController implements Initializable {
   /**
    * Initializes the controller class.
    */
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 

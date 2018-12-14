@@ -74,7 +74,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   @Override
   public String obteberPuesto(int numeroDePersonal) throws SQLException {
     
-    query = "SELECT puesto FROM personal WHERE idpersonal = ? ";
+    query = "SELECT puesto FROM centro_de_computo.personal WHERE idpersonal = ? ";
 
     try {
       conexion = this.conectar();
@@ -97,13 +97,14 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   }
 
   @Override
-  public String obtenerContrasenia(int numeroDePersonal) throws SQLException {
-    query = "SELECT contrasenia FROM personal p, usuario u WHERE u.personal_idPersonal = p.idPersonal ADN p.idpersonal = ? ";
+  public String obtenerContrasenia(String contrasenia) throws SQLException {
+    query = "SELECT contrasenia FROM centro_de_computo.usuario WHERE "
+            + "contrasenia = ? ;";
 
     try {
       conexion = this.conectar();
       PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
+      statement.setString(1, contrasenia);
       ResultSet result = statement.executeQuery();
       result.next();
       dato = result.getString("contrasenia");
@@ -121,28 +122,54 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   }
 
   @Override
-  public String obtenerUsuario(int numeroDePersonal) throws SQLException {
+  public int obtenerUsuario(int numeroDePersonal) throws SQLException {
     
-    query = "SELECT usuario FROM personal WHERE nombre_usuario = ? ";
+    query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ? ";
 
-    try {
       conexion = this.conectar();
       PreparedStatement statement = conexion.prepareStatement(query);
       statement.setInt(1, numeroDePersonal);
       ResultSet result = statement.executeQuery();
       result.next();
-      dato = result.getString("nombre_usuario");
-    } catch (SQLException ex) {
-      throw new SQLException();
-    } finally {
+      int usuario = result.getInt("nombre_usuario");
+
       try {
         conexion.close();
       } catch (SQLException ex) {
         throw new SQLException();
       }
-    }
+      
 
-    return dato;
+    return usuario;
+  }
+
+  @Override
+  public boolean buscarPersonal(int numeroDePersonal, String contrasenia) {
+    query = "SELECT * FROM centro_de_computo.usuario WHERE "
+            + "contrasenia = ? && nombre_usuario = ? ;";
+
+    try {
+      conexion = this.conectar();
+      PreparedStatement statement = conexion.prepareStatement(query);
+      statement.setString(1, contrasenia);
+      statement.setInt(2, numeroDePersonal);
+      ResultSet result = statement.executeQuery();
+      if (result.next()) {
+        
+        return true;
+      } else {
+        return false;
+      }
+    } catch (SQLException ex) {
+      return false;
+    } finally {
+      try {
+        conexion.close();
+      } catch (SQLException ex) {
+        return false;
+      }
+      
+    }
   }
   
 }

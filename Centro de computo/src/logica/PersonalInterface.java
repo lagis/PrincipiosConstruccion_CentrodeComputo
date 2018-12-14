@@ -12,6 +12,9 @@ import java.sql.SQLException;
  * @author marai
  */
 public interface PersonalInterface {
-  public boolean comprobarUsuario() throws SQLException ;
-  public boolean comprobarContrasenia() throws SQLException ;
+  public boolean comprobarUsuario(int usuario) throws SQLException ;
+  public boolean comprobarContrasenia(String contrasenia) throws SQLException ;
+  public Personal obtenerPersonal() throws SQLException ;
+  public boolean comprobarPersonal(int numeroDePersonal, String contrasenia);
+  public String obtenerPuesto(int usuario);
 }

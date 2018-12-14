@@ -25,8 +25,10 @@ public interface PersistenciaPersonal {
  
   public String obteberPuesto(int numeroDePersonal) throws SQLException;
   
-  public String obtenerContrasenia(int numeroDePersonal) throws SQLException;
+  public String obtenerContrasenia(String contrasenia) throws SQLException;
   
-  public String obtenerUsuario(int numeroDePersonal) throws SQLException;
+  public int obtenerUsuario(int numeroDePersonal) throws SQLException;
+  
+  public boolean buscarPersonal(int numeroDePersonal, String contrasenia);
   
 }

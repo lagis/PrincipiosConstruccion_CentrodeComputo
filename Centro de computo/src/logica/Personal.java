@@ -25,6 +25,10 @@ public class Personal implements PersonalInterface{
   private String contrasenia;
   private PersistenciaPersonal  almacen = new PersonalAlmacen();
   
+  public Personal(){
+    
+  }
+  
   public Personal(int idPersonal, String nombre, String correo, String telefono, String puesto, String contrasenia) {
     this.idPersonal = idPersonal;
     this.nombre = nombre;
@@ -64,25 +68,44 @@ public class Personal implements PersonalInterface{
   }
 
   @Override
-  public boolean comprobarUsuario() throws SQLException  {
-    try {
-      return almacen.obtenerUsuario(idPersonal).equals(Integer.toString(idPersonal));
-    } catch (SQLException ex) {
-      //TODO
+  public boolean comprobarUsuario(int usuario) throws SQLException  {
+    this.idPersonal = almacen.obtenerUsuario(usuario);
+    if (this.idPersonal == 0) {
+      return false;
+    } else {
+      return true;
     }
-    return false;
+    
   }
 
   @Override
-  public boolean comprobarContrasenia() throws SQLException  {
-    try {
-      return almacen.obtenerContrasenia(idPersonal).equals(this.contrasenia);
-    }  catch (SQLException ex) {
-      //TODO
-    }
-    return false;
-    
+  public boolean comprobarContrasenia(String contrasenia) throws SQLException  {
+    this.contrasenia = almacen.obtenerContrasenia(contrasenia);
+    return !this.contrasenia.isEmpty();
   }
+
+  @Override
+  public Personal obtenerPersonal() throws SQLException {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public boolean comprobarPersonal(int numeroDePersonal, String contrasenia) {
+    return this.almacen.buscarPersonal(numeroDePersonal, contrasenia);
+  }
+
+  @Override
+  public String obtenerPuesto(int usuario) {
+    try {
+      this.puesto = this.almacen.obteberPuesto(usuario);
+    } catch (SQLException ex) {
+      
+    }
+    return this.puesto;
+  }
+  
+  
+
  
   
 }
