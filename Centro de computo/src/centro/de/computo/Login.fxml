@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.LoginController">
+    <stylesheets>
+        <URL value="@login.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="215.0" layoutY="113.0" text="Usuario">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="204.0" layoutY="182.0" text="Contraseña">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textField" layoutX="301.0" layoutY="110.0" />
+      <PasswordField fx:id="passwordtField" layoutX="303.0" layoutY="180.0" />
+      <Button fx:id="loginBoton" layoutX="250.0" layoutY="258.0" mnemonicParsing="false" onAction="#loginButtonAction" text="Iniciar Sesión">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
