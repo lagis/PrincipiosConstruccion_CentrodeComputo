@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.io.IOException;
@@ -32,11 +33,10 @@ import logica.InterfaceInventarioHardware;
 import logica.InventarioHardware;
 
 /**
- * FXML Controller class
- * Controlador de InventarioHardware.
+ * FXML Controller class Controlador de InventarioHardware.
+ *
  * @author PREDATOR 15 G9-78Q
  */
-
 public class InventarioHardwareController implements Initializable {
 
   @FXML
@@ -57,7 +57,7 @@ public class InventarioHardwareController implements Initializable {
   private TableColumn<Equipo, String> tcEstado;
   @FXML
   private Button bttRegistrarEquipo;
-  
+
   private InterfaceInventarioHardware inventario = new InventarioHardware();
   private final String numeroPersonal = User.getUsuario();
 
@@ -73,59 +73,57 @@ public class InventarioHardwareController implements Initializable {
     this.tcResponsable.setCellValueFactory(new PropertyValueFactory<>("responsableUbicacion"));
     this.tcEstado.setCellValueFactory(new PropertyValueFactory<>("disponibilidad"));
     this.tcMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-    
-    
+
     Label labelMenu = new Label();
-    
+
     ContextMenu contextMenu = new ContextMenu();
     MenuItem item1 = new MenuItem("Cambiar responsable");
     item1.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
         labelMenu.setText("Cambiar responsable");
-       
+
         cambiarResponsable(tvInventario.getSelectionModel().getSelectedItem().getModelo(),
-           tvInventario.getSelectionModel().getSelectedItem().getIdentificador());
+            tvInventario.getSelectionModel().getSelectedItem().getIdentificador());
       }
     });
-    
+
     MenuItem item2 = new MenuItem("Registrar dictamen de mantenimiento");
     item2.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
         labelMenu.setText("Registrar dictamen de mantenimiento");
-        registrarDictamen(tvInventario.getSelectionModel().getSelectedItem().getIdentificador(), 
+        registrarDictamen(tvInventario.getSelectionModel().getSelectedItem().getIdentificador(),
             numeroPersonal);
       }
     });
     if (User.getPuesto().equalsIgnoreCase("jefe")) {
-    contextMenu.getItems().addAll(item1, item2);
+      contextMenu.getItems().addAll(item1, item2);
     } else {
       contextMenu.getItems().addAll(item2);
       this.bttRegistrarEquipo.setVisible(false);
     }
-    
+
     tvInventario.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
       @Override
       public void handle(ContextMenuEvent event) {
         contextMenu.show(tvInventario, event.getScreenX(), event.getScreenY());
       }
     });
- 
-    
+
     try {
       this.llenarLista(this.inventario.consultarListaEquipo());
     } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, 
+      JOptionPane.showMessageDialog(null,
           "El sistema no está disponible por el momento, inténtelo más tarde");
     }
-    
-  }  
-  
-  public void llenarLista(List<Equipo> listaEquipo){
+
+  }
+
+  private void llenarLista(List<Equipo> listaEquipo) {
     tvInventario.getItems().clear();
     for (Equipo equipo : listaEquipo) {
-      tvInventario.getItems().add(equipo); 
+      tvInventario.getItems().add(equipo);
     }
   }
 
@@ -133,28 +131,28 @@ public class InventarioHardwareController implements Initializable {
   private void clickRegistrar(ActionEvent event) {
     this.abrirVentana("RegistrarEquipo.fxml");
   }
-  
+
   @FXML
   private void clickConsultar(ActionEvent event) {
     try {
       this.llenarLista(this.inventario.consultarListaEquipo());
     } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "El sistema no está disponible por el momento, inténtelo más tarde");
+      JOptionPane.showMessageDialog(null, 
+          "El sistema no está disponible por el momento, inténtelo más tarde");
     }
   }
-  
-  private void cambiarResponsable(String modelo, String id){
-   CambiarResponsableController.mandarModeloNumeroSerie(modelo, id);
-   this.abrirVentana("CambiarResponsable.fxml");
+
+  private void cambiarResponsable(String modelo, String id) {
+    CambiarResponsableController.mandarModeloNumeroSerie(modelo, id);
+    this.abrirVentana("CambiarResponsable.fxml");
   }
-  
-  private void registrarDictamen(String idEquipo, String numeroPersonal){
-    RegistrarDictamenController.setIdEquipo( idEquipo);
+
+  private void registrarDictamen(String idEquipo, String numeroPersonal) {
+    RegistrarDictamenController.setIdEquipo(idEquipo);
     this.abrirVentana("RegistrarDictamen.fxml");
-    
   }
- 
-   public void abrirVentana(String ventana) {
+
+  private void abrirVentana(String ventana) {
     Stage stageEquipo = new Stage();
     Parent paneEquipo;
     try {
@@ -166,6 +164,5 @@ public class InventarioHardwareController implements Initializable {
       ex.printStackTrace();
     }
   }
-  
-  
+
 }

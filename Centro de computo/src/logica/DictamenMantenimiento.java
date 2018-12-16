@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
 import java.sql.SQLException;
@@ -19,10 +20,8 @@ import persistencia.PersistenciaDictamenMantenimiento;
  * @author Pao
  */
 
-public class DictamenMantenimiento implements InterfaceDictamenMantenimiento{
+public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   private String nombreTecnico;
-  private String apellidoPaternoTecnico;
-  private String apellidoMaternoTecnico;
   private java.sql.Date fecha;
   private String region;
   private String telefonoTecnico;
@@ -36,14 +35,11 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento{
   private PersistenciaDictamenMantenimiento persistencia =
       new DictamenMantenimientoAlmacen();
   
-  
-  public DictamenMantenimiento(String nombreTecnico, String apellidoPaternoTecnico,
-      String apellidoMaternoTecnico, java.sql.Date fecha, String region,
+ 
+  public DictamenMantenimiento(String nombreTecnico, java.sql.Date fecha, String region,
           String telefono, String correo, String entidadAcademica, String tipoBorrado,  
-              String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion){
+              String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion) {
     this.nombreTecnico = nombreTecnico;
-    this.apellidoPaternoTecnico = apellidoPaternoTecnico;
-    this.apellidoMaternoTecnico = apellidoMaternoTecnico;
     this.fecha  = fecha;
     this.region = region;
     this.telefonoTecnico = telefono;
@@ -57,14 +53,11 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento{
     
   }
   
-    public DictamenMantenimiento(String nombreTecnico, String apellidoPaternoTecnico,
-      String apellidoMaternoTecnico, java.sql.Date fecha, String region,
-          String telefono, String correo, String entidadAcademica, String tipoBorrado,  
-              String observaciones, String tipoDictamen, String descripcion){
+  public DictamenMantenimiento(String nombreTecnico, java.sql.Date fecha, String region,
+      String telefono, String correo, String entidadAcademica, String tipoBorrado,
+      String observaciones, String tipoDictamen, String descripcion) {
     this.nombreTecnico = nombreTecnico;
-    this.apellidoPaternoTecnico = apellidoPaternoTecnico;
-    this.apellidoMaternoTecnico = apellidoMaternoTecnico;
-    this.fecha  = fecha;
+    this.fecha = fecha;
     this.region = region;
     this.telefonoTecnico = telefono;
     this.correoTecnico = correo;
@@ -74,64 +67,71 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento{
     this.numeroDeReporte = numeroDeReporte;
     this.tipoDictamen = tipoDictamen;
     this.descripcion = descripcion;
-    
+
   }
 
   public DictamenMantenimiento() {
   }
   
   
-  public String consultarNombre(){
+  public String getNombre() {
     return this.nombreTecnico;
   }
   
-  public String consultarApellidoPaterno(){
-    return this.apellidoPaternoTecnico;
-  }
-  
-  public String consultarApellidoMaterno(){
-    return this.apellidoMaternoTecnico;
-  }
-  
-  public Date consultarFecha(){
+  public Date getFecha() {
     return this.fecha;
   }
   
-  public String consultarRegion(){
+  public String getRegion() {
     return this.region;
   }
   
-  public String consultarTelefono(){
+  public String getTelefono() {
     return this.telefonoTecnico;
   }
   
-  public String consultarCorreo(){
+  public String getCorreo() {
     return this.correoTecnico;
   }
   
-  public String consultarEntidadAcademica(){
+  public String getEntidadAcademica() {
     return this.entidadAcademica;
   }
   
-  public String consultarTipoBorrado(){
-    return this.consultarDescripcion();
+  public String getTipoBorrado() {
+    return this.descripcion;
   }
   
-  public String consultarObservaciones(){
+  public String getObservaciones() {
     return this.observaciones;
   }
   
-  public int consultarNumeroReporte(){
+  public int getNumeroReporte() {
     return this.numeroDeReporte;
   }
   
-  public String consultarTipoDictamen(){
+  public String getTipoDictamen() {
     return this.tipoDictamen;
   }
   
-  public String consultarDescripcion(){
+  public String getDescripcion() {
     return this.descripcion;
   }
+  
+  /**
+   * Permite registrar un nuevo dictamen de mantenimiento.
+   * @param fecha Tipo Date, es la fecha de cuando se registra el dictamen.
+   * @param region String, región dónde se registra el dictamen.
+   * @param dependencia String, dependencia académica de donde procede el dictamen.
+   * @param tipoBorrado String, tipo de borrado que se le hará al equipo.
+   * @param observaciones String, observaciones correspondientes al equipo que se 
+   * le hará el mantenimiento.
+   * @param tipoDictamen String
+   * @param descripcion String, descripción del procedimiento.
+   * @param idPersonal String, Núnero de empleado correspondiente al personal.
+   * @param numeroInventario String, correspondiente al equipo.
+   * @throws SQLException Se arroja cuando no es posible realizar el registro del equipo.
+   */
   
   @Override
   public void registrarDictamenString(java.sql.Date fecha, String region, 
@@ -145,10 +145,19 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento{
                 descripcion, idPersonal, numeroInventario);
   
   }
+
+  /**
+   * genera un reporte del mantenimiento ocurrido desde la fecha indicada hasta
+   * la actualidad.
+   * @param fecha Dato de tipo Date que contrá la fecha desde que se quiere
+   * realizar el dictamen.
+   * @return retorna una lista con los dictámenes
+   * realizados desde esa fecha hasta la actualidad
+   */
   
-    @Override
+  @Override
   public List<DictamenMantenimiento> generarReporteMantinimiento(Date fecha) {
-    throw new UnsupportedOperationException("Not supported yet."); 
+    throw new UnsupportedOperationException("Not supported yet.");
     //To change body of generated methods, choose Tools | Templates.
   }
   

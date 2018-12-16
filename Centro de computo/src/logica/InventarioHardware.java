@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
-
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import persistencia.EquipoAlmacen;
 import persistencia.PersistenciaEquipo;
@@ -60,6 +59,13 @@ public class InventarioHardware implements InterfaceInventarioHardware {
     return this.persistencia.consultarEquipo(id);
   }
 
+  /**
+   * Cambia el responsable acargo del equipo.
+   * @param id String, identificador del equipo.
+   * @param nuevaUbicacion String, nueva ubicación del equipo.
+   * @throws SQLException Se  arroja si no es posible realizar el cambio.
+   */
+  
   @Override
   public void cambiarResponsable(String id, String nuevaUbicacion) throws SQLException {
     this.persistencia.cambiarResponsable(id, nuevaUbicacion);

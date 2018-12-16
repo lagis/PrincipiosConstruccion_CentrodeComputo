@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.net.URL;
@@ -22,16 +23,17 @@ import logica.InterfaceInventarioHardware;
 import logica.InventarioHardware;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author PREDATOR 15 G9-78Q
  */
+
 public class RegistrarEquipoController implements Initializable {
 
   @FXML
   private TextField tfModelo;
   @FXML
-  private TextField Marca;
+  private TextField tfMarca;
   @FXML
   private TextField tfNumeroSerie;
   @FXML
@@ -40,16 +42,15 @@ public class RegistrarEquipoController implements Initializable {
   private Button bttGuardar;
   @FXML
   private ChoiceBox cbResponsable;
-  
+
   private InterfaceInventarioHardware inventario = new InventarioHardware();
-  
+
   private final int longitudMaximaNumeroSerie = 20;
-  private final int longitudMaximaMarca = 45 ;
+  private final int longitudMaximaMarca = 45;
 
   /**
    * Initializes the controller class.
    */
-  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     this.cbTipoEquipo.getItems().add("Desktop");
@@ -60,54 +61,58 @@ public class RegistrarEquipoController implements Initializable {
     this.cbResponsable.getItems().add("CC3");
     this.cbResponsable.getItems().add("CC4");
     this.cbResponsable.getItems().add("Bodega");
-   
-  }  
+
+  }
 
   @FXML
   private void clickGuardarEquipo(ActionEvent event) {
-    
+
     String modelo = this.tfModelo.getText();
     String numeroSerie = this.tfNumeroSerie.getText();
     String tipoEquipo = (String) this.cbTipoEquipo.getValue();
-    String marca = this.Marca.getText();
+    String marca = this.tfMarca.getText();
     String responsableUbicacion = (String) this.cbResponsable.getValue();
-    
-    if(this.validarDatos() && this.cbResponsable.getValue() != null 
+
+    if (this.validarDatos() && this.cbResponsable.getValue() != null
         && this.cbTipoEquipo.getValue() != null) {
-      
+
       try {
-        this.inventario.registrarEquipo(modelo, numeroSerie, tipoEquipo, marca, responsableUbicacion);
+        this.inventario.registrarEquipo(modelo, numeroSerie, 
+            tipoEquipo, marca, responsableUbicacion);
         Stage stage = (Stage) bttGuardar.getScene().getWindow();
-        stage.close(); 
+        stage.close();
       } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "El sistema no está disponible por el momento, inténtelo más tarde");
-      } 
+        JOptionPane.showMessageDialog(null, 
+            "El sistema no está disponible por el momento, inténtelo más tarde");
+      }
     } else {
       JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");
     }
-    
+
   }
-  
-  private boolean validarMarca(){
+
+  private boolean validarMarca() {
     Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
-    Matcher encaja = patron.matcher(this.Marca.getText());
-    return encaja.matches() && this.Marca.getText().length() <= this.longitudMaximaMarca;
+    Matcher encaja = patron.matcher(this.tfMarca.getText());
+    return encaja.matches() && this.tfMarca.getText().length() <= this.longitudMaximaMarca;
   }
-  
-  private boolean validarModelo(){
+
+  private boolean validarModelo() {
     Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
     Matcher encaja = patron.matcher(this.tfModelo.getText());
     return encaja.matches() && this.tfNumeroSerie.getText().length() <= this.longitudMaximaMarca;
   }
-  
-  private boolean validarNumeroSerie(){
+
+  private boolean validarNumeroSerie() {
     Pattern patron = Pattern.compile("[a-zA-Z-0-9]+");
     Matcher encaja = patron.matcher(this.tfNumeroSerie.getText());
-    return encaja.matches() && this.tfNumeroSerie.getText().length() <= this.longitudMaximaNumeroSerie ;
+    return encaja.matches() && this.tfNumeroSerie.getText().length() 
+        <= this.longitudMaximaNumeroSerie;
   }
-  
-  private boolean validarDatos(){
+
+  private boolean validarDatos() {
     return this.validarMarca() && this.validarModelo() && this.validarNumeroSerie();
   }
- 
+
 }
+ 

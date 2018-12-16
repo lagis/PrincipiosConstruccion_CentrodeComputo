@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package persistencia;
 
 import java.sql.SQLException;
@@ -10,9 +11,10 @@ import java.util.List;
 import logica.Personal;
 
 /**
- *
+ * Contiene métodos para realizar la administración del personal.
  * @author marai
  */
+
 public interface PersistenciaPersonal {
   
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException;

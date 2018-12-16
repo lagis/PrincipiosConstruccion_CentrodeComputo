@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
 /**
@@ -13,7 +14,7 @@ package logica;
  * @author Pao
  */
 
-public class Equipo implements InterfaceEquipo{
+public class Equipo implements InterfaceEquipo {
   
   private String identificador;
   private String modelo;
@@ -26,7 +27,7 @@ public class Equipo implements InterfaceEquipo{
 
   
   public Equipo(String identificador, String modelo, String numeroSerie,
-      String tipoEquipo, String marca, String responsableUbicacion, String disponibilidad){
+      String tipoEquipo, String marca, String responsableUbicacion, String disponibilidad) {
     this.modelo = modelo;
     this.numeroSerie = numeroSerie;
     this.tipoEquipo = tipoEquipo;
@@ -37,7 +38,7 @@ public class Equipo implements InterfaceEquipo{
   }
   
   public Equipo(String modelo, String numeroSerie,
-      String tipoEquipo, String marca, String responsableUbicacion){
+      String tipoEquipo, String marca, String responsableUbicacion) {
     this.modelo = modelo;
     this.numeroSerie = numeroSerie;
     this.tipoEquipo = tipoEquipo;
@@ -46,45 +47,7 @@ public class Equipo implements InterfaceEquipo{
   }
 
   public Equipo() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
-  
-
-/**
- * Registra un nuevo dictamen de mantenimiento para el equipo actual.
- * @param nombreTecnico
- * @param apellidoPaternoTecnico
- * @param apellidoMaternoTecnico
- * @param fecha
- * @param region
- * @param telefono
- * @param correo
- * @param entidadAcademica
- * @param tipoBorrado
- * @param observaciones
- * @param tipoDictamen
- * @param descripcion 
- */
-  
-  @Override
-  public void registrarDictamen(String nombreTecnico, String apellidoPaternoTecnico,
-      String apellidoMaternoTecnico, java.sql.Date fecha, String region,
-          String telefono, String correo, String entidadAcademica, String tipoBorrado,  
-              String observaciones, String tipoDictamen, String descripcion) {
-    
-    DictamenMantenimiento nuevoDictamen = new DictamenMantenimiento(nombreTecnico, apellidoPaternoTecnico,
-      apellidoMaternoTecnico, fecha, region,
-           telefono, correo, entidadAcademica, tipoBorrado,  
-               observaciones, tipoDictamen, descripcion);
-  
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-
-  /**
-   * sirve para consultar la disponibilidad del equipo.
-   * @return valor booleano que corresponde a la disponibilidad del equipo.
-   */
-  
   
   @Override
   public String getDisponibilidad() {

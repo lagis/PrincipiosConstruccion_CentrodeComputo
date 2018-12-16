@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
 import java.sql.SQLException;
@@ -10,8 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Contiene métodos para realizar operaciones administrativas 
- * sobre objeto de tipo Equipo.
+ * Contiene métodos para realizar operaciones administrativas sobre objeto de tipo Equipo.
  * @author ferc
  */
 

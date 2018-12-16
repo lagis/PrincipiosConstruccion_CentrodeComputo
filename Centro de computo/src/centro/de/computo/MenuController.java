@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.io.IOException;
@@ -14,35 +15,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
- * FXML Controller class
- *
+ * FXML Controller class.
  * @author PREDATOR 15 G9-78Q
  */
+
 public class MenuController implements Initializable {
-  
-  @FXML
-  private Label lUsuario;
-  @FXML
-  private Label lPuesto;
-  
 
   /**
    * Initializes the controller class.
    */
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    
-    this.lUsuario.setText(User.getUsuario());
-    this.lPuesto.setText(User.getPuesto());
-    
-  }  
-  
-   public void abrirVentana(String ventana) {
+
+  }
+
+  private void abrirVentana(String ventana) {
     Stage stageEquipo = new Stage();
     Parent paneEquipo;
     try {
@@ -51,10 +43,10 @@ public class MenuController implements Initializable {
       stageEquipo.setScene(sceneEquipo);
       stageEquipo.show();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      JOptionPane.showMessageDialog(null, 
+          "El sistema no está disponible por el momento, inténtelo más tarde");
     }
   }
-  
 
   @FXML
   private void abrirInventarioHardware(ActionEvent event) {
@@ -64,9 +56,9 @@ public class MenuController implements Initializable {
   @FXML
   private void clickAdministrarPersonal(ActionEvent event) {
   }
-  
+
   @FXML
   private void prestarEquipo(ActionEvent event) {
   }
-  
+
 }

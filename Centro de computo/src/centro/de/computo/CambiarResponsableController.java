@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.net.URL;
@@ -20,33 +21,33 @@ import logica.InterfaceInventarioHardware;
 import logica.InventarioHardware;
 
 /**
- * FXML Controller class
- *
+ * FXML Controller class.
  * @author PREDATOR 15 G9-78Q
  */
+
 public class CambiarResponsableController implements Initializable {
 
   @FXML
   private ChoiceBox cbResponsable;
   @FXML
-  private Label lNumeroSerie;
+  private Label labelNumeroSerie;
   @FXML
-  private Label lModelo;
+  private Label labelModelo;
   @FXML
   private Button bttGuardar;
   
   private static String modelo;
   private static String numeroSerie;
-  
-  private InterfaceInventarioHardware inventario = new InventarioHardware();
+  private static InterfaceInventarioHardware inventario = new InventarioHardware();
 
   /**
    * Initializes the controller class.
    */
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    this.lModelo.setText(CambiarResponsableController.modelo);
-    this.lNumeroSerie.setText(CambiarResponsableController.numeroSerie);
+    this.labelModelo.setText(CambiarResponsableController.modelo);
+    this.labelNumeroSerie.setText(CambiarResponsableController.numeroSerie);
     
     this.cbResponsable.getItems().add("CC1");
     this.cbResponsable.getItems().add("CC2");
@@ -59,27 +60,26 @@ public class CambiarResponsableController implements Initializable {
   }
   
   public static void mandarModeloNumeroSerie(
-      String modelo, String numeroSerie){
+      String modelo, String numeroSerie) {
     CambiarResponsableController.modelo = modelo;
     CambiarResponsableController.numeroSerie = numeroSerie;
-    
   }
 
   @FXML
   private void clickGuardar(ActionEvent event) {
     if (this.cbResponsable.getValue() != null) {
       try {
-        this.inventario.cambiarResponsable(this.lNumeroSerie.getText(),
+        this.inventario.cambiarResponsable(this.labelNumeroSerie.getText(),
             (String) this.cbResponsable.getValue());
         Stage stage = (Stage) bttGuardar.getScene().getWindow();
         stage.close(); 
       } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "El sistema no está disponible por el momento, inténtelo más tarde");
+        JOptionPane.showMessageDialog(null, 
+            "El sistema no está disponible por el momento, inténtelo más tarde");
       }
     } else {
       JOptionPane.showMessageDialog(null, "Seleccione una nueva ubicación");
     }
-    
     
   }
   

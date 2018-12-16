@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
 import java.sql.SQLException;
@@ -12,10 +13,11 @@ import persistencia.PersistenciaPersonal;
 import persistencia.PersonalAlmacen;
 
 /**
- *
+ * Contiene métodos para administrar al personal.
  * @author marai
  */
-public class Personal implements PersonalInterface{
+
+public class Personal implements PersonalInterface {
   
   private int idPersonal;
   private String nombre;
@@ -25,11 +27,12 @@ public class Personal implements PersonalInterface{
   private String contrasenia;
   private PersistenciaPersonal  almacen = new PersonalAlmacen();
   
-  public Personal(){
+  public Personal() {
     
   }
   
-  public Personal(int idPersonal, String nombre, String correo, String telefono, String puesto, String contrasenia) {
+  public Personal(int idPersonal, String nombre, String correo, String telefono, 
+      String puesto, String contrasenia) {
     this.idPersonal = idPersonal;
     this.nombre = nombre;
     this.correo = correo;
@@ -38,10 +41,10 @@ public class Personal implements PersonalInterface{
     this.contrasenia = contrasenia;
   }
   
-  public Personal(String idPersonal, String contrasenia){
+  public Personal(String idPersonal, String contrasenia) {
     this.idPersonal = Integer.parseInt(idPersonal);
     this.contrasenia = contrasenia;
-    }
+  }
 
   public int getIdPersonal() {
     return idPersonal;
@@ -86,7 +89,8 @@ public class Personal implements PersonalInterface{
 
   @Override
   public Personal obtenerPersonal() throws SQLException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet.");
+    //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
@@ -95,12 +99,9 @@ public class Personal implements PersonalInterface{
   }
 
   @Override
-  public String obtenerPuesto(int usuario) {
-    try {
-      this.puesto = this.almacen.obteberPuesto(usuario);
-    } catch (SQLException ex) {
-      
-    }
+  public String obtenerPuesto(int usuario) throws SQLException {
+    this.puesto = this.almacen.obteberPuesto(usuario);
+    
     return this.puesto;
   }
   

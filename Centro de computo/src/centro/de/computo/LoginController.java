@@ -29,15 +29,14 @@ import logica.Personal;
 import logica.PersonalInterface;
 
 /**
- * FXML Controller class
- *
+ * FXML Controller class.
  * @author marai
  */
 
 public class LoginController implements Initializable {
 
-  private PersonalInterface personal = new Personal();
-  
+  private final PersonalInterface personal = new Personal();
+
   @FXML
   private TextField textField;
 
@@ -46,23 +45,20 @@ public class LoginController implements Initializable {
 
   @FXML
   private Button loginBoton;
-  
-  public final int longMax = 20;
 
-  
-  
+  private    final int longMax = 20;
+
   @FXML
   private void loginButtonAction(ActionEvent event) throws IOException, SQLException {
     String usuario = textField.getText();
     String contrasenia = passwordtField.getText();
-    
+
     if (this.validarPassowrd() && this.validarUser()) {
 
       if (this.personal.comprobarPersonal(Integer.parseInt(usuario), contrasenia)) {
-        System.out.println("Inicio");
-        User.enviarUsuario(usuario);
+        User.setUsuario(usuario);
         String puesto = this.personal.obtenerPuesto(Integer.parseInt(usuario));
-        User.enviarPuesto(puesto);
+        User.setPuesto(puesto);
         this.abrirVentana("Menu.fxml");
         this.cerrarLogin();
       } else {
@@ -73,7 +69,7 @@ public class LoginController implements Initializable {
     }
   }
 
-  public void abrirVentana(String ventana) {
+  private void abrirVentana(String ventana) {
     Stage stageEquipo = new Stage();
     Parent paneEquipo;
     try {
@@ -82,34 +78,33 @@ public class LoginController implements Initializable {
       stageEquipo.setScene(sceneEquipo);
       stageEquipo.show();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      JOptionPane.showMessageDialog(null, 
+          "El sistema no está disponible por el momento");
     }
   }
 
-  
-  private boolean validarPassowrd(){
+  private boolean validarPassowrd() {
     Pattern patron = Pattern.compile("[^ ]+");
     Matcher encaja = patron.matcher(this.passwordtField.getText());
     return encaja.matches() && this.passwordtField.getText().length() <= this.longMax;
   }
-  
-  private boolean validarUser(){
+
+  private boolean validarUser() {
     Pattern patron = Pattern.compile("[0-9]+");
     Matcher encaja = patron.matcher(this.textField.getText());
     return encaja.matches() && this.textField.getText().length() <= this.longMax;
   }
-  
-  
-  private boolean camposVacios(){
-    return textField.getText().trim().isEmpty() 
+
+  private boolean camposVacios() {
+    return textField.getText().trim().isEmpty()
         && passwordtField.getText().trim().isEmpty();
   }
 
-  public void cerrarLogin() {
+  private void cerrarLogin() {
     Stage stage = (Stage) loginBoton.getScene().getWindow();
     stage.close();
   }
-  
+
   private void enviarMensaje(String titulo, String mensaje) {
     Alert fail = new Alert(AlertType.INFORMATION);
     fail.setTitle(titulo);

@@ -12,14 +12,12 @@
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/MenuController.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/InventarioHardware.fxml</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarEquipoController.java</file>
-            <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/DictamenMantenimientoAlmacen.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarEquipo.fxml</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/CambiarResponsable.fxml</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Personal.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/PersonalAlmacen.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/CambiarResponsableController.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceDictamenMantenimiento.java</file>
-            <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/conexion/GenericDao.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/LoginController.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/Login.fxml</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/Menu.fxml</file>
@@ -28,7 +26,6 @@
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/DictamenMantenimiento.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/EquipoAlmacen.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Equipo.java</file>
-            <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceEquipo.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/PersonalInterface.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/conexion/Credenciales.java</file>
             <file>file:/D:/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceInventarioHardware.java</file>

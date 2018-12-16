@@ -11,8 +11,8 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <ChoiceBox fx:id="cbResponsable" layoutX="358.0" layoutY="90.0" prefWidth="150.0" />
-            <Label fx:id="lNumeroSerie" layoutX="36.0" layoutY="51.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
-            <Label fx:id="lModelo" layoutX="36.0" layoutY="116.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
+            <Label fx:id="labelNumeroSerie" layoutX="36.0" layoutY="51.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
+            <Label fx:id="labelModelo" layoutX="36.0" layoutY="116.0" prefHeight="18.0" prefWidth="158.0" text="Label" />
             <Button fx:id="bttGuardar" layoutX="358.0" layoutY="158.0" mnemonicParsing="false" onAction="#clickGuardar" prefHeight="26.0" prefWidth="150.0" text="Guardar" />
             <Label layoutX="36.0" layoutY="93.0" prefHeight="18.0" prefWidth="71.0" text="Modelo" />
             <Label layoutX="36.0" layoutY="33.0" prefHeight="18.0" prefWidth="126.0" text="Número de serie" />

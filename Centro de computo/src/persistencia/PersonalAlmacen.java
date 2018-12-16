@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package persistencia;
 
 import conexion.GenericDao;
@@ -14,10 +15,11 @@ import java.util.List;
 import logica.Personal;
 
 /**
- *
+ * Contiene métodos para realizar la administración del personal mediante una base de datos mysql.
  * @author marai
  */
-public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
+
+public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal {
 
   private String query;
   private Connection conexion;
@@ -27,11 +29,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   public PersonalAlmacen() {
 
   }
-  
+
   @Override
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException {
- 
-    query = "SELECT * FROM personal p, usuario u WHERE u.personal_idpersonal = p.idpersonal ADN p.idpersonal = ? ";
+
+    query = "SELECT * FROM personal p, usuario u WHERE u.personal_idpersonal = "
+        + "p.idpersonal ADN p.idpersonal = ? ";
 
     try {
       conexion = this.conectar();
@@ -40,9 +43,9 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
       ResultSet result = statement.executeQuery();
       result.next();
       personal = new Personal(result.getInt("idpersonal"),
-              result.getString("nombreTecnico"), result.getString("correo"),
-              result.getString("numero_telefono"), result.getString("puesto"),
-              result.getString("contrasenia"));
+          result.getString("nombreTecnico"), result.getString("correo"),
+          result.getString("numero_telefono"), result.getString("puesto"),
+          result.getString("contrasenia"));
     } catch (SQLException ex) {
       throw new SQLException();
     } finally {
@@ -58,22 +61,25 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
 
   @Override
   public List<Personal> obternerTodoPersonal() throws SQLException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet."); 
+    //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void registrarPersonal(Personal personal) throws SQLException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet."); 
+    //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public void actualizarPersonal(Personal personal) throws SQLException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet."); 
+    //To change body of generated methods, choose Tools | Templates.
   }
 
   @Override
   public String obteberPuesto(int numeroDePersonal) throws SQLException {
-    
+
     query = "SELECT puesto FROM centro_de_computo.personal WHERE idpersonal = ? ";
 
     try {
@@ -99,7 +105,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   @Override
   public String obtenerContrasenia(String contrasenia) throws SQLException {
     query = "SELECT contrasenia FROM centro_de_computo.usuario WHERE "
-            + "contrasenia = ? ;";
+        + "contrasenia = ? ;";
 
     try {
       conexion = this.conectar();
@@ -123,22 +129,21 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
 
   @Override
   public int obtenerUsuario(int numeroDePersonal) throws SQLException {
-    
+
     query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ? ";
 
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
-      result.next();
-      int usuario = result.getInt("nombre_usuario");
+    conexion = this.conectar();
+    PreparedStatement statement = conexion.prepareStatement(query);
+    statement.setInt(1, numeroDePersonal);
+    ResultSet result = statement.executeQuery();
+    result.next();
+    int usuario = result.getInt("nombre_usuario");
 
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw new SQLException();
-      }
-      
+    try {
+      conexion.close();
+    } catch (SQLException ex) {
+      throw new SQLException();
+    }
 
     return usuario;
   }
@@ -146,7 +151,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
   @Override
   public boolean buscarPersonal(int numeroDePersonal, String contrasenia) {
     query = "SELECT * FROM centro_de_computo.usuario WHERE "
-            + "contrasenia = ? && nombre_usuario = ? ;";
+        + "contrasenia = ? && nombre_usuario = ? ;";
 
     try {
       conexion = this.conectar();
@@ -155,7 +160,6 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
       statement.setInt(2, numeroDePersonal);
       ResultSet result = statement.executeQuery();
       if (result.next()) {
-        
         return true;
       } else {
         return false;
@@ -168,8 +172,8 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal{
       } catch (SQLException ex) {
         return false;
       }
-      
+
     }
   }
-  
+
 }
