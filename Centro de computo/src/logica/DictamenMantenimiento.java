@@ -64,7 +64,6 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
     this.entidadAcademica = entidadAcademica;
     this.tipoBorrado = tipoBorrado;
     this.observaciones = observaciones;
-    this.numeroDeReporte = numeroDeReporte;
     this.tipoDictamen = tipoDictamen;
     this.descripcion = descripcion;
 
@@ -99,7 +98,7 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   }
   
   public String getTipoBorrado() {
-    return this.descripcion;
+    return this.tipoBorrado;
   }
   
   public String getObservaciones() {
@@ -117,6 +116,7 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   public String getDescripcion() {
     return this.descripcion;
   }
+  
   
   /**
    * Permite registrar un nuevo dictamen de mantenimiento.

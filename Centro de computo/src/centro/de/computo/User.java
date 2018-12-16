@@ -15,6 +15,10 @@ public class User {
 
   private static String usuario;
   private static String puesto;
+  
+  private User(){
+    
+  }
 
   public static void setUsuario(String usuario) {
     User.usuario = usuario;

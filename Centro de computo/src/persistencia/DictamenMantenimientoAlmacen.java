@@ -21,6 +21,7 @@ import logica.DictamenMantenimiento;
 public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
     implements PersistenciaDictamenMantenimiento<T> {
 
+  
   /**
    * Registra el mantenimiento de un equipo.
    *
@@ -35,24 +36,23 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
    * @param numeroInventario String.
    * @throws SQLException Arroja esta excepción cuando no es posible concretar la conexion.
    */
+  
   @Override
   public void registrarDictamenString(java.sql.Date fecha, String region,
       String dependencia, String tipoBorrado, String observaciones, String tipoDictamen,
       String descripcion, String idPersonal, String numeroInventario) throws SQLException {
 
     Connection miConexion = this.conectar();
-    PreparedStatement stp = null;
+    //PreparedStatement stp = null;
+    String query = "INSERT INTO centro_de_computo.dictamen_de_mantenimiento "
+        + "(fecha, region,  dependencia_solicitante, tipo_borrado, "
+            + "observaciones_equipo, "
+                + "tipo_dictamen, descripcion_dictamen, "
+                    + "personal_idpersonal, equipo_numero_inventario) "
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    try {
-
-      stp = miConexion.prepareStatement(
-          "INSERT INTO centro_de_computo.dictamen_de_mantenimiento "
-          + "(fecha, region,  dependencia_solicitante, tipo_borrado, "
-          + "observaciones_equipo, "
-          + "tipo_dictamen, descripcion_dictamen, "
-          + "personal_idpersonal, equipo_numero_inventario) "
-          + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
-
+    try(PreparedStatement stp = miConexion.prepareStatement(query)) {
+      
       stp.setDate(1, fecha);
       stp.setString(2, region);
       stp.setString(3, dependencia);
@@ -66,16 +66,12 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
       stp.executeUpdate();
 
       miConexion.commit();
+      stp.close();
     } catch (SQLException e) {
-      e.printStackTrace();
       throw new SQLException();
     } finally {
-      try {
-        stp.close();
-        miConexion.close();
-      } catch (SQLException e) {
-        throw new SQLException();
-      }
+      miConexion.close();
+
     }
   }
 

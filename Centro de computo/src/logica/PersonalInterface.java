@@ -17,7 +17,7 @@ import java.util.List;
 public interface PersonalInterface {
   
   public boolean comprobarUsuario(int usuario) throws SQLException ;
-  public boolean comprobarContrasenia(int nombre_usuario) throws SQLException ;
+  public boolean comprobarContrasenia(int nombreUsuario) throws SQLException ;
   public Personal obtenerPersonal() throws SQLException ;
   public boolean comprobarPersonal(int numeroDePersonal, String contrasenia);
   public String obtenerPuesto(int usuario);

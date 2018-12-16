@@ -60,6 +60,8 @@ public class InventarioHardwareController implements Initializable {
 
   private InterfaceInventarioHardware inventario = new InventarioHardware();
   private final String numeroPersonal = User.getUsuario();
+  private final String mensajeError = 
+      "El sistema no está disponible por el momento, inténtelo más tarde";
 
   /**
    * Initializes the controller class.
@@ -115,7 +117,7 @@ public class InventarioHardwareController implements Initializable {
       this.llenarLista(this.inventario.consultarListaEquipo());
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null,
-          "El sistema no está disponible por el momento, inténtelo más tarde");
+          this.mensajeError);
     }
 
   }
@@ -138,7 +140,7 @@ public class InventarioHardwareController implements Initializable {
       this.llenarLista(this.inventario.consultarListaEquipo());
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, 
-          "El sistema no está disponible por el momento, inténtelo más tarde");
+          this.mensajeError);
     }
   }
 
@@ -161,7 +163,8 @@ public class InventarioHardwareController implements Initializable {
       stageEquipo.setScene(sceneEquipo);
       stageEquipo.show();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      JOptionPane.showMessageDialog(null,
+          this.mensajeError);
     }
   }
 

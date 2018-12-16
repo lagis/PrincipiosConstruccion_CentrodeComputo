@@ -38,7 +38,7 @@ public class CambiarResponsableController implements Initializable {
   
   private static String modelo;
   private static String numeroSerie;
-  private static InterfaceInventarioHardware inventario = new InventarioHardware();
+  private final InterfaceInventarioHardware inventario = new InventarioHardware();
 
   /**
    * Initializes the controller class.

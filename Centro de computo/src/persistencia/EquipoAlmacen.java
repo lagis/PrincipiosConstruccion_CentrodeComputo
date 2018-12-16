@@ -20,7 +20,11 @@ import logica.Equipo;
  * @author PREDATOR 15 G9-78Q
  */
 public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquipo<T> {
+  
+  private String query;
 
+  
+  
   /**
    * Registra un equipo nuevo dentro de la base de datos.
    *
@@ -36,14 +40,16 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
       String marca, String responsableUbicacion) throws SQLException {
 
     Connection miConexion = this.conectar();
-    PreparedStatement stp = null;
-
-    try {
-
-      stp = miConexion.prepareStatement("INSERT INTO centro_de_computo.equipo "
-          + "(numero_inventario, tipo_equipo, marca, "
-          + "modelo, numero_serie) "
-          + "VALUES(?, ?, ?, ?, ?);");
+    this.query = "INSERT INTO centro_de_computo.equipo "
+        + "(numero_inventario, tipo_equipo, marca, "
+            + "modelo, numero_serie) "
+                + "VALUES(?, ?, ?, ?, ?);";
+    String query2 = "INSERT INTO centro_de_computo.area (nombre_area, "
+          + "equipo_numero_inventario) "
+              + "VALUES(?, ?);";
+    
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query); 
+        PreparedStatement stp2 = miConexion.prepareStatement(query2)) {
 
       stp.setString(1, numeroSerie);
       stp.setString(2, tipoEquipo);
@@ -52,23 +58,16 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
       stp.setString(5, numeroSerie);
       stp.executeUpdate();
 
-      stp = miConexion.prepareStatement("INSERT INTO centro_de_computo.area (nombre_area, "
-          + "equipo_numero_inventario) "
-          + "VALUES(?, ?);");
-      stp.setString(1, responsableUbicacion);
-      stp.setString(2, numeroSerie);
-
-      stp.executeUpdate();
+      stp2.setString(1, responsableUbicacion);
+      stp2.setString(2, numeroSerie);
+      stp2.executeUpdate();
 
       miConexion.commit();
     } catch (SQLException e) {
       throw new SQLException();
     } finally {
-      try {
-        miConexion.close();
-      } catch (SQLException e) {
-        throw new SQLException();
-      }
+      miConexion.close();
+       
     }
   }
 
@@ -83,13 +82,14 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   public Equipo consultarEquipo(String id) throws SQLException {
     Equipo equipo = null;
     Connection miConexion = this.conectar();
-    PreparedStatement stp
-        = null;
-    try {
-      stp = miConexion.prepareStatement(
-          "SELECT * FROM centro_de_computo.equipo WHERE idequipo = ?");
+    this.query = "SELECT * FROM centro_de_computo.equipo WHERE idequipo = ?";
+    
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query)) {
+      
       stp.setString(1, id);
-      ResultSet resultadoQuery = stp.executeQuery();
+
+      ResultSet resultadoQuery
+          = this.ejecutarQuery(stp);
       resultadoQuery.next();
       String modelo = resultadoQuery.getString("modelo");
       String numeroSerie = resultadoQuery.getString("numero_serie");
@@ -99,17 +99,22 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
       String disponibilidad = resultadoQuery.getString("disponibilidad");
       equipo = new Equipo(id, modelo, numeroSerie,
           tipoEquipo, marca, responsable, disponibilidad);
-
+      
     } catch (SQLException e) {
       throw new SQLException();
     } finally {
-      try {
-        miConexion.close();
-      } catch (SQLException e) {
-        throw new SQLException();
-      }
+      miConexion.close();
     }
     return equipo;
+  }
+  
+  
+  private ResultSet ejecutarQuery(PreparedStatement stp) throws SQLException{
+    try  {
+      return stp.executeQuery();
+    } catch (SQLException e) {
+        throw new SQLException();
+      }
   }
 
   /**
@@ -122,26 +127,26 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   public List<Equipo> consultarListaEquipo() throws SQLException {
     List<Equipo> listaDeEquipos = new ArrayList<Equipo>();
     Connection miConexion = this.conectar();
-    PreparedStatement stp = null;
-
-    stp = miConexion.prepareStatement(
-        "SELECT e.numero_inventario, e.tipo_equipo, e.marca, e.modelo, e.numero_serie, e.estado, "
+    this.query = "SELECT e.numero_inventario, e.tipo_equipo, e.marca, e.modelo, e.numero_serie, e.estado, "
         + "a.nombre_area FROM centro_de_computo.equipo e, centro_de_computo.area a "
-        + "WHERE e.numero_inventario = a.equipo_numero_inventario;");
-    ResultSet resultadoQuery = stp.executeQuery();
-    while (resultadoQuery.next()) {
-      Equipo equipo = new Equipo(resultadoQuery.getString("e.numero_inventario"),
-          resultadoQuery.getString("e.modelo"), resultadoQuery.getString("e.numero_serie"),
-          resultadoQuery.getString("e.tipo_equipo"), resultadoQuery.getString("e.marca"),
-          resultadoQuery.getString("a.nombre_area"), resultadoQuery.getString("e.estado"));
-      listaDeEquipos.add(equipo);
-    }
+            + "WHERE e.numero_inventario = a.equipo_numero_inventario;";
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query)) {
 
-    try {
-      miConexion.close();
+      ResultSet resultadoQuery
+          = this.ejecutarQuery(stp);
+      while (resultadoQuery.next()) {
+        Equipo equipo = new Equipo(resultadoQuery.getString("e.numero_inventario"),
+            resultadoQuery.getString("e.modelo"), resultadoQuery.getString("e.numero_serie"),
+                resultadoQuery.getString("e.tipo_equipo"), resultadoQuery.getString("e.marca"),
+                    resultadoQuery.getString("a.nombre_area"), resultadoQuery.getString("e.estado"));
+        listaDeEquipos.add(equipo);
+      }
+       
     } catch (SQLException e) {
       throw new SQLException();
     }
+
+      miConexion.close();
     return listaDeEquipos;
   }
 
@@ -157,35 +162,36 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   public void cambiarResponsable(String id, String nuevaUbicacion) throws SQLException {
 
     Connection miConexion = this.conectar();
-    PreparedStatement stp = null;
+    this.query = "UPDATE centro_de_computo.area "
+        + "SET nombre_area = ? WHERE equipo_numero_inventario = ? ;";
+    
+    String query2 = "UPDATE centro_de_computo.equipo "
+        + "SET estado = ? WHERE numero_inventario = ? ;";
+    
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query);
+        PreparedStatement stp2 = miConexion.prepareStatement(query2)) {
 
-    stp = miConexion.prepareStatement("UPDATE centro_de_computo.area "
-        + "SET nombre_area = ? WHERE equipo_numero_inventario = ? ;");
-
-    stp.setString(1, nuevaUbicacion);
-    stp.setString(2, id);
-    stp.executeUpdate();
-
-    stp = miConexion.prepareStatement("UPDATE centro_de_computo.equipo "
-        + "SET estado = ? WHERE numero_inventario = ? ;");
-
-    if (nuevaUbicacion.equalsIgnoreCase("fuera de servicio")) {
-      stp.setString(1, "No disponible");
+      stp.setString(1, nuevaUbicacion);
       stp.setString(2, id);
+      stp.executeUpdate();
 
-    } else {
-      stp.setString(1, "Disponible");
-      stp.setString(2, id);
-    }
-    stp.executeUpdate();
-    miConexion.commit();
+      if (nuevaUbicacion.equalsIgnoreCase("fuera de servicio")) {
+        stp2.setString(1, "No disponible");
+        stp2.setString(2, id);
 
-    try {
-      stp.close();
-      miConexion.close();
+      } else {
+        stp2.setString(1, "Disponible");
+        stp2.setString(2, id);
+      }
+      stp2.executeUpdate();
+      miConexion.commit();
+
     } catch (SQLException e) {
       throw new SQLException();
+    } finally {
+      miConexion.close();
     }
+      
   }
 
 }

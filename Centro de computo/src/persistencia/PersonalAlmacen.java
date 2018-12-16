@@ -23,69 +23,61 @@ import logica.Personal;
 public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal {
 
    private String query;
-  private Connection conexion;
   private String dato;
   private Personal personal;
-  private List<Personal> listaPersonal;
-
-  public PersonalAlmacen() {
-
-  }
+  
 
   @Override
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException {
 
+    Connection conexion = this.conectar();
     query = "SELECT * FROM centro_de_computo.personal p, centro_de_computo.usuario u"
             + " WHERE p.idpersonal = u.personal_idpersonal AND p.idpersonal = ?";
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setInt(1, numeroDePersonal);
+      ResultSet result = this.ejecutarQuery(stp);
       result.next();
+      String puesto = result.getString("puesto");
+      String contrasenia = result.getString("contrasenia");
+      
       personal = new Personal(result.getInt("idpersonal"),
               result.getString("nombreTecnico"), result.getString("correo"),
-              result.getString("numero_telefono"), result.getString("puesto"),
-              result.getString("contrasenia"));
+              result.getString("numero_telefono"), puesto,
+              contrasenia);
     } catch (SQLException ex) {
       throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw new SQLException();
-      }
+      conexion.close();
     }
 
     return personal;
+    
   }
 
   @Override
   public List<Personal> obternerTodoPersonal() throws SQLException {
-    listaPersonal = new ArrayList<>();
+    List<Personal> listaPersonal = new ArrayList<>();
     query = "SELECT * FROM centro_de_computo.personal p, centro_de_computo.usuario u"
             + " WHERE p.idpersonal = u.personal_idpersonal";
+    Connection conexion = this.conectar();
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      ResultSet result = statement.executeQuery();
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      ResultSet result = this.ejecutarQuery(stp);
+      
       while (result.next()) {
         personal = new Personal(result.getInt("idpersonal"),
                 result.getString("nombreTecnico"), result.getString("correo"),
-                result.getString("numero_telefono"), result.getString("puesto"),
-                result.getString("contrasenia"));
+                    result.getString("numero_telefono"), result.getString("puesto"),
+                        result.getString("contrasenia"));
         listaPersonal.add(personal);
       }
     } catch (SQLException ex) {
-      throw ex;
+      throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw new SQLException();
-      }
+      conexion.close();
     }
     return listaPersonal;
   }
@@ -95,22 +87,21 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
     query = "INSERT INTO centro_de_computo.personal(idpersonal,nombreTecnico,correo,"
             + "numero_telefono,puesto) VALUES (?,?,?,?,?)";
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, personal.getIdPersonal());
-      statement.setString(2, personal.getNombre());
-      statement.setString(3, personal.getCorreo());
-      statement.setString(4, personal.getTelefono());
-      statement.setString(5, personal.getPuesto());
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setInt(1, personal.getIdPersonal());
+      stp.setString(2, personal.getNombre());
+      stp.setString(3, personal.getCorreo());
+      stp.setString(4, personal.getTelefono());
+      stp.setString(5, personal.getPuesto());
+      conexion.commit();
+      
     } catch (SQLException ex) {
-      throw ex;
+      throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw ex;
-      }
+      conexion.close();
     }
   }
 
@@ -124,21 +115,20 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
 
     query = "SELECT puesto FROM centro_de_computo.personal WHERE idpersonal = ? ";
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setInt(1, numeroDePersonal);
+      
+      ResultSet result = this.ejecutarQuery(stp);
+      
       result.next();
       dato = result.getString("puesto");
     } catch (SQLException ex) {
       throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw new SQLException();
-      }
+      conexion.close();
     }
 
     return dato;
@@ -149,21 +139,18 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
     query = "SELECT contrasenia FROM centro_de_computo.usuario WHERE "
             + "nombre_usuario = ? ;";
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setInt(1, numeroDePersonal);
+      ResultSet result = this.ejecutarQuery(stp);
       result.next();
       dato = result.getString("contrasenia");
     } catch (SQLException ex) {
       throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw new SQLException();
-      }
+      conexion.close();
     }
 
     return dato;
@@ -173,11 +160,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   public boolean buscarUsuario(int numeroDePersonal) throws SQLException {
     query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ? ";
 
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setInt(1, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setInt(1, numeroDePersonal);
+      ResultSet result = this.ejecutarQuery(stp);
       if (result.next()) {
         return true;
       } else {
@@ -186,11 +174,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
     } catch (SQLException ex) {
       return false;
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        return false;
-      }
+      conexion.close();
     }
   }
 
@@ -198,26 +182,28 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   public boolean buscarPersonal(int numeroDePersonal, String contrasenia) {
     query = "SELECT * FROM centro_de_computo.usuario WHERE "
             + "contrasenia = ? && nombre_usuario = ? ;";
-
+    
     try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setString(1, contrasenia);
-      statement.setInt(2, numeroDePersonal);
-      ResultSet result = statement.executeQuery();
-      if (result.next()) {
-        return true;
-      } else {
+    Connection conexion = this.conectar();
+  
+      try (PreparedStatement stp = conexion.prepareStatement(query)) {
+
+        stp.setString(1, contrasenia);
+        stp.setInt(2, numeroDePersonal);
+        ResultSet result = this.ejecutarQuery(stp);
+        boolean retorno = false;
+        if (result.next()) {
+          retorno = true;
+        }
+        return retorno;
+        
+      } catch (SQLException ex) {
         return false;
+      } finally {
+          conexion.close();
       }
     } catch (SQLException ex) {
       return false;
-    } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        return false;
-      }
     }
   }
 
@@ -225,21 +211,27 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   public void registrarContrasenia(Personal personal) throws SQLException {
     query = "INSERT INTO centro_de_computo.usuario(contrasenia,nombre_usuario,"
             + "personal_idpersonal) VALUES(?,?,?);";
-    try {
-      conexion = this.conectar();
-      PreparedStatement statement = conexion.prepareStatement(query);
-      statement.setString(1, personal.getContrasenia());
-      statement.setInt(2, personal.getIdPersonal());
-      statement.setInt(3, personal.getIdPersonal());
+    Connection conexion = this.conectar();
+  
+      try (PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setString(1, personal.getContrasenia());
+      stp.setInt(2, personal.getIdPersonal());
+      stp.setInt(3, personal.getIdPersonal());
+      conexion.commit();
     } catch (SQLException ex) {
       throw new SQLException();
     } finally {
-      try {
-        conexion.close();
-      } catch (SQLException ex) {
-        throw ex;
-      }
+      conexion.close();
     }
+  }
+  
+  private ResultSet ejecutarQuery(PreparedStatement stp) throws SQLException{
+    try  {
+      return stp.executeQuery();
+    } catch (SQLException e) {
+        throw new SQLException();
+      }
   }
 
 }

@@ -12,10 +12,10 @@ package conexion;
  */
 public class Credenciales {
   
-  public static final String usuario = "admincc";
-  public static final String password = "FeGiPa232520.";
-  public static final String baseDatos = "centro_de_computo";
-  public static final String host = "localhost";
-  public static final int port = 3306;
+  public static final String Usuario = "admincc";
+  public static final String Contrasenia = "FeGiPa232520.";
+  public static final String BaseDatos = "centro_de_computo";
+  public static final String Host = "localhost";
+  public static final int Port = 3306;
   
 }

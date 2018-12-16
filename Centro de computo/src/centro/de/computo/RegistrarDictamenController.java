@@ -86,7 +86,6 @@ public class RegistrarDictamenController implements Initializable {
         Stage stage = (Stage) bttGuardar.getScene().getWindow();
         stage.close();
       } catch (SQLException ex) {
-        ex.printStackTrace();
         JOptionPane.showMessageDialog(null, 
             "El sistema no está disponible por el momento, inténtelo más tarde");
       }

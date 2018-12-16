@@ -76,8 +76,8 @@ public class Personal implements PersonalInterface {
   }
 
   @Override
-  public boolean comprobarContrasenia(int nombre_usuario) throws SQLException {
-    this.contrasenia = almacen.obtenerContrasenia(nombre_usuario);
+  public boolean comprobarContrasenia(int nombreUsuario) throws SQLException {
+    this.contrasenia = almacen.obtenerContrasenia(nombreUsuario);
     return !this.contrasenia.isEmpty();
   }
 
