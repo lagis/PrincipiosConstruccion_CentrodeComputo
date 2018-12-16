@@ -7,6 +7,7 @@
 package logica;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Contiene métodos para administrar el personal.
@@ -16,13 +17,11 @@ import java.sql.SQLException;
 public interface PersonalInterface {
   
   public boolean comprobarUsuario(int usuario) throws SQLException ;
-  
-  public boolean comprobarContrasenia(String contrasenia) throws SQLException ;
-  
+  public boolean comprobarContrasenia(int nombre_usuario) throws SQLException ;
   public Personal obtenerPersonal() throws SQLException ;
-  
   public boolean comprobarPersonal(int numeroDePersonal, String contrasenia);
-  
-  public String obtenerPuesto(int usuario)throws SQLException;
+  public String obtenerPuesto(int usuario);
+  public List<Personal> verPersonal() throws SQLException;
+  public void registrarNuevoPersonal(Personal personal); 
   
 }

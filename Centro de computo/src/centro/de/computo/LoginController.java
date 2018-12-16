@@ -18,8 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -95,23 +93,10 @@ public class LoginController implements Initializable {
     return encaja.matches() && this.textField.getText().length() <= this.longMax;
   }
 
-  private boolean camposVacios() {
-    return textField.getText().trim().isEmpty()
-        && passwordtField.getText().trim().isEmpty();
-  }
-
   private void cerrarLogin() {
     Stage stage = (Stage) loginBoton.getScene().getWindow();
     stage.close();
   }
-
-  private void enviarMensaje(String titulo, String mensaje) {
-    Alert fail = new Alert(AlertType.INFORMATION);
-    fail.setTitle(titulo);
-    fail.setHeaderText(mensaje);
-    fail.showAndWait();
-  }
-
   /**
    * Initializes the controller class.
    */
