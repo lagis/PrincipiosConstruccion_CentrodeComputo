@@ -53,6 +53,8 @@ public class RegistrarDictamenController implements Initializable {
 
   private final String numeroPersonal = User.getUsuario();
   private static String numeroInventario;
+  
+  private static final Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
 
   private InterfaceDictamenMantenimiento inventario = new DictamenMantenimiento();
 
@@ -97,26 +99,27 @@ public class RegistrarDictamenController implements Initializable {
   }
 
   private boolean validarTipoDictamen() {
-    Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
-    Matcher encaja = patron.matcher(this.tfTipoDictamen.getText());
+    
+    Matcher encaja = 
+        RegistrarDictamenController.patron.matcher(this.tfTipoDictamen.getText());
     return encaja.matches() && this.tfTipoDictamen.getText().length() <= this.maximoTextField;
   }
 
   private boolean validarRegion() {
-    Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
-    Matcher encaja = patron.matcher(this.tfRegion.getText());
+    Matcher encaja = 
+        RegistrarDictamenController.patron.matcher(this.tfRegion.getText());
     return encaja.matches() && this.tfRegion.getText().length() <= this.maximoTextField;
   }
 
   private boolean validarDependencia() {
-    Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
-    Matcher encaja = patron.matcher(this.tfDependencia.getText());
+    Matcher encaja = 
+        RegistrarDictamenController.patron.matcher(this.tfDependencia.getText());
     return encaja.matches() && this.tfDependencia.getText().length() <= this.maximoTextField;
   }
 
   private boolean validarTipoBorrado() {
-    Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
-    Matcher encaja = patron.matcher(this.tfTipoBorrado.getText());
+    Matcher encaja = 
+        RegistrarDictamenController.patron.matcher(this.tfTipoBorrado.getText());
     return encaja.matches() && this.tfTipoBorrado.getText().length() <= this.maximoTextField;
   }
 

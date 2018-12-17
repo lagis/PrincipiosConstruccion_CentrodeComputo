@@ -10,12 +10,12 @@ package conexion;
  * Contiene los datos para poderrealizar una conexión con la base de datos.
  * @author PREDATOR 15 G9-78Q
  */
-public class Credenciales {
+public abstract class Credenciales {
   
-  public static final String Usuario = "admincc";
-  public static final String Contrasenia = "FeGiPa232520.";
-  public static final String BaseDatos = "centro_de_computo";
-  public static final String Host = "localhost";
-  public static final int Port = 3306;
+  public static final String usuario = "admincc";
+  public static final String contrasenia = "FeGiPa232520.";
+  public static final String basedatos = "centro_de_computo";
+  public static final String host = "localhost";
+  public static final int port = 3306;
   
 }

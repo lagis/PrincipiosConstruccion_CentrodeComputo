@@ -9,7 +9,9 @@ package persistencia;
 import conexion.GenericDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import logica.DictamenMantenimiento;
 
@@ -88,4 +90,52 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
     //To change body of generated methods, choose Tools | Templates.
   }
 
+  
+  /**
+   * 
+   * @param fehca
+   * @return
+   * @throws SQLException 
+   */
+  
+  @Override
+  public List<DictamenMantenimiento> generarReporte(java.sql.Date fehca) throws SQLException {
+    List<DictamenMantenimiento> lista = new ArrayList<DictamenMantenimiento>();
+    Connection miConexion = this.conectar();
+    String query = "SELECT * FROM centro_de_computo.dictamen_de_mantenimiento "
+        + "WHERE fecha >= ?;";
+    try (PreparedStatement stp = miConexion.prepareStatement(query)) {
+        stp.setDate(1, fehca);
+      ResultSet resultadoQuery
+          = this.ejecutarQuery(stp);
+      while (resultadoQuery.next()) {
+        DictamenMantenimiento dictamen
+            = new DictamenMantenimiento(resultadoQuery.getDate("fecha"), resultadoQuery.getString("region"),
+                resultadoQuery.getString("dependencia_solicitante"), resultadoQuery.getString("tipo_borrado"),
+                    resultadoQuery.getString("observaciones_equipo"), 
+                        resultadoQuery.getInt("numero_reporte"), resultadoQuery.getString("tipo_dictamen"),
+                        resultadoQuery.getString("descripcion_dictamen"));
+        lista.add(dictamen);
+
+      }
+      
+      return lista;
+
+    } catch (SQLException e) {
+      throw new SQLException();
+    } finally {
+      miConexion.close();
+      
+    }
+
+  }
+
+  private ResultSet ejecutarQuery(PreparedStatement stp) throws SQLException {
+    try {
+      return stp.executeQuery();
+    } catch (SQLException e) {
+      throw new SQLException();
+    }
+  }
+  
 }

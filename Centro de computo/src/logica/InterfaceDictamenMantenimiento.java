@@ -7,7 +7,6 @@
 package logica;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +21,6 @@ public interface InterfaceDictamenMantenimiento {
           String descripcion, String idPersonal, String numeroInventario
     ) throws SQLException;
   
-  public List<DictamenMantenimiento> generarReporteMantinimiento(Date fecha);
+  public List<DictamenMantenimiento> generarReporteMantinimiento() throws SQLException;
   
 }

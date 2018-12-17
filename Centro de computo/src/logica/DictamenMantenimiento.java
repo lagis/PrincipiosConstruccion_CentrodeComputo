@@ -7,6 +7,7 @@
 package logica;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import persistencia.DictamenMantenimientoAlmacen;
@@ -53,17 +54,16 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
     
   }
   
-  public DictamenMantenimiento(String nombreTecnico, java.sql.Date fecha, String region,
-      String telefono, String correo, String entidadAcademica, String tipoBorrado,
-      String observaciones, String tipoDictamen, String descripcion) {
-    this.nombreTecnico = nombreTecnico;
+  public DictamenMantenimiento(java.sql.Date fecha, String region,
+      String entidadAcademica, String tipoBorrado,
+          String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion) {
+    
     this.fecha = fecha;
     this.region = region;
-    this.telefonoTecnico = telefono;
-    this.correoTecnico = correo;
     this.entidadAcademica = entidadAcademica;
     this.tipoBorrado = tipoBorrado;
     this.observaciones = observaciones;
+    this.numeroDeReporte = numeroDeReporte;
     this.tipoDictamen = tipoDictamen;
     this.descripcion = descripcion;
 
@@ -156,9 +156,18 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
    */
   
   @Override
-  public List<DictamenMantenimiento> generarReporteMantinimiento(Date fecha) {
-    throw new UnsupportedOperationException("Not supported yet.");
-    //To change body of generated methods, choose Tools | Templates.
+  public List<DictamenMantenimiento> generarReporteMantinimiento() throws SQLException{
+    Date fecha = new Date();
+    Date fecha2 = this.sumarMeses(fecha, -6);
+    java.sql.Date dateSql = new java.sql.Date(fecha2.getTime());
+    return this.persistencia.generarReporte(dateSql);
+  }
+  
+  private Date sumarMeses(Date fecha, int mesesSumados) {
+    Calendar calendario = Calendar.getInstance();
+    calendario.setTime(fecha);
+    calendario.add(Calendar.MONTH, mesesSumados);
+    return calendario.getTime();
   }
   
 }

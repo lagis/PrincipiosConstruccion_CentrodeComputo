@@ -9,8 +9,6 @@ package conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Permite realizar una conexión a una base de datos mysql mediante jdbc.
@@ -23,11 +21,11 @@ public abstract class GenericDao<T> {
   static final String DB_URL = "jdbc:mysql://";
 
   protected Connection conectar() throws SQLException {
-    String usuario = Credenciales.Usuario;
-    String pass = Credenciales.Contrasenia;
-    String bd = Credenciales.BaseDatos;
-    String host = Credenciales.Host;
-    int port = Credenciales.Port;
+    String usuario = Credenciales.usuario;
+    String pass = Credenciales.contrasenia;
+    String bd = Credenciales.basedatos;
+    String host = Credenciales.host;
+    int port = Credenciales.port;
     Connection res = null;
 
     

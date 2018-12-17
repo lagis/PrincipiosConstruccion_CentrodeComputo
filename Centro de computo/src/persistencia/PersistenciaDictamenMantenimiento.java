@@ -6,6 +6,7 @@
 
 package persistencia;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public interface PersistenciaDictamenMantenimiento<T> {
   
   
   public List<DictamenMantenimiento> consultarListaDictamen(String id);
+  
+  public List<DictamenMantenimiento> generarReporte(Date fehca) throws SQLException;
   
   
 }

@@ -95,8 +95,7 @@ public class InventarioHardwareController implements Initializable {
       @Override
       public void handle(ActionEvent event) {
         labelMenu.setText("Registrar dictamen de mantenimiento");
-        registrarDictamen(tvInventario.getSelectionModel().getSelectedItem().getIdentificador(),
-            numeroPersonal);
+        registrarDictamen(tvInventario.getSelectionModel().getSelectedItem().getIdentificador());
       }
     });
     if (User.getPuesto().equalsIgnoreCase("jefe")) {
@@ -149,7 +148,7 @@ public class InventarioHardwareController implements Initializable {
     this.abrirVentana("CambiarResponsable.fxml");
   }
 
-  private void registrarDictamen(String idEquipo, String numeroPersonal) {
+  private void registrarDictamen(String idEquipo) {
     RegistrarDictamenController.setIdEquipo(idEquipo);
     this.abrirVentana("RegistrarDictamen.fxml");
   }
