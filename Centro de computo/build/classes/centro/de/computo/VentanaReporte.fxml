@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="1000.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.VentanaReporteController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tableView" layoutX="14.0" layoutY="69.0" prefHeight="910.0" prefWidth="1870.0">
+              <columns>
+                <TableColumn fx:id="columnNumeroReporte" prefWidth="207.7777777777778" text="Numero de reporte" />
+                <TableColumn fx:id="columnFecha" prefWidth="195.99998474121094" text="Fecha de reporte" />
+                  <TableColumn fx:id="columnRegion" prefWidth="169.60003662109375" text="Region" />
+                  <TableColumn fx:id="columnDependencia" prefWidth="205.59991455078125" text="Dependencia" />
+                  <TableColumn fx:id="columnTipoBorrado" prefWidth="258.39996337890625" text="Tipo de borrado" />
+                  <TableColumn fx:id="columnObservaciones" prefWidth="207.7777777777778" text="Observaciones del equipo" />
+                  <TableColumn fx:id="columnTipoDictamen" prefWidth="207.7777777777778" text="Tipo de dictamen" />
+                  <TableColumn fx:id="columnDescripcion" prefWidth="207.7777777777778" text="Descripción" />
+                  <TableColumn fx:id="columnNumeroSerie" prefWidth="207.7777777777778" text="Número de serie del equipo" />
+              </columns>
+            </TableView>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

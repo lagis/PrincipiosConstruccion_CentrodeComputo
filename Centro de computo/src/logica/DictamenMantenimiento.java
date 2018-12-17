@@ -33,6 +33,7 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   private int numeroDeReporte;
   private String tipoDictamen;
   private String descripcion;
+  private String idEquipo;
   private PersistenciaDictamenMantenimiento persistencia =
       new DictamenMantenimientoAlmacen();
   
@@ -56,7 +57,8 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   
   public DictamenMantenimiento(java.sql.Date fecha, String region,
       String entidadAcademica, String tipoBorrado,
-          String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion) {
+          String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion, 
+          String idEquipo) {
     
     this.fecha = fecha;
     this.region = region;
@@ -66,6 +68,7 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
     this.numeroDeReporte = numeroDeReporte;
     this.tipoDictamen = tipoDictamen;
     this.descripcion = descripcion;
+    this.idEquipo = idEquipo;
 
   }
 
@@ -105,7 +108,7 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
     return this.observaciones;
   }
   
-  public int getNumeroReporte() {
+  public int getNumeroDeReporte() {
     return this.numeroDeReporte;
   }
   
@@ -115,6 +118,10 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   
   public String getDescripcion() {
     return this.descripcion;
+  }
+  
+  public String getIdEquipo() {
+    return this.idEquipo;
   }
   
   

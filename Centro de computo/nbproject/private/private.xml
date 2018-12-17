@@ -5,25 +5,36 @@
         <group>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/nbproject/jfx-impl.xml</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/CentroDeComputo.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/AdministrarUsuariosController.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InventarioPersonal.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/DictamenMantenimientoTest.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/PersistenciaPersonal.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/LoginController.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/MenuController.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceDictamenMantenimiento.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/PersonalAlmacen.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/PersistenciaDictamenMantenimiento.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InventarioHardware.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarDictamen.fxml</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InventarioPersonalInterface.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/DictamenMantenimiento.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/InventarioHardwareController.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/InventarioHardware.fxml</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/conexion/Credenciales.java</file>
-            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/conexion/GenericDao.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/InventarioHardwareController.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Equipo.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarEquipoController.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceInventarioHardware.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarDictamenController.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/DictamenMantenimientoAlmacen.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Personal.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/EquipoTest.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/InventarioHardwareTest.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/CambiarResponsable.fxml</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/EquipoAlmacen.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/RegistrarUsuarioController.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/VentanaReporte.fxml</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/Menu.fxml</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/LoginController.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/MenuController.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/InterfaceDictamenMantenimiento.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/User.java</file>
+            <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/VentanaReporteController.java</file>
         </group>
     </open-files>
 </project-private>

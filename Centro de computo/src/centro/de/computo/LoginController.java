@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
         User.setPuesto(puesto);
         this.abrirVentana("Menu.fxml");
         this.cerrarLogin();
+        
       } else {
         JOptionPane.showMessageDialog(null, "Contraseña y/o usuario inválidos");
       }
