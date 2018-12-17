@@ -89,7 +89,8 @@ public class RegistrarUsuarioController implements Initializable {
     
     try {
       if (puesto != null && this.validarDatos()){
-        Personal nuevoPersonal = new Personal(idPersonal,nombre,correo,telefono,puesto,contrasenia);
+        Personal nuevoPersonal = new Personal(
+            idPersonal,nombre,correo,telefono,puesto,contrasenia);
         this.inventario.registrarNuevoPersonal(nuevoPersonal);
         this.cerrarRegistroUsuario(this.bRegistrar);
         try {
@@ -159,7 +160,7 @@ public class RegistrarUsuarioController implements Initializable {
   }
   
   private boolean validarNombre() {
-    Pattern patron = Pattern.compile("[a-zA-Z]+");
+    Pattern patron = Pattern.compile("[a-zA-Z- ]+");
     Matcher encaja = patron.matcher(this.tfNombre.getText());
     return encaja.matches() && this.tfNombre.getText().length() <= this.maxCaracteres;
   }

@@ -158,7 +158,8 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   @Override
   public List<DictamenMantenimiento> generarReporteMantinimiento() throws SQLException{
     Date fecha = new Date();
-    Date fecha2 = this.sumarMeses(fecha, -6);
+    int apartirDeMeses = -6;
+    Date fecha2 = this.sumarMeses(fecha, apartirDeMeses);
     java.sql.Date dateSql = new java.sql.Date(fecha2.getTime());
     return this.persistencia.generarReporte(dateSql);
   }

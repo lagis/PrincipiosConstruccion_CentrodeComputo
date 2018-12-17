@@ -45,7 +45,6 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
       String descripcion, String idPersonal, String numeroInventario) throws SQLException {
 
     Connection miConexion = this.conectar();
-    //PreparedStatement stp = null;
     String query = "INSERT INTO centro_de_computo.dictamen_de_mantenimiento "
         + "(fecha, region,  dependencia_solicitante, tipo_borrado, "
             + "observaciones_equipo, "

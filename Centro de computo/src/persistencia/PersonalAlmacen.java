@@ -85,7 +85,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   @Override
   public void registrarPersonal(Personal personal) throws SQLException {
     query = "INSERT INTO centro_de_computo.personal(idpersonal,nombreTecnico,correo,"
-            + "numero_telefono,puesto) VALUES (?,?,?,?,?)";
+            + "numero_telefono,puesto) VALUES (?,?,?,?,?);";
 
     Connection conexion = this.conectar();
 
@@ -96,6 +96,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
       stp.setString(3, personal.getCorreo());
       stp.setString(4, personal.getTelefono());
       stp.setString(5, personal.getPuesto());
+      stp.executeUpdate();
       conexion.commit();
       
     } catch (SQLException ex) {
@@ -113,7 +114,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   @Override
   public String obteberPuesto(int numeroDePersonal) throws SQLException {
 
-    query = "SELECT puesto FROM centro_de_computo.personal WHERE idpersonal = ? ";
+    query = "SELECT puesto FROM centro_de_computo.personal WHERE idpersonal = ?; ";
 
     Connection conexion = this.conectar();
 
@@ -158,7 +159,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
 
   @Override
   public boolean buscarUsuario(int numeroDePersonal) throws SQLException {
-    query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ? ";
+    query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ?; ";
 
     Connection conexion = this.conectar();
 
@@ -219,6 +220,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
       stp.setString(1, personal.getContrasenia());
       stp.setInt(2, personal.getIdPersonal());
       stp.setInt(3, personal.getIdPersonal());
+      stp.executeUpdate();
       conexion.commit();
     } catch (SQLException ex) {
       throw new SQLException();
@@ -229,7 +231,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   
   @Override
   public boolean buscarCorreo(String correo) throws SQLException {
-    query = "SELECT * FROM centro_de_computo.personal WHERE correo = ? ";
+    query = "SELECT * FROM centro_de_computo.personal WHERE correo = ?; ";
 
     Connection conexion = this.conectar();
 
@@ -252,7 +254,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
 
   @Override
   public boolean buscarTelefono(String telefono) throws SQLException {
-    query = "SELECT * FROM centro_de_computo.personal WHERE numero_telefono = ? ";
+    query = "SELECT * FROM centro_de_computo.personal WHERE numero_telefono = ?; ";
 
     Connection conexion = this.conectar();
 

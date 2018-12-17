@@ -62,12 +62,12 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   @Override
-  public void registrarNuevoPersonal(Personal personal) {
+  public void registrarNuevoPersonal(Personal personal) throws SQLException{
     try {
       this.almacen.registrarPersonal(personal);
       this.almacen.registrarContrasenia(personal);
     } catch (SQLException ex) {
-      Logger.getLogger(InventarioPersonal.class.getName()).log(Level.SEVERE, null, ex);
+      throw new SQLException();
     }
   }
 

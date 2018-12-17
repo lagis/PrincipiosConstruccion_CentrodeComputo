@@ -98,11 +98,11 @@ public class InventarioHardwareController implements Initializable {
         registrarDictamen(tvInventario.getSelectionModel().getSelectedItem().getIdentificador());
       }
     });
-    if (User.getPuesto().equalsIgnoreCase("jefe")) {
-      contextMenu.getItems().addAll(item1, item2);
-    } else {
+    if (User.getPuesto().equalsIgnoreCase("tecnico")) {
       contextMenu.getItems().addAll(item2);
       this.bttRegistrarEquipo.setVisible(false);
+    } else {
+      contextMenu.getItems().addAll(item1, item2);
     }
 
     tvInventario.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {

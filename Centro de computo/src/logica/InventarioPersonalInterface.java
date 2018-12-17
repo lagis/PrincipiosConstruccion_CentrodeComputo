@@ -31,6 +31,6 @@ public interface InventarioPersonalInterface {
 
   public List<Personal> verPersonal() throws SQLException;
 
-  public void registrarNuevoPersonal(Personal personal);
+  public void registrarNuevoPersonal(Personal personal) throws SQLException;
 
 }

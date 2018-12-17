@@ -64,7 +64,6 @@ public class MenuController implements Initializable {
   @FXML
   private void abrirInventarioHardware(ActionEvent event) {
     this.abrirVentana("InventarioHardware.fxml");
-    this.cerrarMenu(this.bttHardware);
   }
 
   @FXML
