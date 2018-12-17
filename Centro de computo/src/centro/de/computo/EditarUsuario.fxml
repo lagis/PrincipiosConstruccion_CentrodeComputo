@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.EditarUsuarioController">
+   <children>
+      <Label layoutX="400.0" layoutY="147.0" text="Numero de personal:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label layoutX="412.0" layoutY="209.0" text="Nombre completo:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label layoutX="412.0" layoutY="273.0" text="Correo intitucional:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label layoutX="401.0" layoutY="338.0" text="Numero de telefono:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label fx:id="labelIdPersonal" layoutX="567.0" layoutY="147.0" prefHeight="19.0" prefWidth="224.0" text="-">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <Label layoutX="478.0" layoutY="393.0" text="Puesto:">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+      <TextField fx:id="tfNuevoNombte" layoutX="561.0" layoutY="206.0" prefHeight="25.0" prefWidth="224.0" />
+      <TextField fx:id="tfNuevoCorreo" layoutX="561.0" layoutY="270.0" prefHeight="25.0" prefWidth="224.0" />
+      <TextField fx:id="tfNuevoTelefono" layoutX="561.0" layoutY="335.0" prefHeight="25.0" prefWidth="224.0" />
+      <ChoiceBox fx:id="cbNuevoPuesto" layoutX="561.0" layoutY="390.0" prefHeight="25.0" prefWidth="224.0" />
+      <Button fx:id="botonGuardar" layoutX="456.0" layoutY="647.0" mnemonicParsing="false" onAction="#edtitarButtonEvent" text="Guardar">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button fx:id="botonCancelar" layoutX="679.0" layoutY="647.0" mnemonicParsing="false" onAction="#cancelarButtonEvent" text="Cancelar">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <PasswordField fx:id="pfPassword" layoutX="562.0" layoutY="456.0" prefHeight="25.0" prefWidth="224.0" />
+      <PasswordField fx:id="pfConfirmar" layoutX="562.0" layoutY="517.0" prefHeight="25.0" prefWidth="224.0" />
+      <Label layoutX="455.0" layoutY="459.0" text="Contraseña:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="394.0" layoutY="520.0" text="Confrime contraseña:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

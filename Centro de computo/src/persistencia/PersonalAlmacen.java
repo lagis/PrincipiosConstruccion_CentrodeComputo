@@ -32,7 +32,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
 
     Connection conexion = this.conectar();
     query = "SELECT * FROM centro_de_computo.personal p, centro_de_computo.usuario u"
-            + " WHERE p.idpersonal = u.personal_idpersonal AND p.idpersonal = ?";
+            + " WHERE p.idpersonal = u.personal_idpersonal AND p.idpersonal = ? ;";
 
     try(PreparedStatement stp = conexion.prepareStatement(query)) {
       
@@ -60,7 +60,7 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   public List<Personal> obternerTodoPersonal() throws SQLException {
     List<Personal> listaPersonal = new ArrayList<>();
     query = "SELECT * FROM centro_de_computo.personal p, centro_de_computo.usuario u"
-            + " WHERE p.idpersonal = u.personal_idpersonal";
+            + " WHERE p.idpersonal = u.personal_idpersonal;";
     Connection conexion = this.conectar();
 
     try(PreparedStatement stp = conexion.prepareStatement(query)) {
@@ -108,7 +108,40 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
 
   @Override
   public void actualizarPersonal(Personal personal) throws SQLException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    query="UPDATE centro_de_computo.personal SET nombreTecnico = ?, correo = ?,"
+            + " numero_telefono = ?, puesto = ? WHERE idpersonal = ? ;";
+    
+    Connection conexion = this.conectar();
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      stp.setString(1, personal.getNombre());
+      stp.setString(2, personal.getCorreo());
+      stp.setString(3, personal.getTelefono());
+      stp.setString(4, personal.getPuesto());
+      stp.setInt(5, personal.getIdPersonal());
+      stp.executeUpdate();
+      conexion.commit();
+    } catch (SQLException ex) {
+      throw new SQLException();
+    } finally {
+      conexion.close();
+    }
+  }
+  
+  @Override
+  public void actualizarContrasenia(Personal personal) throws SQLException {
+    query="UPDATE centro_de_computo.usuario SET contrasenia = ? WHERE nombre_usuario = ? ;";
+    
+    Connection conexion = this.conectar();
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      stp.setString(1, personal.getContrasenia());
+      stp.setInt(2, personal.getIdPersonal());
+      stp.executeUpdate();
+      conexion.commit();
+    } catch (SQLException ex) {
+      throw new SQLException();
+    } finally {
+      conexion.close();
+    }
   }
 
   @Override

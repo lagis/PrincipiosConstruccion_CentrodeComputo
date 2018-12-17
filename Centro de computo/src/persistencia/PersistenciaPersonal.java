@@ -23,6 +23,8 @@ public interface PersistenciaPersonal {
   public void registrarPersonal(Personal personal) throws SQLException;
 
   public void actualizarPersonal(Personal personal) throws SQLException;
+  
+  public void actualizarContrasenia(Personal personal) throws SQLException;
 
   public void registrarContrasenia(Personal personal) throws SQLException;
 

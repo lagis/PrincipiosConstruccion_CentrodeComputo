@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import logica.InventarioPersonal;
@@ -36,6 +37,8 @@ import logica.Personal;
 public class AdministrarUsuariosController implements Initializable {
 
   private InventarioPersonalInterface personal = new InventarioPersonal();
+
+  AdministrarUsuariosController administrarinstancia;
 
   @FXML
   private TableColumn<Personal, String> columnNumero;
@@ -72,13 +75,13 @@ public class AdministrarUsuariosController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    administrarinstancia = this;
     this.columnNumero.setCellValueFactory(new PropertyValueFactory<>("idPersonal"));
     this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-    this.columnPuesto.setCellValueFactory(new PropertyValueFactory<>("correo"));
+    this.columnPuesto.setCellValueFactory(new PropertyValueFactory<>("puesto"));
     this.columnTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-    this.columnCorreo.setCellValueFactory(new PropertyValueFactory<>("puesto"));
+    this.columnCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
     this.llenarTabla();
-
   }
 
   public void llenarTabla() {
@@ -104,29 +107,41 @@ public class AdministrarUsuariosController implements Initializable {
     this.cerrarVentana(this.bRegistrar);
   }
 
-  public void editarUsuarioEvent(ActionEvent event) {
-    try {
-      this.abrirVentana("Editar.fxml");
-    } catch (IOException ex) {
-      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  public void editarUsuarioEvent(ActionEvent event) throws IOException {
+    Stage stage = new Stage();
+    FXMLLoader loader = new FXMLLoader();
+
+    AnchorPane root = (AnchorPane) loader.load(getClass().getResource("EditarUsuario.fxml").openStream());
+
+    EditarUsuarioController editarInctancia = (EditarUsuarioController) loader.getController();
+    Personal person = this.tabla.getSelectionModel().getSelectedItem();
+    if(person != null){
+      editarInctancia.llenarFormulario(Integer.toString(person.getIdPersonal()));
+      Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
     this.cerrarVentana(this.bEditar);
+    } else {
+      JOptionPane.showMessageDialog(null, "Por favor, seleccione el personal que desea ediatr");
+    }
+    
+    
   }
-  
+
   public void volverEvent(ActionEvent event) {
     try {
-      this.abrirVentana("Login.fxml");
+      this.abrirVentana("Menu.fxml");
     } catch (IOException ex) {
       Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
     }
     this.cerrarVentana(this.bVolver);
   }
-  
+
   public void abrirVentana(String ventana) throws IOException {
     Stage stage = new Stage();
     Parent pane = FXMLLoader.load(getClass().getResource(ventana));
-    Scene sceneEquipo = new Scene(pane);
-    stage.setScene(sceneEquipo);
+    Scene scene = new Scene(pane);
+    stage.setScene(scene);
     stage.show();
   }
 

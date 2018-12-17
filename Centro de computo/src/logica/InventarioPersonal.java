@@ -20,32 +20,30 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   
   private PersistenciaPersonal almacen = new PersonalAlmacen();
   
-  
-
   public InventarioPersonal() {
   }
   
-   @Override
+  @Override
   public boolean comprobarIdPersonal(int usuario) throws SQLException {
     return this.almacen.buscarUsuario(usuario);
-
+    
   }
-
+  
   @Override
   public boolean comprobarContrasenia(String contrasenia) throws SQLException {
     return false;
   }
-
+  
   @Override
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException {
     return this.almacen.obtenerPersonal(numeroDePersonal);
   }
-
+  
   @Override
   public boolean comprobarPersonal(int numeroDePersonal, String contrasenia) {
     return this.almacen.buscarPersonal(numeroDePersonal, contrasenia);
   }
-
+  
   @Override
   public String obtenerPuesto(int usuario) {
     try {
@@ -54,15 +52,15 @@ public class InventarioPersonal implements InventarioPersonalInterface {
       return null;
     }
   }
-
+  
   @Override
   public List<Personal> verPersonal() throws SQLException {
     return this.almacen.obternerTodoPersonal();
-  
+    
   }
-
+  
   @Override
-  public void registrarNuevoPersonal(Personal personal) throws SQLException{
+  public void registrarNuevoPersonal(Personal personal) throws SQLException {
     try {
       this.almacen.registrarPersonal(personal);
       this.almacen.registrarContrasenia(personal);
@@ -70,16 +68,30 @@ public class InventarioPersonal implements InventarioPersonalInterface {
       throw new SQLException();
     }
   }
-
+  
   @Override
   public boolean comprobarCorreo(String correo) throws SQLException {
     return this.almacen.buscarCorreo(correo);
   }
-
+  
   @Override
   public boolean comprobarTelefono(String telefono) throws SQLException {
     return this.almacen.buscarTelefono(telefono);
   }
-
   
+  @Override
+  public void editarPersonal(Personal personal) {
+   
+    try {
+      this.almacen.actualizarPersonal(personal);
+    } catch (SQLException ex) {
+      Logger.getLogger(InventarioPersonal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    try {
+      this.almacen.actualizarContrasenia(personal);
+    } catch (SQLException ex) {
+      Logger.getLogger(InventarioPersonal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+   
+  }
 }

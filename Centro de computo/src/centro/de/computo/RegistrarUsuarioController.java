@@ -62,13 +62,13 @@ public class RegistrarUsuarioController implements Initializable {
 
   @FXML
   private Button bRegistrar;
-  
+
   private InventarioPersonalInterface inventario = new InventarioPersonal();
 
   private final int maxCaracteres = 50;
-  private final int maxTelefonoCaracteres= 10;
+  private final int maxTelefonoCaracteres = 10;
   private final int maxIDCaracteres = 11;
-  
+
   /**
    * Initializes the controller class.
    */
@@ -78,7 +78,7 @@ public class RegistrarUsuarioController implements Initializable {
     this.cbPuesto.getItems().add("Tecnico");
   }
 
-   @FXML
+  @FXML
   private void registrarButtonEvent(ActionEvent event) {
     int idPersonal = Integer.parseInt(this.tfIdPersonal.getText());
     String nombre = this.tfNombre.getText();
@@ -86,45 +86,45 @@ public class RegistrarUsuarioController implements Initializable {
     String telefono = this.tfTelefono.getText();
     String puesto = (String) this.cbPuesto.getValue();
     String contrasenia = this.pfContrasenia.getText();
-    
+
     try {
-      if (puesto != null && this.validarDatos()){
+      if (puesto != null && this.validarDatos()) {
         Personal nuevoPersonal = new Personal(
-            idPersonal,nombre,correo,telefono,puesto,contrasenia);
+                idPersonal, nombre, correo, telefono, puesto, contrasenia);
         this.inventario.registrarNuevoPersonal(nuevoPersonal);
         this.cerrarRegistroUsuario(this.bRegistrar);
         try {
           this.volverVentanaAdministrar();
         } catch (IOException ex) {
-         JOptionPane.showMessageDialog(null,"El sistema no disponible.");
-         
+          JOptionPane.showMessageDialog(null, "El sistema no disponible.");
+
         }
       } else {
-      JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");
-      if(!this.validarIdPersonal()){
-        this.tfIdPersonal.setStyle("-fx-text-inner-color: red;");
+        JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");
+        if (!this.validarIdPersonal()) {
+          this.tfIdPersonal.setStyle("-fx-text-inner-color: red;");
+        }
+        if (!this.validarNombre()) {
+          this.tfNombre.setStyle("-fx-text-inner-color: red;");
+        }
+        if (!this.validaCorreo()) {
+          this.tfCorreo.setStyle("-fx-text-inner-color: red;");
+        }
+        if (!this.validarTelefono()) {
+          this.tfTelefono.setStyle("-fx-text-inner-color: red;");
+        }
+        if (!this.validarContrasenia()) {
+          this.pfConfirmacion.setStyle("-fx-text-inner-color: red;");
+        }
       }
-      if(!this.validarNombre()){
-        this.tfNombre.setStyle("-fx-text-inner-color: red;");
-      }
-      if(!this.validaCorreo()){
-        this.tfCorreo.setStyle("-fx-text-inner-color: red;");
-      }
-      if(!this.validarTelefono()){
-        this.tfTelefono.setStyle("-fx-text-inner-color: red;");
-      }
-      if(!this.validarContrasenia()){
-        this.pfConfirmacion.setStyle("-fx-text-inner-color: red;");
-      }
-    }
     } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, 
-            "El sistema no está disponible por el momento, inténtelo más tarde");
+      JOptionPane.showMessageDialog(null,
+              "El sistema no está disponible por el momento, inténtelo más tarde");
     }
   }
-  
- @FXML
-  private void cancelarButtonEvent(ActionEvent event){
+
+  @FXML
+  private void cancelarButtonEvent(ActionEvent event) {
     try {
       this.volverVentanaAdministrar();
     } catch (IOException ex) {
@@ -132,57 +132,58 @@ public class RegistrarUsuarioController implements Initializable {
     }
     this.cerrarRegistroUsuario(this.bCancelar);
   }
-  
-  private void cerrarRegistroUsuario(Button btt){
+
+  private void cerrarRegistroUsuario(Button btt) {
     Stage stage = (Stage) btt.getScene().getWindow();
     stage.close();
   }
-  
-  private void volverVentanaAdministrar() throws IOException{
+
+  private void volverVentanaAdministrar() throws IOException {
     Stage stageEquipo = new Stage();
     Parent paneEquipo;
     paneEquipo = FXMLLoader.load(getClass().getResource("AdministrarUsuarios.fxml"));
     Scene sceneEquipo = new Scene(paneEquipo);
     stageEquipo.setScene(sceneEquipo);
-    stageEquipo.show(); 
+    stageEquipo.show();
   }
-  
-  private boolean validarDatos() throws SQLException{
-   return this.validarIdPersonal() && this.validarNombre() && this.validaCorreo()
-           &&  this.validarTelefono() && this.validarContrasenia();
+
+  private boolean validarDatos() throws SQLException {
+    return this.validarIdPersonal() && this.validarNombre() && this.validaCorreo()
+            && this.validarTelefono() && this.validarContrasenia();
   }
-  
-    private boolean validarIdPersonal() throws SQLException {
+
+  private boolean validarIdPersonal() throws SQLException {
     Pattern patron = Pattern.compile("[0-9]+");
     Matcher encaja = patron.matcher(this.tfIdPersonal.getText());
     return encaja.matches() && this.tfIdPersonal.getText().length() <= this.maxIDCaracteres
             && !this.inventario.comprobarIdPersonal(Integer.parseInt(this.tfIdPersonal.getText()));
   }
-  
+
   private boolean validarNombre() {
     Pattern patron = Pattern.compile("[a-zA-Z- ]+");
     Matcher encaja = patron.matcher(this.tfNombre.getText());
     return encaja.matches() && this.tfNombre.getText().length() <= this.maxCaracteres;
   }
-    private boolean validarTelefono() throws SQLException {
+
+  private boolean validarTelefono() throws SQLException {
     Pattern patron = Pattern.compile("[0-9]+");
     Matcher encaja = patron.matcher(this.tfTelefono.getText());
     return encaja.matches() && !this.inventario.comprobarTelefono(this.tfTelefono.getText())
             && this.tfTelefono.getText().length() <= this.maxTelefonoCaracteres;
   }
-      private boolean validaCorreo() throws SQLException {
+
+  private boolean validaCorreo() throws SQLException {
     Pattern patron = Pattern.compile("[A-Za-z0-9.@_-]+");
     Matcher encaja = patron.matcher(this.tfCorreo.getText());
     return encaja.matches() && this.tfCorreo.getText().length() <= this.maxCaracteres
             && !this.inventario.comprobarCorreo(this.tfCorreo.getText());
   }
-    private boolean validarContrasenia() {
+
+  private boolean validarContrasenia() {
     Pattern patron = Pattern.compile("[^ ]+");
     Matcher encaja = patron.matcher(this.pfContrasenia.getText());
     return encaja.matches() && this.pfContrasenia.getText().length() <= this.maxCaracteres
             && this.pfContrasenia.getText().equals(this.pfConfirmacion.getText());
   }
 
-  
-  
-  }
+}
