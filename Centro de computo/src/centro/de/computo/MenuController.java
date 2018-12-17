@@ -76,6 +76,11 @@ public class MenuController implements Initializable {
   private void prestarEquipo(ActionEvent event) {
     
   }
+  
+  @FXML
+  private void generarReporte(ActionEvent event) {
+    this.abrirVentana("VentanaReporte.fxml");
+  }
 
   private void cerrarMenu(Button bt) {
     Stage stage = (Stage) bt.getScene().getWindow();

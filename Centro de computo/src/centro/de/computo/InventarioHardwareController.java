@@ -59,7 +59,6 @@ public class InventarioHardwareController implements Initializable {
   private Button bttRegistrarEquipo;
 
   private InterfaceInventarioHardware inventario = new InventarioHardware();
-  private final String numeroPersonal = User.getUsuario();
   private final String mensajeError = 
       "El sistema no está disponible por el momento, inténtelo más tarde";
 

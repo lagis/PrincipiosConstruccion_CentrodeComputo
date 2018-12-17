@@ -113,7 +113,7 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
                 resultadoQuery.getString("dependencia_solicitante"), resultadoQuery.getString("tipo_borrado"),
                     resultadoQuery.getString("observaciones_equipo"), 
                         resultadoQuery.getInt("numero_reporte"), resultadoQuery.getString("tipo_dictamen"),
-                        resultadoQuery.getString("descripcion_dictamen"));
+                        resultadoQuery.getString("descripcion_dictamen"), resultadoQuery.getString("equipo_numero_inventario"));
         lista.add(dictamen);
 
       }
