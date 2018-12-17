@@ -21,11 +21,11 @@ public abstract class GenericDao<T> {
   static final String DB_URL = "jdbc:mysql://";
 
   protected Connection conectar() throws SQLException {
-    String usuario = Credenciales.usuario;
-    String pass = Credenciales.contrasenia;
-    String bd = Credenciales.basedatos;
-    String host = Credenciales.host;
-    int port = Credenciales.port;
+    String usuario = Credenciales.USUARIO;
+    String pass = Credenciales.CONTRASENIA;
+    String bd = Credenciales.BASEDATOS;
+    String host = Credenciales.HOST;
+    int port = Credenciales.PORT;
     Connection res = null;
 
     
