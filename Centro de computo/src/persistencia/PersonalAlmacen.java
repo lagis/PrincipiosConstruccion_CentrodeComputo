@@ -166,11 +166,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
       
       stp.setInt(1, numeroDePersonal);
       ResultSet result = this.ejecutarQuery(stp);
-      if (result.next()) {
-        return true;
-      } else {
-        return false;
-      }
+     boolean existeUsuario = false;
+        if (result.next()) {
+          existeUsuario = true;
+        }
+        return existeUsuario;
+        
     } catch (SQLException ex) {
       return false;
     } finally {
@@ -221,6 +222,52 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
       conexion.commit();
     } catch (SQLException ex) {
       throw new SQLException();
+    } finally {
+      conexion.close();
+    }
+  }
+  
+  @Override
+  public boolean buscarCorreo(String correo) throws SQLException {
+    query = "SELECT * FROM centro_de_computo.personal WHERE correo = ? ";
+
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setString(1, correo);
+      ResultSet result = this.ejecutarQuery(stp);
+      boolean existeCorreo = false;
+        if (result.next()) {
+          existeCorreo = true;
+        }
+        return existeCorreo;
+        
+    } catch (SQLException ex) {
+      return false;
+    } finally {
+      conexion.close();
+    }
+  }
+
+  @Override
+  public boolean buscarTelefono(String telefono) throws SQLException {
+    query = "SELECT * FROM centro_de_computo.personal WHERE numero_telefono = ? ";
+
+    Connection conexion = this.conectar();
+
+    try(PreparedStatement stp = conexion.prepareStatement(query)) {
+      
+      stp.setString(1, telefono);
+      ResultSet result = this.ejecutarQuery(stp);
+      boolean existeTelefono = false;
+        if (result.next()) {
+          existeTelefono = true;
+        }
+        return existeTelefono;
+        
+    } catch (SQLException ex) {
+      return false;
     } finally {
       conexion.close();
     }

@@ -24,8 +24,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import logica.InventarioPersonal;
+import logica.InventarioPersonalInterface;
 import logica.Personal;
-import logica.PersonalInterface;
 
 /**
  * FXML Controller class
@@ -34,7 +35,7 @@ import logica.PersonalInterface;
  */
 public class AdministrarUsuariosController implements Initializable {
 
-  private PersonalInterface personal = new Personal();
+  private InventarioPersonalInterface personal = new InventarioPersonal();
 
   @FXML
   private TableColumn<Personal, String> columnNumero;
