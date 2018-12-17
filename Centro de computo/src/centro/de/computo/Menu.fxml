@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.MenuController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.MenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="bttHardware" layoutX="251.0" layoutY="74.0" mnemonicParsing="false" onAction="#abrirInventarioHardware" prefHeight="26.0" prefWidth="138.0" text="Consultar hardware" />
-            <Button fx:id="bttPersonal" layoutX="251.0" layoutY="151.0" mnemonicParsing="false" onAction="#clickAdministrarPersonal" prefHeight="26.0" prefWidth="138.0" text="Administrar personal" />
-            <Button fx:id="bttEquipo" layoutX="251.0" layoutY="222.0" mnemonicParsing="false" onAction="#prestarEquipo" prefHeight="26.0" prefWidth="138.0" text="Prestar Equipo" />
+            <Button fx:id="bttHardware" layoutX="251.0" layoutY="98.0" mnemonicParsing="false" onAction="#abrirInventarioHardware" prefHeight="26.0" prefWidth="138.0" text="Consultar hardware" />
+            <Button fx:id="bttPersonal" layoutX="251.0" layoutY="187.0" mnemonicParsing="false" onAction="#clickAdministrarPersonal" prefHeight="26.0" prefWidth="138.0" text="Administrar personal" />
+            <Button fx:id="bttEquipo" layoutX="251.0" layoutY="280.0" mnemonicParsing="false" onAction="#prestarEquipo" prefHeight="26.0" prefWidth="138.0" text="Prestar Equipo" />
          </children>
     </AnchorPane>
   </children>

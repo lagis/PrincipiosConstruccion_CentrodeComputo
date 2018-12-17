@@ -23,8 +23,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import logica.Personal;
-import logica.PersonalInterface;
+import logica.InventarioPersonal;
+import logica.InventarioPersonalInterface;
 
 /**
  * FXML Controller class.
@@ -33,8 +33,7 @@ import logica.PersonalInterface;
 
 public class LoginController implements Initializable {
 
-  private final PersonalInterface personal = new Personal();
-
+  private final InventarioPersonalInterface personal = new InventarioPersonal();
   @FXML
   private TextField textField;
 
@@ -76,8 +75,8 @@ public class LoginController implements Initializable {
       stageEquipo.setScene(sceneEquipo);
       stageEquipo.show();
     } catch (IOException ex) {
-      JOptionPane.showMessageDialog(null, 
-          "El sistema no está disponible por el momento");
+      JOptionPane.showMessageDialog(null,
+              "El sistema no está disponible por el momento");
     }
   }
 
