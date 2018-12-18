@@ -52,7 +52,7 @@ public class RegistrarEquipoController implements Initializable {
    * Initializes the controller class.
    */
   @Override
-  public void initialize(URL url, ResourceBundle rb) {
+  public void initialize  (URL url, ResourceBundle rb) {
     this.cbTipoEquipo.getItems().add("Desktop");
     this.cbTipoEquipo.getItems().add("Laptop");
     this.cbTipoEquipo.getItems().add("Cañon");

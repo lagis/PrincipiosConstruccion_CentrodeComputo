@@ -5,12 +5,11 @@
  */
 package logica;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.List;
 import persistencia.PrestamoAlmacen;
 import persistencia.PersistenciaPrestamo;
+import java.lang.String;
 
 /**
  *
@@ -21,11 +20,11 @@ public class Prestamo implements InterfacePrestamo {
   private int numeroPrestamo;
   private String nombreSolicitante;
   private String matricula;
-  private java.sql.Date fechaPrestamo;
-  private java.sql.Time horaPrestamo;
+  private String fechaPrestamo;
+  private String horaPrestamo;
   private String equipo;
-  private java.sql.Date FechaDevolucion;
-  private java.sql.Time horaDevolucion;
+  private String FechaDevolucion;
+  private String horaDevolucion;
   private String salon;
   private PersistenciaPrestamo persistencia = new PrestamoAlmacen();
 
@@ -33,9 +32,9 @@ public class Prestamo implements InterfacePrestamo {
   }
 
   public Prestamo(String nombreSolicitante, String matricula,
-          java.sql.Date fechaPrestamo, java.sql.Time horaPrestamo,
-          String equipo, java.sql.Date FechaDevolucion,
-          java.sql.Time horaDevolucion, String salon) {
+          String fechaPrestamo, String horaPrestamo,
+          String equipo, String FechaDevolucion,
+          String horaDevolucion, String salon) {
 
     this.nombreSolicitante = nombreSolicitante;
     this.matricula = matricula;
@@ -46,6 +45,15 @@ public class Prestamo implements InterfacePrestamo {
     this.horaDevolucion = horaDevolucion;
     this.salon = salon;
   }
+
+  public Prestamo(String fechaPrestamo,String equipo,  String matricula,String nombreSolicitante,  String salon) {
+    this.nombreSolicitante = nombreSolicitante;
+    this.matricula = matricula;
+    this.fechaPrestamo = fechaPrestamo;
+    this.equipo = equipo;
+    this.salon = salon;
+  }
+  
 
   public int getNumeroPrestamo() {
     return numeroPrestamo;
@@ -59,11 +67,11 @@ public class Prestamo implements InterfacePrestamo {
     return matricula;
   }
 
-  public Date getFechaPrestamo() {
+  public String getFechaPrestamo() {
     return fechaPrestamo;
   }
 
-  public Time getHoraPrestamo() {
+  public String getHoraPrestamo() {
     return horaPrestamo;
   }
 
@@ -71,11 +79,11 @@ public class Prestamo implements InterfacePrestamo {
     return equipo;
   }
 
-  public Date getFechaDevolucion() {
+  public String getFechaDevolucion() {
     return FechaDevolucion;
   }
 
-  public Time getHoraDevolucion() {
+  public String getHoraDevolucion() {
     return horaDevolucion;
   }
 
@@ -85,25 +93,27 @@ public class Prestamo implements InterfacePrestamo {
 
   @Override
   public void registrarPrestamo(String nombreSolicitante, String matricula,
-          java.sql.Date fechaPrestamo, java.sql.Time horaPrestamo, String equipo,
-          String salon) throws SQLException{
+          String fechaPrestamo, String horaPrestamo,
+          String equipo, String salon) throws SQLException{
     this.persistencia.registrarPrestamo(nombreSolicitante, matricula,
             fechaPrestamo, horaPrestamo, equipo, salon);
   }
 
   @Override
-  public List<DictamenMantenimiento> obtenerTodosLosPrestamos()
+  public List<Prestamo> obtenerTodosLosPrestamos()
           throws SQLException {
     return this.persistencia.obtenerTodosLosPrestamos();
   }
 
   @Override
-  public List<DictamenMantenimiento> obtenerPrestados() throws SQLException {
+  public List<Prestamo> obtenerPrestados() throws SQLException {
     return this.persistencia.obtenerPrestados();
   }
 
   @Override
-  public void registrarDevolucion(int numeroPrestamo,Date FechaDevolucion, Time horaDevolucion,String equipo) throws SQLException {
+  public void registrarDevolucion(int numeroPrestamo,
+          String FechaDevolucion,String horaDevolucion,
+          String equipo) throws SQLException {
     this.persistencia.registrarDevolucion(numeroPrestamo,FechaDevolucion, horaDevolucion,equipo);
   }
 

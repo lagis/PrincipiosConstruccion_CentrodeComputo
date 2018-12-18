@@ -27,5 +27,8 @@ public interface PersistenciaEquipo<T> {
   
   public void cambiarResponsable(String id, String nuevaUbicacion) throws SQLException;
   
+  public List<String> obtenerDisponibles()throws SQLException;
+  public String obtenerProducto(String identificador)throws SQLException;
+  
   
 }

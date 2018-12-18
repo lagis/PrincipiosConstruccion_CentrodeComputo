@@ -6,6 +6,9 @@
 
 package logica;
 
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  * Contiene métodos para administrar un equipo.
  * @author ferc
@@ -26,5 +29,9 @@ public interface InterfaceEquipo {
   public String getMarca();
   
   public String getResponsableUbicacion();
+  
+  public List<String> obtenerDisponibles()throws SQLException;
+  
+  public String obtenerProducto(String identificador)throws SQLException;
   
 }

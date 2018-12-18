@@ -16,14 +16,15 @@ import java.util.List;
 public interface InterfacePrestamo {
 
   public void registrarPrestamo(String nombreSolicitante, String matricula,
-          java.sql.Date fechaPrestamo, java.sql.Time horaPrestamo,
+          String fechaPrestamo, String horaPrestamo,
           String equipo, String salon)throws SQLException;
   
-  public void registrarDevolucion(int numeroPrestamo,java.sql.Date FechaDevolucion,
-          java.sql.Time horaDevolucion,String equipo)throws SQLException;
+  public void registrarDevolucion(int numeroPrestamo,
+          String FechaDevolucion,String horaDevolucion,
+          String equipo)throws SQLException;
 
-  public List<DictamenMantenimiento>obtenerTodosLosPrestamos()
+  public List<Prestamo>obtenerTodosLosPrestamos()
           throws SQLException;
 
-  public List<DictamenMantenimiento>obtenerPrestados()throws SQLException;
+  public List<Prestamo>obtenerPrestados()throws SQLException;
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.AdministrarPrestamosController">
+   <children>
+      <TabPane layoutY="78.0" prefHeight="423.0" prefWidth="671.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Registrar Prestamo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="385.0" prefWidth="661.0">
+                     <children>
+                        <Text layoutX="316.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricula/noPersonal" />
+                        <Text layoutX="89.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+                        <Text layoutX="29.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de prestamo" />
+                        <Text layoutX="336.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora de prestamo" />
+                        <Text layoutX="93.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipo" />
+                        <Text layoutX="399.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salon" />
+                        <TextField fx:id="nombreTextField" layoutX="138.0" layoutY="89.0" />
+                        <TextField fx:id="matriculaTextField" layoutX="433.0" layoutY="89.0" />
+                        <TextField fx:id="horaTextField" disable="true" layoutX="433.0" layoutY="149.0" />
+                        <TextField fx:id="salonTextField" layoutX="433.0" layoutY="210.0" />
+                        <Button fx:id="aceptarButton" layoutX="530.0" layoutY="296.0" mnemonicParsing="false" onAction="#accionBotonAceptar" text="Aceptar" />
+                        <Button fx:id="cancelarButton" layoutX="446.0" layoutY="296.0" mnemonicParsing="false" onAction="#accionBotonCancelar" text="Cancelar" />
+                        <TextField fx:id="fechaTextField" disable="true" layoutX="138.0" layoutY="149.0" />
+                        <ChoiceBox fx:id="equipoChoiceBox" layoutX="138.0" layoutY="210.0" onDragDetected="#accionSeleccionarEquipo" prefWidth="150.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Registrar Entregas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="devueltoButton" layoutX="81.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionBotonDevuelto" text="Devuelto" />
+                        <TableView fx:id="tablaPrestados" layoutX="233.0" layoutY="40.0" prefHeight="314.0" prefWidth="396.0">
+                          <columns>
+                              <TableColumn fx:id="columnaFecha" prefWidth="75.0" text="Fecha" />
+                            <TableColumn fx:id="columnaEquipo" prefWidth="75.0" text="Equipo" />
+                            <TableColumn fx:id="columnaMatricula" prefWidth="75.0" text="Matricula" />
+                              <TableColumn fx:id="columnaNombre" prefWidth="75.0" text="Nombre" />
+                              <TableColumn fx:id="columnaSalon" prefWidth="75.0" text="Salón" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="actualizarEntregasButton" layoutX="79.0" layoutY="72.0" mnemonicParsing="false" onAction="#accionActualizarEntregasButton" text="Actualizar" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Ver Prestamos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="346.0" prefWidth="576.0">
+                     <children>
+                        <TableView fx:id="tablaPrestamos" layoutX="11.0" layoutY="21.0" prefHeight="316.0" prefWidth="649.0">
+                           <columns>
+                              <TableColumn fx:id="columnaPrestamosEquipo" prefWidth="75.0" text="Equipo" />
+                              <TableColumn fx:id="columnaPrestamosFecha" prefWidth="122.0" text="Fecha de prestamo" />
+                              <TableColumn fx:id="columnaPrestamosHora" prefWidth="113.0" text="Hora de prestamo" />
+                              <TableColumn fx:id="columnaPrestamosMatricula" prefWidth="75.0" text="Matricula" />
+                              <TableColumn fx:id="columnaPrestamosNombre" prefWidth="75.0" text="Nombre" />
+                              <TableColumn fx:id="columnaPrestamosSalon" prefWidth="75.0" text="Salon" />
+                              <TableColumn fx:id="columnaPrestamosFechaDevolucion" prefWidth="75.0" text="Fecha Devolucion" />
+                              <TableColumn fx:id="columnaPrestamosHoraDevolucion" prefWidth="75.0" text="Hora devolucion" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="actualizarPrestamosButton" layoutX="567.0" layoutY="355.0" mnemonicParsing="false" onAction="#accionActualizarPrestamosButton" text="Actualizar" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Text layoutX="138.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrar Prestamos">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="64.0" fitWidth="89.0" layoutX="31.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../imagenes/kisspng-computer-icons-sound-experience-giving-5adc9cabe6b138.6857444315244074679449.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

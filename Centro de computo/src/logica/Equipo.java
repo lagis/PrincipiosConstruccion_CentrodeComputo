@@ -6,6 +6,11 @@
 
 package logica;
 
+import java.sql.SQLException;
+import java.util.List;
+import persistencia.EquipoAlmacen;
+import persistencia.PersistenciaEquipo;
+
 /**
  * contiene los datos de un equipo además de 
  * métodos para registrar un mantenimiento o un préstamo.
@@ -14,7 +19,7 @@ package logica;
  * @author Pao
  */
 
-public class Equipo implements InterfaceEquipo {
+public class Equipo implements InterfaceEquipo{
   
   private String identificador;
   private String modelo;
@@ -23,6 +28,10 @@ public class Equipo implements InterfaceEquipo {
   private String marca;
   private String responsableUbicacion;
   private String disponibilidad;
+  private PersistenciaEquipo persistencia = new EquipoAlmacen();
+  
+  
+  
   
 
   
@@ -47,6 +56,10 @@ public class Equipo implements InterfaceEquipo {
   }
 
   public Equipo() {
+  }
+
+  public Equipo(String identificador) {
+    this.identificador = identificador;
   }
   
   @Override
@@ -82,6 +95,16 @@ public class Equipo implements InterfaceEquipo {
   @Override
   public String getResponsableUbicacion() {
     return this.responsableUbicacion;
+  }
+
+  @Override
+  public List<String> obtenerDisponibles() throws SQLException {
+    return this.persistencia.obtenerDisponibles();
+  }
+
+  @Override
+  public String obtenerProducto(String identificador) throws SQLException {
+    return this.persistencia.obtenerProducto(identificador);
   }
   
 }
