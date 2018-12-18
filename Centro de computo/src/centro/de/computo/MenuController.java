@@ -74,7 +74,7 @@ public class MenuController implements Initializable {
 
   @FXML
   private void prestarEquipo(ActionEvent event) {
-    
+    this.abrirVentana("AdministrarPrestamos.fxml");
   }
   
   @FXML

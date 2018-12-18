@@ -6,7 +6,6 @@
 package centro.de.computo;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -120,7 +119,19 @@ public class AdministrarPrestamosController implements Initializable {
     this.equipoChoiceBox.getValue();
     this.salonTextField.getText();
     
-    prestamo.registrarPrestamo(this.nombreTextField.getText(), this.matriculaTextField.getText(), this.calcularFecha(), this.calcularHora(), this.equipoChoiceBox.getValue().toString(), this.salonTextField.getText());
+    prestamo.registrarPrestamo(this.nombreTextField.getText(), 
+        this.matriculaTextField.getText(), this.calcularFecha(), 
+            this.calcularHora(), this.equipoChoiceBox.getValue().toString(), 
+                this.salonTextField.getText());
+    this.limpiarCampos();
+    
+  }
+  
+  private void limpiarCampos() {
+    this.nombreTextField.setText("");
+    this.matriculaTextField.setText("");
+    this.equipoChoiceBox.setValue("");
+    this.salonTextField.setText("");
   }
 
   @FXML
@@ -132,12 +143,13 @@ public class AdministrarPrestamosController implements Initializable {
     Prestamo prestado = tablaPrestados.getSelectionModel().getSelectedItem();
     int id = prestado.getNumeroPrestamo();
     String equipo = prestado.getEquipo();
+   
     try{
       prestado.registrarDevolucion(id, this.calcularFecha(), this.calcularHora(), equipo);
     }catch(SQLException ex){
       Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    System.out.println(prestado.getEquipo());
+    
   }
 
   @FXML
@@ -153,6 +165,7 @@ public class AdministrarPrestamosController implements Initializable {
   }
 
   public void llenarTabla() {
+    this.tablaPrestamos.getItems().clear();
     this.columnaPrestamosEquipo.setCellValueFactory(new PropertyValueFactory<>("equipo"));
     this.columnaPrestamosNombre.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitante"));
     this.columnaPrestamosMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));

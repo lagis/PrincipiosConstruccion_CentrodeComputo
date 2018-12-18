@@ -55,6 +55,16 @@ public class Equipo implements InterfaceEquipo{
     this.responsableUbicacion = responsableUbicacion;
   }
 
+  public Equipo(String identificador, String modelo, String numeroSerie,
+      String tipoEquipo, String marca, String disponibilidad) {
+    this.modelo = modelo;
+    this.numeroSerie = numeroSerie;
+    this.tipoEquipo = tipoEquipo;
+    this.identificador = identificador;
+    this.marca = marca;
+    this.disponibilidad = disponibilidad;    
+  }  
+  
   public Equipo() {
   }
 
