@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package centro.de.computo;
 
 import java.net.URL;
@@ -94,7 +93,6 @@ public class AdministrarPrestamosController implements Initializable {
   private Button actualizarPrestamosButton;
   @FXML
   private ChoiceBox equipoChoiceBox;
-  private TextField nombreEquipoTextField;
   @FXML
   private TableColumn<?, ?> columnaIdPrestamo;
   
@@ -124,6 +122,7 @@ public class AdministrarPrestamosController implements Initializable {
   
   @FXML
   private void accionBotonAceptar(ActionEvent event) throws SQLException {
+<<<<<<< HEAD
     
     if (this.validarCamposRegistrar()) {
       
@@ -139,6 +138,22 @@ public class AdministrarPrestamosController implements Initializable {
       
     }
     
+=======
+    this.nombreTextField.getText();
+    this.matriculaTextField.getText();
+    this.equipoChoiceBox.getValue();
+    this.salonTextField.getText();
+
+    prestamo.registrarPrestamo(this.nombreTextField.getText(),
+            this.matriculaTextField.getText(), this.calcularFecha(),
+            this.calcularHora(), this.equipoChoiceBox.getValue().toString(),
+            this.salonTextField.getText());
+    this.equipoChoiceBox.getItems().clear();
+    this.equipoChoiceBox.getItems().addAll(this.equipo.obtenerDisponibles());
+
+    this.limpiarCampos();
+
+>>>>>>> master
   }
 
   private void limpiarCampos() {
@@ -202,16 +217,23 @@ public class AdministrarPrestamosController implements Initializable {
   @FXML
   private void accionBotonDevuelto(ActionEvent event) {
     Prestamo prestado = tablaPrestados.getSelectionModel().getSelectedItem();
+    Prestamo llamarMetodo = new Prestamo();
     int id = prestado.getNumeroPrestamo();
-    String equipo = prestado.getEquipo();
+    String equipoPrestado = prestado.getEquipo();
 
     try {
-      prestado.registrarDevolucion(id, this.calcularFecha(), this.calcularHora(), equipo);
+      llamarMetodo.registrarDevolucion(id, this.calcularFecha(),
+              this.calcularHora(), equipoPrestado);
+      this.equipoChoiceBox.getItems().clear();
+      this.equipoChoiceBox.getItems().addAll(this.equipo.obtenerDisponibles());
     } catch (SQLException ex) {
+<<<<<<< HEAD
       JOptionPane.showMessageDialog(null, 
           "El sistema no está dispobible por el momento");
+=======
+      Logger.getLogger(AdministrarPrestamosController.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> master
     }
-
   }
 
   @FXML
@@ -227,13 +249,15 @@ public class AdministrarPrestamosController implements Initializable {
   }
 
   /**
-   * Este método se encarga de añadir todos los registros de los préstamos a la tabla gráfica.
+   * Este método se encarga de añadir todos los registros de los préstamos a la
+   * tabla gráfica.
    */
   public void llenarTabla() {
     this.tablaPrestamos.getItems().clear();
-    this.columnaPrestamosEquipo.setCellValueFactory(new PropertyValueFactory<>("equipo"));
-    this.columnaPrestamosNombre.setCellValueFactory(new PropertyValueFactory<>(""
-            + "nombreSolicitante"));
+    this.columnaPrestamosEquipo.setCellValueFactory(
+            new PropertyValueFactory<>("equipo"));
+    this.columnaPrestamosNombre.setCellValueFactory(
+            new PropertyValueFactory<>("" + "nombreSolicitante"));
     this.columnaPrestamosMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
     this.columnaPrestamosFecha.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
     this.columnaPrestamosHora.setCellValueFactory(new PropertyValueFactory<>("horaPrestamo"));
@@ -255,8 +279,8 @@ public class AdministrarPrestamosController implements Initializable {
   }
 
   /**
-   * Este método se encarga de añdir los registros solo de los euipos que etán en estado
-   * de "Prestado".
+   * Este método se encarga de añdir los registros solo de los euipos que etán
+   * en estado de "Prestado".
    */
   public void llenarTablaPrestados() {
     this.tablaPrestados.getItems().clear();
@@ -303,10 +327,7 @@ public class AdministrarPrestamosController implements Initializable {
   }
 
   @FXML
-  private void accionSeleccionarEquipo(MouseEvent event) throws SQLException {
-    this.nombreEquipoTextField.setText(this.equipo.obtenerProducto((String) 
-            this.equipoChoiceBox.getValue()));
-
+  private void accionSeleccionarEquipo(MouseEvent event) {
   }
 
 }

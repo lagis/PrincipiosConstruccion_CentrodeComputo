@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import centro.de.computo.AdministrarUsuariosController;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +26,6 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
   private String query;
   private Connection conexion;
   private List<Prestamo> prestamos = new ArrayList<Prestamo>();
-  
 
   @Override
   public void registrarPrestamo(String nombreSolicitante, String matricula,
@@ -42,13 +42,13 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
             + "`salon`)"
             + "VALUES"
             + "(?,?,?,?,?,?);";
-    
+
     String query2 = "UPDATE `centro_de_computo`.`equipo` "
-              + "SET"
-              + "`estado` = 'prestado' "
-              + "WHERE equipo.numero_inventario like ?;";
+            + "SET"
+            + "`estado` = 'prestado' "
+            + "WHERE equipo.numero_inventario like ?;";
     try (PreparedStatement statement = conexion.prepareStatement(query);
-        PreparedStatement statement2 = conexion.prepareStatement(query2);) {
+            PreparedStatement statement2 = conexion.prepareStatement(query2);) {
 
       statement.setString(1, nombreSolicitante);
       statement.setString(2, matricula);
@@ -57,7 +57,7 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
       statement.setString(5, equipo);
       statement.setString(6, salon);
       statement.executeUpdate();
-      
+
       statement2.setString(1, equipo);
       statement2.executeUpdate();
 
@@ -77,9 +77,9 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
     conexion = this.conectar();
     query = "Select * from centro_de_computo.prestamo;";
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
-      
-      ResultSet result = 
-          this.ejecutarQuery(statement);
+
+      ResultSet result
+              = this.ejecutarQuery(statement);
       while (result.next()) {
         Prestamo prestamo = new Prestamo(result.getString("nombre_solicitante"),
                 result.getString("matricula_solicitante"),
@@ -110,13 +110,13 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
             + "from centro_de_computo.prestamo where prestamo.equipo_numero_inventario "
             + "in(select equipo.numero_inventario from centro_de_computo.equipo where equipo.estado "
             + "like 'prestado');";
-*/
-    query = "SELECT * FROM centro_de_computo.prestamo WHERE fecha_entrega IS null;"; 
+     */
+    query = "SELECT * FROM centro_de_computo.prestamo WHERE fecha_entrega IS null;";
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
-      
-      ResultSet result = 
-          this.ejecutarQuery(statement);
-      
+
+      ResultSet result
+              = this.ejecutarQuery(statement);
+
       while (result.next()) {
         Prestamo prestamo = new Prestamo(result.getInt("numero_prestamo"),
                 result.getString("fecha_prestamo"),
@@ -142,18 +142,16 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
           throws SQLException {
 
     conexion = this.conectar();
-    query = "UPDATE centro_de_computo.prestamo"
-            + "SET "
-              + "fecha_entrega = ?, "
-                 + "hora_entrega = ?, "
-                   + "WHERE numero_prestamo = ?;";
-    
-    String query2 = "UPDATE centro_de_computo.equipo "
-              + "SET estado.equipo = disponible WHERE numero_inventario.equipo = ?";
-    
+    query = "UPDATE centro_de_computo.prestamo SET "
+            + "fecha_entrega = ?, hora_entrega = ? "
+            + "WHERE numero_prestamo = ?;";
+
+    String query2 = "UPDATE centro_de_computo.equipo SET estado = 'disponible' "
+            + "WHERE numero_inventario = ?;";
+
     try (PreparedStatement statement = conexion.prepareStatement(query);
-        PreparedStatement statement2 = conexion.prepareStatement(query)) { 
-  
+            PreparedStatement statement2 = conexion.prepareStatement(query2)) {
+
       statement.setString(1, FechaDevolucion);
       statement.setString(2, horaDevolucion);
       statement.setInt(3, numeroPrestamo);
@@ -166,18 +164,18 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
       statement.close();
 
     } catch (SQLException ex) {
-      throw new SQLException();
+      Logger.getLogger(PrestamoAlmacen.class.getName()).log(Level.SEVERE, null, ex);
     } finally {
       conexion.close();
     }
   }
-  
-    private ResultSet ejecutarQuery(PreparedStatement stp) throws SQLException { 
-    try { 
-      return stp.executeQuery(); 
-    } catch (SQLException e) { 
-      throw new SQLException(); 
-    } 
-  } 
+
+  private ResultSet ejecutarQuery(PreparedStatement stp) throws SQLException {
+    try {
+      return stp.executeQuery();
+    } catch (SQLException e) {
+      throw new SQLException();
+    }
+  }
 
 }

@@ -27,4 +27,5 @@ public interface InterfacePrestamo {
           throws SQLException;
 
   public List<Prestamo>obtenerPrestados()throws SQLException;
+  
 }
