@@ -5,8 +5,6 @@
  */
 package centro.de.computo;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -59,7 +57,7 @@ public class AdministrarPrestamosController implements Initializable {
   @FXML
   private Button devueltoButton;
   @FXML
-  private TableView tablaPrestados;
+  private TableView<Prestamo> tablaPrestados;
   @FXML
   private TableColumn<Prestamo, String> columnaFecha;
   @FXML
@@ -94,8 +92,9 @@ public class AdministrarPrestamosController implements Initializable {
   private Button actualizarPrestamosButton;
   @FXML
   private ChoiceBox equipoChoiceBox;
-  @FXML
   private TextField nombreEquipoTextField;
+  @FXML
+  private TableColumn<?, ?> columnaIdPrestamo;
 
   /**
    * Initializes the controller class.
@@ -130,6 +129,15 @@ public class AdministrarPrestamosController implements Initializable {
 
   @FXML
   private void accionBotonDevuelto(ActionEvent event) {
+    Prestamo prestado = tablaPrestados.getSelectionModel().getSelectedItem();
+    int id = prestado.getNumeroPrestamo();
+    String equipo = prestado.getEquipo();
+    try{
+      prestado.registrarDevolucion(id, this.calcularFecha(), this.calcularHora(), equipo);
+    }catch(SQLException ex){
+      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    System.out.println(prestado.getEquipo());
   }
 
   @FXML
@@ -168,6 +176,7 @@ public class AdministrarPrestamosController implements Initializable {
 
   public void llenarTablaPrestados() {
     this.tablaPrestados.getItems().clear();
+    this.columnaIdPrestamo.setCellValueFactory(new PropertyValueFactory<>("numeroPrestamo"));
     this.columnaFecha.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
     this.columnaEquipo.setCellValueFactory(new PropertyValueFactory<>("equipo"));
     this.columnaMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
@@ -213,7 +222,6 @@ public class AdministrarPrestamosController implements Initializable {
   @FXML
   private void accionSeleccionarEquipo(MouseEvent event) throws SQLException {
     this.nombreEquipoTextField.setText(this.equipo.obtenerProducto((String) this.equipoChoiceBox.getValue()));
-    this.nombreEquipoTextField.setText("jj");
     
   }
 

@@ -46,7 +46,8 @@ public class Prestamo implements InterfacePrestamo {
     this.salon = salon;
   }
 
-  public Prestamo(String fechaPrestamo,String equipo,  String matricula,String nombreSolicitante,  String salon) {
+  public Prestamo(int numeroPrestamo,String fechaPrestamo,String equipo,  String matricula,String nombreSolicitante,  String salon) {
+    this.numeroPrestamo = numeroPrestamo;
     this.nombreSolicitante = nombreSolicitante;
     this.matricula = matricula;
     this.fechaPrestamo = fechaPrestamo;

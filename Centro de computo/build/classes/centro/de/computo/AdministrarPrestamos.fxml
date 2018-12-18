@@ -45,6 +45,7 @@
                         <Button fx:id="devueltoButton" layoutX="81.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionBotonDevuelto" text="Devuelto" />
                         <TableView fx:id="tablaPrestados" layoutX="233.0" layoutY="40.0" prefHeight="314.0" prefWidth="396.0">
                           <columns>
+                              <TableColumn fx:id="columnaIdPrestamo" prefWidth="75.0" text="idPrestamo" />
                               <TableColumn fx:id="columnaFecha" prefWidth="75.0" text="Fecha" />
                             <TableColumn fx:id="columnaEquipo" prefWidth="75.0" text="Equipo" />
                             <TableColumn fx:id="columnaMatricula" prefWidth="75.0" text="Matricula" />
