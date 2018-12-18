@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/PrestamoAlmacen.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/AdministrarPrestamosController.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Prestamo.java</file>
@@ -19,6 +20,13 @@
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/logica/Personal.java</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/centro/de/computo/AdministrarPrestamos.fxml</file>
             <file>file:/C:/Users/PREDATOR%2015%20G9-78Q/Desktop/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/src/persistencia/EquipoAlmacen.java</file>
+=======
+            <file>file:/C:/Users/marai/Documents/IngSoftware/4-Principios_Construccion/5/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/logica/PrestamoTest.java</file>
+            <file>file:/C:/Users/marai/Documents/IngSoftware/4-Principios_Construccion/5/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/logica/EquipoTest.java</file>
+            <file>file:/C:/Users/marai/Documents/IngSoftware/4-Principios_Construccion/5/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/logica/PersonalTest.java</file>
+            <file>file:/C:/Users/marai/Documents/IngSoftware/4-Principios_Construccion/5/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/logica/DictamenMantenimientoTest.java</file>
+            <file>file:/C:/Users/marai/Documents/IngSoftware/4-Principios_Construccion/5/PrincipiosConstruccion_CentrodeComputo/Centro%20de%20computo/test/logica/InventarioHardwareTest.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
