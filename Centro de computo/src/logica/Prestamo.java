@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import persistencia.PrestamoAlmacen;
 import persistencia.PersistenciaPrestamo;
-import java.lang.String;
 
 /**
  *
@@ -53,6 +52,13 @@ public class Prestamo implements InterfacePrestamo {
     this.fechaPrestamo = fechaPrestamo;
     this.equipo = equipo;
     this.salon = salon;
+  }
+  
+  public Prestamo(int numeroPrestamo,String FechaDevolucion,String horaDevolucion,String equipo){
+    this.numeroPrestamo = numeroPrestamo;
+    this.FechaDevolucion = FechaDevolucion;
+    this.horaDevolucion = horaDevolucion;
+    this.equipo = equipo;
   }
   
 
@@ -115,7 +121,8 @@ public class Prestamo implements InterfacePrestamo {
   public void registrarDevolucion(int numeroPrestamo,
           String FechaDevolucion,String horaDevolucion,
           String equipo) throws SQLException {
-    this.persistencia.registrarDevolucion(numeroPrestamo,FechaDevolucion, horaDevolucion,equipo);
+    this.persistencia.registrarDevolucion(numeroPrestamo,FechaDevolucion,
+            horaDevolucion,equipo);
   }
 
 }
