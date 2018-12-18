@@ -142,7 +142,7 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
             + "SET "
             + "`fecha_entrega.prestamo` = ?, "
             + "`hora_entrega.prestamo` = ?, "
-            + "WHERE `numero_prestamo.prestamo` = '?';";
+            + "WHERE `numero_prestamo.prestamo` = ?;";
     try {
 
       PreparedStatement statement = conexion.prepareStatement(query);
@@ -153,7 +153,7 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
       statement.executeUpdate();
 
       query = "UPDATE centro_de_computo.equipo"
-              + "SET estado = disponible where numero_inventario = '?'";
+              + "SET estado.equipo = 'disponible' where numero_inventario.equipo = '?'";
       statement = conexion.prepareStatement(query);
       statement.setString(1, equipo);
       statement.executeUpdate();
