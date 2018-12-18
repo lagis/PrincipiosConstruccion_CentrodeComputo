@@ -97,10 +97,10 @@ public class LoginController implements Initializable {
     Stage stage = (Stage) loginBoton.getScene().getWindow();
     stage.close();
   }
+  
   /**
    * Initializes the controller class.
    */
-  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 

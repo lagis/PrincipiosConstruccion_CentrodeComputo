@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.net.URL;
@@ -30,7 +31,7 @@ import logica.InterfacePrestamo;
 import logica.Prestamo;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author Giselle
  */
@@ -118,15 +119,15 @@ public class AdministrarPrestamosController implements Initializable {
     this.matriculaTextField.getText();
     this.equipoChoiceBox.getValue();
     this.salonTextField.getText();
-    
-    prestamo.registrarPrestamo(this.nombreTextField.getText(), 
-        this.matriculaTextField.getText(), this.calcularFecha(), 
-            this.calcularHora(), this.equipoChoiceBox.getValue().toString(), 
-                this.salonTextField.getText());
+
+    prestamo.registrarPrestamo(this.nombreTextField.getText(),
+            this.matriculaTextField.getText(), this.calcularFecha(),
+            this.calcularHora(), this.equipoChoiceBox.getValue().toString(),
+            this.salonTextField.getText());
     this.limpiarCampos();
-    
+
   }
-  
+
   private void limpiarCampos() {
     this.nombreTextField.setText("");
     this.matriculaTextField.setText("");
@@ -143,13 +144,13 @@ public class AdministrarPrestamosController implements Initializable {
     Prestamo prestado = tablaPrestados.getSelectionModel().getSelectedItem();
     int id = prestado.getNumeroPrestamo();
     String equipo = prestado.getEquipo();
-   
-    try{
+
+    try {
       prestado.registrarDevolucion(id, this.calcularFecha(), this.calcularHora(), equipo);
-    }catch(SQLException ex){
+    } catch (SQLException ex) {
       Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
+
   }
 
   @FXML
@@ -164,15 +165,21 @@ public class AdministrarPrestamosController implements Initializable {
     this.llenarTabla();
   }
 
+  /**
+   * Este método se encarga de añadir todos los registros de los préstamos a la tabla gráfica.
+   */
   public void llenarTabla() {
     this.tablaPrestamos.getItems().clear();
     this.columnaPrestamosEquipo.setCellValueFactory(new PropertyValueFactory<>("equipo"));
-    this.columnaPrestamosNombre.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitante"));
+    this.columnaPrestamosNombre.setCellValueFactory(new PropertyValueFactory<>(""
+            + "nombreSolicitante"));
     this.columnaPrestamosMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
     this.columnaPrestamosFecha.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
     this.columnaPrestamosHora.setCellValueFactory(new PropertyValueFactory<>("horaPrestamo"));
-    this.columnaPrestamosFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
-    this.columnaPrestamosHoraDevolucion.setCellValueFactory(new PropertyValueFactory<>("horaDevolucion"));
+    this.columnaPrestamosFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>(""
+            + "fechaDevolucion"));
+    this.columnaPrestamosHoraDevolucion.setCellValueFactory(new PropertyValueFactory<>(""
+            + "horaDevolucion"));
     this.columnaPrestamosSalon.setCellValueFactory(new PropertyValueFactory<>("salon"));
     List<Prestamo> lista;
     try {
@@ -187,6 +194,10 @@ public class AdministrarPrestamosController implements Initializable {
     }
   }
 
+  /**
+   * Este método se encarga de añdir los registros solo de los euipos que etán en estado
+   * de "Prestado".
+   */
   public void llenarTablaPrestados() {
     this.tablaPrestados.getItems().clear();
     this.columnaIdPrestamo.setCellValueFactory(new PropertyValueFactory<>("numeroPrestamo"));
@@ -212,7 +223,7 @@ public class AdministrarPrestamosController implements Initializable {
     Calendar dato = new GregorianCalendar();
     String fecha = new String();
     int anio = dato.get(Calendar.YEAR);
-    int mes = dato.get(Calendar.MONTH)+1;
+    int mes = dato.get(Calendar.MONTH) + 1;
     int dia = dato.get(Calendar.DAY_OF_MONTH);
 
     fecha = anio + "-" + mes + "-" + dia;
@@ -234,8 +245,9 @@ public class AdministrarPrestamosController implements Initializable {
 
   @FXML
   private void accionSeleccionarEquipo(MouseEvent event) throws SQLException {
-    this.nombreEquipoTextField.setText(this.equipo.obtenerProducto((String) this.equipoChoiceBox.getValue()));
-    
+    this.nombreEquipoTextField.setText(this.equipo.obtenerProducto((String) 
+            this.equipoChoiceBox.getValue()));
+
   }
 
 }

@@ -27,7 +27,6 @@ import logica.InventarioHardware;
  *
  * @author PREDATOR 15 G9-78Q
  */
-
 public class RegistrarEquipoController implements Initializable {
 
   @FXML
@@ -52,7 +51,7 @@ public class RegistrarEquipoController implements Initializable {
    * Initializes the controller class.
    */
   @Override
-  public void initialize  (URL url, ResourceBundle rb) {
+  public void initialize(URL url, ResourceBundle rb) {
     this.cbTipoEquipo.getItems().add("Desktop");
     this.cbTipoEquipo.getItems().add("Laptop");
     this.cbTipoEquipo.getItems().add("Cañon");
@@ -74,16 +73,16 @@ public class RegistrarEquipoController implements Initializable {
     String responsableUbicacion = (String) this.cbResponsable.getValue();
 
     if (this.validarDatos() && this.cbResponsable.getValue() != null
-        && this.cbTipoEquipo.getValue() != null) {
+            && this.cbTipoEquipo.getValue() != null) {
 
       try {
-        this.inventario.registrarEquipo(modelo, numeroSerie, 
-            tipoEquipo, marca, responsableUbicacion);
+        this.inventario.registrarEquipo(modelo, numeroSerie,
+                tipoEquipo, marca, responsableUbicacion);
         Stage stage = (Stage) bttGuardar.getScene().getWindow();
         stage.close();
       } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, 
-            "El sistema no está disponible por el momento, inténtelo más tarde");
+        JOptionPane.showMessageDialog(null,
+                "El sistema no está disponible por el momento, inténtelo más tarde");
       }
     } else {
       JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");
@@ -106,13 +105,11 @@ public class RegistrarEquipoController implements Initializable {
   private boolean validarNumeroSerie() {
     Pattern patron = Pattern.compile("[a-zA-Z-0-9]+");
     Matcher encaja = patron.matcher(this.tfNumeroSerie.getText());
-    return encaja.matches() && this.tfNumeroSerie.getText().length() 
-        <= this.longitudMaximaNumeroSerie;
+    return encaja.matches() && this.tfNumeroSerie.getText().length()
+            <= this.longitudMaximaNumeroSerie;
   }
 
   private boolean validarDatos() {
     return this.validarMarca() && this.validarModelo() && this.validarNumeroSerie();
   }
-
 }
- 

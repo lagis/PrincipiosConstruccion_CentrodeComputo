@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.net.URL;
@@ -20,7 +21,7 @@ import logica.DictamenMantenimiento;
 import logica.InterfaceDictamenMantenimiento;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author PREDATOR 15 G9-78Q
  */
@@ -46,9 +47,9 @@ public class VentanaReporteController implements Initializable {
   private TableColumn<DictamenMantenimiento, String> columnDescripcion;
   @FXML
   private TableColumn<DictamenMantenimiento, String> columnNumeroSerie;
-  
-  private static final InterfaceDictamenMantenimiento almacen =
-      new DictamenMantenimiento();
+
+  private static final InterfaceDictamenMantenimiento almacen
+          = new DictamenMantenimiento();
 
   /**
    * Initializes the controller class.
@@ -64,23 +65,21 @@ public class VentanaReporteController implements Initializable {
     this.columnTipoDictamen.setCellValueFactory(new PropertyValueFactory<>("tipoDictamen"));
     this.columnDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
     this.columnNumeroSerie.setCellValueFactory(new PropertyValueFactory<>("idEquipo"));
-    
+
     try {
       this.llenarLista(VentanaReporteController.almacen.generarReporteMantinimiento());
     } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, 
-            "El sistema no está disponible por el momento, inténtelo más tarde");
+      JOptionPane.showMessageDialog(null,
+              "El sistema no está disponible por el momento, inténtelo más tarde");
     }
-    
-    
-  }  
-  
-  
+
+  }
+
   private void llenarLista(List<DictamenMantenimiento> lista) {
     tableView.getItems().clear();
     for (DictamenMantenimiento dictamen : lista) {
       tableView.getItems().add(dictamen);
     }
   }
-  
+
 }

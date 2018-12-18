@@ -55,10 +55,13 @@ public class CambiarResponsableController implements Initializable {
     this.cbResponsable.getItems().add("CC4");
     this.cbResponsable.getItems().add("Bodega");
     this.cbResponsable.getItems().add("Fuera de servicio");
-    
-    
   }
   
+  /**
+   * Este método sirve para enviar los datos del equipo a otra ventana.
+   * @param modelo Dato que se enviará a otra ventana.
+   * @param numeroSerie Dato que se enviará a otra ventana.
+   */
   public static void mandarModeloNumeroSerie(
       String modelo, String numeroSerie) {
     CambiarResponsableController.modelo = modelo;
