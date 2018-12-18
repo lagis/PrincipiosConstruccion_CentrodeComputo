@@ -19,7 +19,7 @@ import persistencia.PersistenciaEquipo;
  * @author Pao
  */
 
-public class Equipo implements InterfaceEquipo{
+public class Equipo implements InterfaceEquipo {
   
   private String identificador;
   private String modelo;
@@ -30,10 +30,6 @@ public class Equipo implements InterfaceEquipo{
   private String disponibilidad;
   private PersistenciaEquipo persistencia = new EquipoAlmacen();
   
-  
-  
-  
-
   
   public Equipo(String identificador, String modelo, String numeroSerie,
       String tipoEquipo, String marca, String responsableUbicacion, String disponibilidad) {
@@ -107,11 +103,24 @@ public class Equipo implements InterfaceEquipo{
     return this.responsableUbicacion;
   }
 
+  /**
+   * Recupera una lista conequipos disponibles.
+   * @return lista de Strings.
+   * @throws SQLException Cuando no es posible recuperar el producto.
+   */
+  
   @Override
   public List<String> obtenerDisponibles() throws SQLException {
     return this.persistencia.obtenerDisponibles();
   }
 
+  /**
+   * Recupera los productos.
+   * @param identificador String
+   * @return String.
+   * @throws SQLException Cuando no es posible recuperar el producto.
+   */
+  
   @Override
   public String obtenerProducto(String identificador) throws SQLException {
     return this.persistencia.obtenerProducto(identificador);

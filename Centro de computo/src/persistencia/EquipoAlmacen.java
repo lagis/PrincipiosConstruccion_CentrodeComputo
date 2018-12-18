@@ -5,8 +5,7 @@
  */
 
 package persistencia; 
- 
-import centro.de.computo.AdministrarPrestamosController; 
+
 import conexion.GenericDao; 
 import java.sql.Connection; 
 import java.sql.PreparedStatement; 
@@ -14,47 +13,44 @@ import java.sql.ResultSet;
 import java.sql.SQLException; 
 import java.util.ArrayList; 
 import java.util.List; 
-import java.util.logging.Level; 
-import java.util.logging.Logger; 
 import logica.Equipo; 
  
 /** 
  * Permite guardar y recuperar Equipos, modificar sus datos y crear dictamenes. 
- * 
  * @author PREDATOR 15 G9-78Q 
  */ 
+
 public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquipo<T> { 
  
   private String query; 
  
-  /** 
-   * Registra un equipo nuevo dentro de la base de datos. 
-   * 
-   * @param modelo String con el modelo del equipo. 
-   * @param numeroSerie String con el número de serie del equipo. 
-   * @param tipoEquipo String con el tipo de equipo que se va a registrar. 
-   * @param marca String con la marca del equipo. 
-   * @param responsableUbicacion String con el responsable o la ubicación del 
-   * equipo. 
-   * @throws java.sql.SQLException Arroja esta excepción cuando no es posible 
-   * concretar la conexion. 
-   */ 
+  /**
+   * Registra un equipo nuevo dentro de la base de datos.
+   *
+   * @param modelo String con el modelo del equipo.
+   * @param numeroSerie String con el número de serie del equipo.
+   * @param tipoEquipo String con el tipo de equipo que se va a registrar.
+   * @param marca String con la marca del equipo.
+   * @param responsableUbicacion String con el responsable o la ubicación del equipo.
+   * @throws java.sql.SQLException Arroja esta excepción cuando no es posible concretar la conexion.
+   */
+  
   @Override 
   public void registrarEquipo(String modelo, String numeroSerie, String tipoEquipo, 
           String marca, String responsableUbicacion) throws SQLException { 
  
     Connection miConexion = this.conectar(); 
-    this.query = "INSERT INTO centro_de_computo.equipo " 
-            + "(numero_inventario, tipo_equipo, marca, " 
+    this.query = "INSERT INTO centro_de_computo.equipo "
+        + "(numero_inventario, tipo_equipo, marca, " 
             + "modelo, numero_serie) " 
-            + "VALUES(?, ?, ?, ?, ?);"; 
-    String query2 = "INSERT INTO centro_de_computo.area (nombre_area, " 
-            + "equipo_numero_inventario) " 
+               + "VALUES(?, ?, ?, ?, ?);"; 
+    String query2 = "INSERT INTO centro_de_computo.area (nombre_area, "
+        + "equipo_numero_inventario) " 
             + "VALUES(?, ?);"; 
  
-    try (PreparedStatement stp = miConexion.prepareStatement(this.query); 
-            PreparedStatement stp2 = miConexion.prepareStatement(query2)) { 
- 
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query);
+        PreparedStatement stp2 = miConexion.prepareStatement(query2)) {
+      
       stp.setString(1, numeroSerie); 
       stp.setString(2, tipoEquipo); 
       stp.setString(3, marca); 
@@ -76,13 +72,12 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   } 
  
   /** 
-   * Consulta un equipo registrado en la Base de datos. 
-   * 
+   * Consulta un equipo registrado en la Base de datos.
    * @param id entero correspondiente al identificador el Equio. 
    * @return Retorna un objeto de tipo Equipo. 
-   * @throws java.sql.SQLException Arroja esta excepción cuando no es posible 
-   * concretar la conexion. 
+   * @throws java.sql.SQLException Es arrojada cuando no es posible concretar la conexion. 
    */ 
+  
   @Override 
   public Equipo consultarEquipo(String id) throws SQLException { 
     Equipo equipo = null; 
@@ -102,8 +97,8 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
       String marca = resultadoQuery.getString("marca"); 
       String responsable = resultadoQuery.getString("responsable_ubicacion"); 
       String disponibilidad = resultadoQuery.getString("disponibilidad"); 
-      equipo = new Equipo(id, modelo, numeroSerie, 
-              tipoEquipo, marca, responsable, disponibilidad); 
+      equipo = new Equipo(id, modelo, numeroSerie,
+          tipoEquipo, marca, responsable, disponibilidad); 
  
     } catch (SQLException e) { 
       throw new SQLException(); 
@@ -122,28 +117,29 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   } 
  
   /** 
-   * Recupera todos los Equipos almacenados en la Base de datos. 
-   * 
+   * Recupera todos los Equipos almacenados en la Base de datos.
    * @return Retorna una lista con los equipos almacenados. 
-   * @throws java.sql.SQLException Arroja esta excepción cuando no es posible 
-   * concretar la conexion. 
+   * @throws java.sql.SQLException es arrojada cuando no es posible concretar la conexion. 
    */ 
+  
   @Override 
   public List<Equipo> consultarListaEquipo() throws SQLException { 
     List<Equipo> listaDeEquipos = new ArrayList<Equipo>(); 
     Connection miConexion = this.conectar(); 
-    this.query = "SELECT e.numero_inventario, e.tipo_equipo, e.marca, e.modelo, e.numero_serie, e.estado, " 
+    this.query = 
+        "SELECT e.numero_inventario, e.tipo_equipo, e.marca, e.modelo, e.numero_serie, e.estado, "
             + "a.nombre_area FROM centro_de_computo.equipo e, centro_de_computo.area a " 
-            + "WHERE e.numero_inventario = a.equipo_numero_inventario;"; 
+                + "WHERE e.numero_inventario = a.equipo_numero_inventario;"; 
     try (PreparedStatement stp = miConexion.prepareStatement(this.query)) { 
  
-      ResultSet resultadoQuery 
-              = this.ejecutarQuery(stp); 
+      ResultSet resultadoQuery
+          = this.ejecutarQuery(stp); 
       while (resultadoQuery.next()) { 
-        Equipo equipo = new Equipo(resultadoQuery.getString("e.numero_inventario"), 
-                resultadoQuery.getString("e.modelo"), resultadoQuery.getString("e.numero_serie"), 
+        Equipo equipo = new Equipo(resultadoQuery.getString("e.numero_inventario"),
+            resultadoQuery.getString("e.modelo"), resultadoQuery.getString("e.numero_serie"), 
                 resultadoQuery.getString("e.tipo_equipo"), resultadoQuery.getString("e.marca"), 
-                resultadoQuery.getString("a.nombre_area"), resultadoQuery.getString("e.estado")); 
+                    resultadoQuery.getString("a.nombre_area"), 
+                        resultadoQuery.getString("e.estado")); 
         listaDeEquipos.add(equipo); 
       } 
  
@@ -156,25 +152,24 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
   } 
  
   /** 
-   * Cambia el responsable a cargo de un equipo. 
-   * 
+   * Cambia el responsable a cargo de un equipo.
    * @param id identificador del equipo de tipo String 
    * @param nuevaUbicacion nueva ubicación del equipo. 
-   * @throws SQLException Arroja esta excepción cuando no es posible concretar 
-   * la conexion. 
+   * @throws SQLException Arroja esta excepción cuando no es posible concretar la conexion. 
    */ 
+  
   @Override 
   public void cambiarResponsable(String id, String nuevaUbicacion) throws SQLException { 
  
     Connection miConexion = this.conectar(); 
-    this.query = "UPDATE centro_de_computo.area " 
-            + "SET nombre_area = ? WHERE equipo_numero_inventario = ? ;"; 
+    this.query = "UPDATE centro_de_computo.area "
+        + "SET nombre_area = ? WHERE equipo_numero_inventario = ? ;"; 
  
-    String query2 = "UPDATE centro_de_computo.equipo " 
-            + "SET estado = ? WHERE numero_inventario = ? ;"; 
+    String query2 = "UPDATE centro_de_computo.equipo "
+        + "SET estado = ? WHERE numero_inventario = ? ;"; 
  
-    try (PreparedStatement stp = miConexion.prepareStatement(this.query); 
-            PreparedStatement stp2 = miConexion.prepareStatement(query2)) { 
+    try (PreparedStatement stp = miConexion.prepareStatement(this.query);
+        PreparedStatement stp2 = miConexion.prepareStatement(query2)) { 
  
       stp.setString(1, nuevaUbicacion); 
       stp.setString(2, id); 
@@ -198,15 +193,21 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
     } 
  
   } 
- 
+  
+  /**
+   * Recupera todos los equipos disponibles.
+   * @return lista con strings.
+   * @throws SQLException la arroja sino es posible realisar la conexión.
+   */
+  
   @Override 
   public List<String> obtenerDisponibles() throws SQLException { 
     List<String> listaDeEquiposDisponibles = new ArrayList<String>(); 
     Connection miConexion = this.conectar(); 
-    this.query = "SELECT equipo.numero_inventario " 
-            + "FROM centro_de_computo.equipo WHERE equipo.estado LIKE 'disponible';";
+    this.query = "SELECT equipo.numero_inventario "
+        + "FROM centro_de_computo.equipo WHERE equipo.estado LIKE 'disponible';";
     
-    try (PreparedStatement statement = miConexion.prepareStatement(query)){ 
+    try (PreparedStatement statement = miConexion.prepareStatement(query)) { 
        
       ResultSet result = 
           this.ejecutarQuery(statement);
@@ -215,32 +216,41 @@ public class EquipoAlmacen<T> extends GenericDao<T> implements PersistenciaEquip
         listaDeEquiposDisponibles.add(equipo); 
       } 
  
-    } catch (SQLException ex) { 
-      Logger.getLogger(AdministrarPrestamosController.class.getName()).log(Level.SEVERE, null, ex); 
+    } catch (SQLException ex) {
+      throw new SQLException();
     } finally { 
       miConexion.close(); 
     } 
     return listaDeEquiposDisponibles; 
   } 
  
-  @Override 
-  public String obtenerProducto(String identificador) throws SQLException { 
-  Connection miConexion = this.conectar(); 
-  String producto = new String(); 
-  this.query="Select equipo.tipo_equipo,marca,modelo " 
-          + "FROM centro_de_computo.equipo where equipo.numero_inventario like ?;"; 
-  try (PreparedStatement statement = miConexion.prepareStatement(query)) { 
-    
-      ResultSet result =
-          this.ejecutarQuery(statement);
-      statement.setString(1, identificador); 
-      producto =result.getString("tipo_equipo")+" "+result.getString("marca")+" "+result.getString("modelo");  
-  }catch(SQLException ex){ 
-    Logger.getLogger(AdministrarPrestamosController.class.getName()).log(Level.SEVERE, null, ex); 
-  }finally{ 
-    miConexion.close(); 
-  } 
-  return producto; 
-  } 
+  
+  /**
+   * Recupera un string con el producto.
+   * @param identificador String.
+   * @return String.
+   * @throws SQLException la arroja sino es posible realisar la conexión.
+   */
+  
+  @Override
+  public String obtenerProducto(String identificador) throws SQLException {
+    Connection miConexion = this.conectar();
+    String producto = new String();
+    this.query = "Select equipo.tipo_equipo,marca,modelo "
+        + "FROM centro_de_computo.equipo where equipo.numero_inventario like ?;";
+    try (PreparedStatement statement = miConexion.prepareStatement(query)) {
+
+      ResultSet result
+          = this.ejecutarQuery(statement);
+      statement.setString(1, identificador);
+      producto = result.getString("tipo_equipo") + " " + result.getString("marca") 
+          + " " + result.getString("modelo");
+    } catch (SQLException ex) {
+      throw new SQLException();
+    } finally {
+      miConexion.close();
+    }
+    return producto;
+  }
  
 } 

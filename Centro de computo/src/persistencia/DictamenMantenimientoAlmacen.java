@@ -52,7 +52,7 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
                     + "personal_idpersonal, equipo_numero_inventario) "
                         + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    try(PreparedStatement stp = miConexion.prepareStatement(query)) {
+    try (PreparedStatement stp = miConexion.prepareStatement(query)) {
       
       stp.setDate(1, fecha);
       stp.setString(2, region);
@@ -78,7 +78,6 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
 
   /**
    * Recupera una lista con los dictámenes del equipo respectivo.
-   *
    * @param id Número de identificador del que se quiere.
    * @return Retorna una lista con los dictámenes de mantenimiento registrados al equipo.
    */
@@ -91,29 +90,33 @@ public class DictamenMantenimientoAlmacen<T> extends GenericDao<T>
 
   
   /**
-   * 
-   * @param fehca
-   * @return
-   * @throws SQLException 
+   * recupera los dictámenes de mantenimiento a partir de la fecha establecida.
+   * @param fecha java.sql.Date.
+   * @return regresa una lista que contiene los dictámenes de mantenimiento.
+   * @throws SQLException lo arroja sino puede establecer una conexión con la base de datos.
    */
   
   @Override
-  public List<DictamenMantenimiento> generarReporte(java.sql.Date fehca) throws SQLException {
+  public List<DictamenMantenimiento> generarReporte(java.sql.Date fecha) throws SQLException {
     List<DictamenMantenimiento> lista = new ArrayList<DictamenMantenimiento>();
     Connection miConexion = this.conectar();
     String query = "SELECT * FROM centro_de_computo.dictamen_de_mantenimiento "
         + "WHERE fecha >= ?;";
     try (PreparedStatement stp = miConexion.prepareStatement(query)) {
-        stp.setDate(1, fehca);
+      stp.setDate(1, fecha);
       ResultSet resultadoQuery
           = this.ejecutarQuery(stp);
       while (resultadoQuery.next()) {
         DictamenMantenimiento dictamen
-            = new DictamenMantenimiento(resultadoQuery.getDate("fecha"), resultadoQuery.getString("region"),
-                resultadoQuery.getString("dependencia_solicitante"), resultadoQuery.getString("tipo_borrado"),
-                    resultadoQuery.getString("observaciones_equipo"), 
-                        resultadoQuery.getInt("numero_reporte"), resultadoQuery.getString("tipo_dictamen"),
-                        resultadoQuery.getString("descripcion_dictamen"), resultadoQuery.getString("equipo_numero_inventario"));
+            = new DictamenMantenimiento(resultadoQuery.getDate("fecha"), 
+                resultadoQuery.getString("region"), 
+                    resultadoQuery.getString("dependencia_solicitante"), 
+                        resultadoQuery.getString("tipo_borrado"), 
+                            resultadoQuery.getString("observaciones_equipo"), 
+                                resultadoQuery.getInt("numero_reporte"), 
+                                    resultadoQuery.getString("tipo_dictamen"),
+                                        resultadoQuery.getString("descripcion_dictamen"), 
+                                            resultadoQuery.getString("equipo_numero_inventario"));
         lista.add(dictamen);
 
       }

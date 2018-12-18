@@ -15,7 +15,6 @@ import persistencia.PersistenciaDictamenMantenimiento;
 
 /**
  * Contiene los datos que se registran durante un mantenimiento de equipo.
- * 
  * @author ferc
  * @author Giss
  * @author Pao
@@ -39,8 +38,8 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   
  
   public DictamenMantenimiento(String nombreTecnico, java.sql.Date fecha, String region,
-          String telefono, String correo, String entidadAcademica, String tipoBorrado,  
-              String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion) {
+      String telefono, String correo, String entidadAcademica, String tipoBorrado,  
+          String observaciones, int numeroDeReporte, String tipoDictamen, String descripcion) {
     this.nombreTecnico = nombreTecnico;
     this.fecha  = fecha;
     this.region = region;
@@ -131,9 +130,8 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
    * @param region String, región dónde se registra el dictamen.
    * @param dependencia String, dependencia académica de donde procede el dictamen.
    * @param tipoBorrado String, tipo de borrado que se le hará al equipo.
-   * @param observaciones String, observaciones correspondientes al equipo que se 
-   * le hará el mantenimiento.
-   * @param tipoDictamen String
+   * @param observaciones String, correspondientes al equipo que se le hará el mantenimiento.
+   * @param tipoDictamen String.
    * @param descripcion String, descripción del procedimiento.
    * @param idPersonal String, Núnero de empleado correspondiente al personal.
    * @param numeroInventario String, correspondiente al equipo.
@@ -156,14 +154,12 @@ public class DictamenMantenimiento implements InterfaceDictamenMantenimiento {
   /**
    * genera un reporte del mantenimiento ocurrido desde la fecha indicada hasta
    * la actualidad.
-   * @param fecha Dato de tipo Date que contrá la fecha desde que se quiere
-   * realizar el dictamen.
-   * @return retorna una lista con los dictámenes
-   * realizados desde esa fecha hasta la actualidad
+   * @return retorna una lista con los dictámenes realizados desde esa fecha hasta la actualidad.
+   * @throws java.sql.SQLException cuando no es posible conectarse a la database
    */
   
   @Override
-  public List<DictamenMantenimiento> generarReporteMantinimiento() throws SQLException{
+  public List<DictamenMantenimiento> generarReporteMantinimiento() throws SQLException {
     Date fecha = new Date();
     int apartirDeMeses = -6;
     Date fecha2 = this.sumarMeses(fecha, apartirDeMeses);

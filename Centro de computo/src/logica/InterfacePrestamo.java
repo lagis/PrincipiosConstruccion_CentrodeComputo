@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
- *
+ * Contiene métodos para administrar los préstamos.
  * @author Giselle
  */
 public interface InterfacePrestamo {
@@ -20,12 +20,12 @@ public interface InterfacePrestamo {
           String equipo, String salon)throws SQLException;
   
   public void registrarDevolucion(int numeroPrestamo,
-          String FechaDevolucion,String horaDevolucion,
+          String fechaDevolucion,String horaDevolucion,
           String equipo)throws SQLException;
 
-  public List<Prestamo>obtenerTodosLosPrestamos()
+  public List<Prestamo> obtenerTodosLosPrestamos()
           throws SQLException;
 
-  public List<Prestamo>obtenerPrestados()throws SQLException;
+  public List<Prestamo> obtenerPrestados()throws SQLException;
   
 }

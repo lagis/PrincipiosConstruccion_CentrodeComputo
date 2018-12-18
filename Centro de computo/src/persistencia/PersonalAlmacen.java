@@ -1,3 +1,4 @@
+
 package persistencia;
 
 import conexion.GenericDao;
@@ -10,11 +11,10 @@ import java.util.List;
 import logica.Personal;
 
 /**
- * Contiene métodos para realizar la administración del personal mediante una
- * base de datos mysql.
- *
+ * Contiene métodos para realizar la administración del personal mediante una base de datos mysql.
  * @author marai
  */
+
 public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal {
 
   private String query;
@@ -22,11 +22,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   private Personal personal;
 
   /**
-   * 
-   * @param numeroDePersonal
-   * @return
-   * @throws SQLException 
+   * Permite cuperar un personal.
+   * @param numeroDePersonal int id del personal.
+   * @return objeto de tipo Personal
+   * @throws SQLException la arroja sino puede realizar una conexión con la base de datos.
    */
+  
   @Override
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException {
 
@@ -52,10 +53,11 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @return
-   * @throws SQLException 
+   * Recupera una lista de personal registrado en la base de datos.
+   * @return una lista de personal
+   * @throws SQLException Arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public List<Personal> obternerTodoPersonal() throws SQLException {
     List<Personal> listaPersonal = new ArrayList<>();
@@ -83,10 +85,11 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param personal
-   * @throws SQLException 
+   * Registra un nuevo personal en el sistema.
+   * @param personal objeto de tipo Personal.
+   * @throws SQLException arroja una excepción si no puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public void registrarPersonal(Personal personal) throws SQLException {
     query = "INSERT INTO centro_de_computo.personal(idpersonal,nombreTecnico,correo,"
@@ -110,10 +113,11 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param personal
-   * @throws SQLException 
+   * Actualiza los datos de un personal ya registrado.
+   * @param personal Persona.
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase. 
    */
+  
   @Override
   public void actualizarPersonal(Personal personal) throws SQLException {
     query = "UPDATE centro_de_computo.personal SET nombreTecnico = ?, correo = ?,"
@@ -136,10 +140,11 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param personal
-   * @throws SQLException 
+   * Actualiza la contraseña de un usuario ya registrado.
+   * @param personal Personal.
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public void actualizarContrasenia(Personal personal) throws SQLException {
     query = "UPDATE centro_de_computo.usuario SET contrasenia = ? WHERE nombre_usuario = ? ;";
@@ -158,11 +163,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param numeroDePersonal
-   * @return
-   * @throws SQLException 
+   * Obtiene el puesto correspondiente al personal.
+   * @param numeroDePersonal int.
+   * @return String
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con laDataBase.
    */
+  
   @Override
   public String obteberPuesto(int numeroDePersonal) throws SQLException {
 
@@ -188,11 +194,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param numeroDePersonal
-   * @return
-   * @throws SQLException 
+   * Recupera la contraseña de un usuario.
+   * @param numeroDePersonal int
+   * @return String
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public String obtenerContrasenia(int numeroDePersonal) throws SQLException {
     query = "SELECT contrasenia FROM centro_de_computo.usuario WHERE "
@@ -216,11 +223,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param numeroDePersonal
-   * @return
-   * @throws SQLException 
+   * Busca un usuario en la base de datos.
+   * @param numeroDePersonal número correspondiente al usuario.
+   * @return true si encuentra una coincidencia.
+   * @throws SQLException sino puede realizar la conexión con la bDataBase.
    */
+  
   @Override
   public boolean buscarUsuario(int numeroDePersonal) throws SQLException {
     query = "SELECT usuario FROM centro_de_computo.personal WHERE nombre_usuario = ?; ";
@@ -245,11 +253,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param numeroDePersonal
-   * @param contrasenia
-   * @return 
+   * Busca a un usuario con esa contraseña y usuario.
+   * @param numeroDePersonal int
+   * @param contrasenia String
+   * @return true si encuenta una coincidencia.
    */
+  
   @Override
   public boolean buscarPersonal(int numeroDePersonal, String contrasenia) {
     query = "SELECT * FROM centro_de_computo.usuario WHERE "
@@ -280,10 +289,11 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param personal
-   * @throws SQLException 
+   * Registra una contraseña a un nuevo personal.
+   * @param personal de tipo personal.
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public void registrarContrasenia(Personal personal) throws SQLException {
     query = "INSERT INTO centro_de_computo.usuario(contrasenia,nombre_usuario,"
@@ -305,11 +315,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param correo
-   * @return
-   * @throws SQLException 
+   * Busca si ya se ha registrado el correo en la base de datos.
+   * @param correo String.
+   * @return true si encuentra una coincidencia.
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public boolean buscarCorreo(String correo) throws SQLException {
     query = "SELECT * FROM centro_de_computo.personal WHERE correo = ?; ";
@@ -334,11 +345,12 @@ public class PersonalAlmacen extends GenericDao implements PersistenciaPersonal 
   }
 
   /**
-   * 
-   * @param telefono
-   * @return
-   * @throws SQLException 
+   * Busca si ya se ha registrado el teléfono en la base de datos.
+   * @param telefono String.
+   * @return true si encuentra una coincidencia.
+   * @throws SQLException arroja esta excepción sino puede realizar una conexión con la DataBase.
    */
+  
   @Override
   public boolean buscarTelefono(String telefono) throws SQLException {
     query = "SELECT * FROM centro_de_computo.personal WHERE numero_telefono = ?; ";

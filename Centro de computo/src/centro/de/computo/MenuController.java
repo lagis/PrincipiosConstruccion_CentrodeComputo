@@ -34,6 +34,8 @@ public class MenuController implements Initializable {
   
   @FXML
   private Button bttEquipo;
+  @FXML
+  private Button bttReporte;
   
   /**
    * Initializes the controller class.
@@ -41,6 +43,10 @@ public class MenuController implements Initializable {
   
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    
+    if (User.getPuesto().equalsIgnoreCase("tecnico")) {
+      this.abrirOpcionesTecnico();
+    }
 
   }
 
@@ -82,6 +88,13 @@ public class MenuController implements Initializable {
   private void cerrarMenu(Button bt) {
     Stage stage = (Stage) bt.getScene().getWindow();
     stage.close();
+  }
+  
+  private void abrirOpcionesTecnico(){
+    this.bttPersonal.setVisible(false);
+    this.bttEquipo.setVisible(false);
+    
+    
   }
   
 }

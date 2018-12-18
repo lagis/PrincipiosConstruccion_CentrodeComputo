@@ -122,7 +122,6 @@ public class AdministrarPrestamosController implements Initializable {
   
   @FXML
   private void accionBotonAceptar(ActionEvent event) throws SQLException {
-<<<<<<< HEAD
     
     if (this.validarCamposRegistrar()) {
       
@@ -138,7 +137,6 @@ public class AdministrarPrestamosController implements Initializable {
       
     }
     
-=======
     this.nombreTextField.getText();
     this.matriculaTextField.getText();
     this.equipoChoiceBox.getValue();
@@ -153,7 +151,6 @@ public class AdministrarPrestamosController implements Initializable {
 
     this.limpiarCampos();
 
->>>>>>> master
   }
 
   private void limpiarCampos() {
@@ -227,12 +224,8 @@ public class AdministrarPrestamosController implements Initializable {
       this.equipoChoiceBox.getItems().clear();
       this.equipoChoiceBox.getItems().addAll(this.equipo.obtenerDisponibles());
     } catch (SQLException ex) {
-<<<<<<< HEAD
       JOptionPane.showMessageDialog(null, 
           "El sistema no está dispobible por el momento");
-=======
-      Logger.getLogger(AdministrarPrestamosController.class.getName()).log(Level.SEVERE, null, ex);
->>>>>>> master
     }
   }
 

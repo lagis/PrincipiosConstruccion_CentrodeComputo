@@ -1,0 +1,5 @@
+admincc
+FeGiPa232520.
+centro_de_computo
+localhost
+3306

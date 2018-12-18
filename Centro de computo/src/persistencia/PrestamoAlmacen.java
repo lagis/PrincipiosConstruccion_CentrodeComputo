@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package persistencia;
 
-import centro.de.computo.AdministrarUsuariosController;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 import conexion.GenericDao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import logica.Prestamo;
 
 /**
- *
+ * Contiene métodos para administrar los préstamos.
  * @author Giselle
  */
+
 public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPrestamo {
 
   private String query;
@@ -34,19 +33,19 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
 
     conexion = this.conectar();
     query = "INSERT INTO `centro_de_computo`.`prestamo`"
-            + "(`nombre_solicitante`,"
+        + "(`nombre_solicitante`,"
             + "`matricula_solicitante`,"
-            + "`fecha_prestamo`,"
-            + "`hora_prestamo`,"
-            + "`equipo_numero_inventario`,"
-            + "`salon`)"
-            + "VALUES"
-            + "(?,?,?,?,?,?);";
+                + "`fecha_prestamo`,"
+                    + "`hora_prestamo`,"
+                        + "`equipo_numero_inventario`,"
+                            + "`salon`)"
+                                + "VALUES"
+                                    + "(?,?,?,?,?,?);";
 
     String query2 = "UPDATE `centro_de_computo`.`equipo` "
-            + "SET"
+        + "SET"
             + "`estado` = 'prestado' "
-            + "WHERE equipo.numero_inventario like ?;";
+                + "WHERE equipo.numero_inventario like ?;";
     try (PreparedStatement statement = conexion.prepareStatement(query);
             PreparedStatement statement2 = conexion.prepareStatement(query2);) {
 
@@ -82,12 +81,12 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
               = this.ejecutarQuery(statement);
       while (result.next()) {
         Prestamo prestamo = new Prestamo(result.getString("nombre_solicitante"),
-                result.getString("matricula_solicitante"),
+            result.getString("matricula_solicitante"),
                 result.getString("fecha_prestamo"),
-                result.getString("hora_prestamo"),
-                result.getString("equipo_numero_inventario"),
-                result.getString("fecha_entrega"),
-                result.getString("hora_entrega"), result.getString("salon"));
+                    result.getString("hora_prestamo"),
+                        result.getString("equipo_numero_inventario"),
+                            result.getString("fecha_entrega"),
+                                result.getString("hora_entrega"), result.getString("salon"));
         prestamos.add(prestamo);
       }
 
@@ -104,13 +103,6 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
   public List<Prestamo> obtenerPrestados() throws SQLException {
     List<Prestamo> prestados = new ArrayList<Prestamo>();
     conexion = this.conectar();
-    /*
-    query = "select prestamo.numero_prestamo,prestamo.fecha_prestamo,prestamo.equipo_numero_inventario,"
-            + "prestamo.matricula_solicitante,prestamo.nombre_solicitante,prestamo.salon "
-            + "from centro_de_computo.prestamo where prestamo.equipo_numero_inventario "
-            + "in(select equipo.numero_inventario from centro_de_computo.equipo where equipo.estado "
-            + "like 'prestado');";
-     */
     query = "SELECT * FROM centro_de_computo.prestamo WHERE fecha_entrega IS null;";
     try (PreparedStatement statement = conexion.prepareStatement(query)) {
 
@@ -119,11 +111,11 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
 
       while (result.next()) {
         Prestamo prestamo = new Prestamo(result.getInt("numero_prestamo"),
-                result.getString("fecha_prestamo"),
+            result.getString("fecha_prestamo"),
                 result.getString("equipo_numero_inventario"),
-                result.getString("matricula_solicitante"),
-                result.getString("nombre_solicitante"),
-                result.getString("salon"));
+                    result.getString("matricula_solicitante"),
+                        result.getString("nombre_solicitante"),
+                            result.getString("salon"));
 
         prestados.add(prestamo);
       }
@@ -137,22 +129,22 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
   }
 
   @Override
-  public void registrarDevolucion(int numeroPrestamo, String FechaDevolucion,
+  public void registrarDevolucion(int numeroPrestamo, String fechaDevolucion,
           String horaDevolucion, String equipo)
           throws SQLException {
 
     conexion = this.conectar();
     query = "UPDATE centro_de_computo.prestamo SET "
-            + "fecha_entrega = ?, hora_entrega = ? "
+        + "fecha_entrega = ?, hora_entrega = ? "
             + "WHERE numero_prestamo = ?;";
 
     String query2 = "UPDATE centro_de_computo.equipo SET estado = 'disponible' "
-            + "WHERE numero_inventario = ?;";
+        + "WHERE numero_inventario = ?;";
 
     try (PreparedStatement statement = conexion.prepareStatement(query);
             PreparedStatement statement2 = conexion.prepareStatement(query2)) {
 
-      statement.setString(1, FechaDevolucion);
+      statement.setString(1, fechaDevolucion);
       statement.setString(2, horaDevolucion);
       statement.setInt(3, numeroPrestamo);
       statement.executeUpdate();
@@ -164,7 +156,7 @@ public class PrestamoAlmacen<T> extends GenericDao<T> implements PersistenciaPre
       statement.close();
 
     } catch (SQLException ex) {
-      Logger.getLogger(PrestamoAlmacen.class.getName()).log(Level.SEVERE, null, ex);
+      throw new SQLException();
     } finally {
       conexion.close();
     }
