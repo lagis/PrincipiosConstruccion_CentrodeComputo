@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centro.de.computo;
 
 import java.io.IOException;
@@ -30,7 +25,7 @@ import logica.InventarioPersonalInterface;
 import logica.Personal;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author marai
  */
@@ -59,19 +54,19 @@ public class AdministrarUsuariosController implements Initializable {
   private TableView<Personal> tabla;
 
   @FXML
-  private Button bRegistrar;
+  private Button botonRegistrar;
 
   @FXML
-  private Button bEditar;
+  private Button botonEditar;
 
   @FXML
-  private Button bVolver;
+  private Button botonVolver;
 
   /**
    * Initializes the controller class.
    *
-   * @param url
-   * @param rb
+   * @param url Parametro por defecto 
+   * @param rb Parametro por defecto 
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -84,7 +79,7 @@ public class AdministrarUsuariosController implements Initializable {
     this.llenarTabla();
   }
 
-  public void llenarTabla() {
+  private void llenarTabla() {
     List<Personal> lista;
     try {
       lista = this.personal.verPersonal();
@@ -98,46 +93,46 @@ public class AdministrarUsuariosController implements Initializable {
     }
   }
 
-  public void nuevoPersonalEvent(ActionEvent event) {
+  private void nuevoPersonalEvent(ActionEvent event) {
     try {
       this.abrirVentana("RegistrarUsuario.fxml");
     } catch (IOException ex) {
       Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    this.cerrarVentana(this.bRegistrar);
+    this.cerrarVentana(this.botonRegistrar);
   }
 
-  public void editarUsuarioEvent(ActionEvent event) throws IOException {
+  private void editarUsuarioEvent(ActionEvent event) throws IOException {
     Stage stage = new Stage();
     FXMLLoader loader = new FXMLLoader();
 
-    AnchorPane root = (AnchorPane) loader.load(getClass().getResource("EditarUsuario.fxml").openStream());
+    AnchorPane root = (AnchorPane) loader.load(getClass().getResource("Editar"
+            + "Usuario.fxml").openStream());
 
     EditarUsuarioController editarInctancia = (EditarUsuarioController) loader.getController();
     Personal person = this.tabla.getSelectionModel().getSelectedItem();
-    if(person != null){
+    if (person != null) {
       editarInctancia.llenarFormulario(Integer.toString(person.getIdPersonal()));
       Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    this.cerrarVentana(this.bEditar);
+      stage.setScene(scene);
+      stage.show();
+      this.cerrarVentana(this.botonEditar);
     } else {
       JOptionPane.showMessageDialog(null, "Por favor, seleccione el personal que desea ediatr");
     }
-    
-    
+
   }
 
-  public void volverEvent(ActionEvent event) {
+  private void volverEvent(ActionEvent event) {
     try {
       this.abrirVentana("Menu.fxml");
     } catch (IOException ex) {
       Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    this.cerrarVentana(this.bVolver);
+    this.cerrarVentana(this.botonVolver);
   }
 
-  public void abrirVentana(String ventana) throws IOException {
+  private void abrirVentana(String ventana) throws IOException {
     Stage stage = new Stage();
     Parent pane = FXMLLoader.load(getClass().getResource(ventana));
     Scene scene = new Scene(pane);
@@ -145,7 +140,7 @@ public class AdministrarUsuariosController implements Initializable {
     stage.show();
   }
 
-  public void cerrarVentana(Button boton) {
+  private void cerrarVentana(Button boton) {
     Stage stage = (Stage) boton.getScene().getWindow();
     stage.close();
   }

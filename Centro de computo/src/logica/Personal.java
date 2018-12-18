@@ -13,7 +13,8 @@ public class Personal {
   private String puesto;
   private String contrasenia;
 
-  public Personal(int idPersonal, String nombre, String correo, String telefono, String puesto, String contrasenia) {
+  public Personal(int idPersonal, String nombre, String correo, String telefono, 
+          String puesto, String contrasenia) {
     this.idPersonal = idPersonal;
     this.nombre = nombre;
     this.correo = correo;

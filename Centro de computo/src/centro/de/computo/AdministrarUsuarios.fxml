@@ -17,15 +17,15 @@
             <TableColumn fx:id="columnPuesto" prefWidth="150.0" text="Puesto" />
         </columns>
       </TableView>
-      <Button fx:id="bVolver" layoutX="968.0" layoutY="643.0" mnemonicParsing="false" onAction="#volverEvent" text="Volver">
+      <Button fx:id="botonVolver" layoutX="968.0" layoutY="643.0" mnemonicParsing="false" onAction="#volverEvent" text="Volver">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="bEditar" layoutX="63.0" layoutY="643.0" mnemonicParsing="false" onAction="#editarUsuarioEvent" prefHeight="29.0" prefWidth="68.0" text="Editar">
+      <Button fx:id="botonEditar" layoutX="63.0" layoutY="643.0" mnemonicParsing="false" onAction="#editarUsuarioEvent" prefHeight="29.0" prefWidth="68.0" text="Editar">
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Button fx:id="bRegistrar" layoutX="173.0" layoutY="643.0" mnemonicParsing="false" onAction="#nuevoPersonalEvent" prefHeight="29.0" prefWidth="68.0" text="Nuevo">
+      <Button fx:id="botonRegistrar" layoutX="173.0" layoutY="643.0" mnemonicParsing="false" onAction="#nuevoPersonalEvent" prefHeight="29.0" prefWidth="68.0" text="Nuevo">
          <font>
             <Font size="13.0" />
          </font></Button>

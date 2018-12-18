@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package centro.de.computo;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ import logica.InventarioPersonalInterface;
 import logica.Personal;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author marai
  */
@@ -58,16 +59,16 @@ public class RegistrarUsuarioController implements Initializable {
   private PasswordField pfConfirmacion;
 
   @FXML
-  private Button bCancelar;
+  private Button botonCancelar;
 
   @FXML
-  private Button bRegistrar;
+  private Button botonRegistrar;
 
   private InventarioPersonalInterface inventario = new InventarioPersonal();
 
   private final int maxCaracteres = 50;
   private final int maxTelefonoCaracteres = 10;
-  private final int maxIDCaracteres = 11;
+  private final int maxIdCaracteres = 11;
 
   /**
    * Initializes the controller class.
@@ -92,7 +93,7 @@ public class RegistrarUsuarioController implements Initializable {
         Personal nuevoPersonal = new Personal(
                 idPersonal, nombre, correo, telefono, puesto, contrasenia);
         this.inventario.registrarNuevoPersonal(nuevoPersonal);
-        this.cerrarRegistroUsuario(this.bRegistrar);
+        this.cerrarRegistroUsuario(this.botonRegistrar);
         try {
           this.volverVentanaAdministrar();
         } catch (IOException ex) {
@@ -130,7 +131,7 @@ public class RegistrarUsuarioController implements Initializable {
     } catch (IOException ex) {
       Logger.getLogger(RegistrarUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    this.cerrarRegistroUsuario(this.bCancelar);
+    this.cerrarRegistroUsuario(this.botonCancelar);
   }
 
   private void cerrarRegistroUsuario(Button btt) {
@@ -155,7 +156,7 @@ public class RegistrarUsuarioController implements Initializable {
   private boolean validarIdPersonal() throws SQLException {
     Pattern patron = Pattern.compile("[0-9]+");
     Matcher encaja = patron.matcher(this.tfIdPersonal.getText());
-    return encaja.matches() && this.tfIdPersonal.getText().length() <= this.maxIDCaracteres
+    return encaja.matches() && this.tfIdPersonal.getText().length() <= this.maxIdCaracteres
             && !this.inventario.comprobarIdPersonal(Integer.parseInt(this.tfIdPersonal.getText()));
   }
 

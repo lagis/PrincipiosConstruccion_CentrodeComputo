@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package centro.de.computo;
 
 import java.io.IOException;
@@ -31,7 +26,7 @@ import logica.InventarioPersonalInterface;
 import logica.Personal;
 
 /**
- * FXML Controller class
+ * FXML Controller class.
  *
  * @author marai
  */
@@ -40,7 +35,7 @@ public class EditarUsuarioController implements Initializable {
   private InventarioPersonalInterface personal = new InventarioPersonal();
   private Personal persona;
   private final int limite = 50;
-  private final int limitePhone= 10;
+  private final int limitePhone = 10;
 
   @FXML
   private Label labelIdPersonal;
@@ -64,8 +59,8 @@ public class EditarUsuarioController implements Initializable {
   /**
    * Initializes the controller class.
    *
-   * @param url
-   * @param rb
+   * @param url parametro por defecto
+   * @param rb parametro por defecto
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -75,7 +70,7 @@ public class EditarUsuarioController implements Initializable {
 
   @FXML
   private void edtitarButtonEvent(ActionEvent event) {
-     int idPersonal = Integer.parseInt(this.labelIdPersonal.getText());
+    int idPersonal = Integer.parseInt(this.labelIdPersonal.getText());
     String nombre = this.tfNuevoNombte.getText();
     String correo = this.tfNuevoCorreo.getText();
     String telefono = this.tfNuevoTelefono.getText();
@@ -136,9 +131,14 @@ public class EditarUsuarioController implements Initializable {
     stageEquipo.setScene(sceneEquipo);
     stageEquipo.show();
   }
-  
+
+  /**
+   * Recibe el objeto selecicionado en la ventana anterior.
+   * 
+   * @param id se refiere al identificador del personal enviado
+   */
   @FXML
-  public void llenarFormulario(String id){
+  public void llenarFormulario(String id) {
     this.labelIdPersonal.setText(id);
     try {
       this.persona = this.personal.obtenerPersonal(Integer.parseInt(id));
@@ -146,34 +146,37 @@ public class EditarUsuarioController implements Initializable {
       this.tfNuevoCorreo.setText(this.persona.getCorreo());
       this.tfNuevoTelefono.setText(this.persona.getTelefono());
       this.pfPassword.setText(this.persona.getContrasenia());
-      
+
     } catch (SQLException ex) {
       JOptionPane.showMessageDialog(null, "No se pudieron recuperar los datos.");
     }
-    
+
   }
-  
-  private boolean validarDatos() throws SQLException{
-   return this.validarNombre() && this.validaCorreo() &&  this.validarTelefono() 
-           && this.validarContrasenia();
+
+  private boolean validarDatos() throws SQLException {
+    return this.validarNombre() && this.validaCorreo() && this.validarTelefono()
+            && this.validarContrasenia();
   }
-   
+
   private boolean validarNombre() {
     Pattern patron = Pattern.compile("[a-zA-Z- ]+");
     Matcher encaja = patron.matcher(this.tfNuevoNombte.getText());
     return encaja.matches() && this.tfNuevoNombte.getText().length() <= this.limite;
   }
-    private boolean validarTelefono() throws SQLException {
+
+  private boolean validarTelefono() throws SQLException {
     Pattern patron = Pattern.compile("[0-9]+");
     Matcher encaja = patron.matcher(this.tfNuevoTelefono.getText());
     return encaja.matches() && this.tfNuevoTelefono.getText().length() <= this.limitePhone;
   }
-      private boolean validaCorreo() throws SQLException {
+
+  private boolean validaCorreo() throws SQLException {
     Pattern patron = Pattern.compile("[A-Za-z0-9.@_-]+");
     Matcher encaja = patron.matcher(this.tfNuevoCorreo.getText());
     return encaja.matches() && this.tfNuevoCorreo.getText().length() <= this.limite;
   }
-    private boolean validarContrasenia() {
+
+  private boolean validarContrasenia() {
     Pattern patron = Pattern.compile("[^ ]+");
     Matcher encaja = patron.matcher(this.pfPassword.getText());
     return encaja.matches() && this.pfPassword.getText().length() <= this.limite
