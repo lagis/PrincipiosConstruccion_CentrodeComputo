@@ -93,6 +93,8 @@ public class AdministrarUsuariosController implements Initializable {
     }
   }
 
+  
+  @FXML
   private void nuevoPersonalEvent(ActionEvent event) {
     try {
       this.abrirVentana("RegistrarUsuario.fxml");
@@ -102,6 +104,7 @@ public class AdministrarUsuariosController implements Initializable {
     this.cerrarVentana(this.botonRegistrar);
   }
 
+  @FXML
   private void editarUsuarioEvent(ActionEvent event) throws IOException {
     Stage stage = new Stage();
     FXMLLoader loader = new FXMLLoader();
@@ -118,11 +121,12 @@ public class AdministrarUsuariosController implements Initializable {
       stage.show();
       this.cerrarVentana(this.botonEditar);
     } else {
-      JOptionPane.showMessageDialog(null, "Por favor, seleccione el personal que desea ediatr");
+      JOptionPane.showMessageDialog(null, "Por favor, seleccione el personal que desea editar");
     }
 
   }
 
+  @FXML
   private void volverEvent(ActionEvent event) {
     try {
       this.abrirVentana("Menu.fxml");

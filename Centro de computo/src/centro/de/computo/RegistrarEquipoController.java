@@ -82,7 +82,7 @@ public class RegistrarEquipoController implements Initializable {
         stage.close();
       } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null,
-                "El sistema no está disponible por el momento, inténtelo más tarde");
+                "Ya existe un equipo con ese número de serie.");
       }
     } else {
       JOptionPane.showMessageDialog(null, "Por favor, introzca datos válidos");

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -95,6 +97,8 @@ public class AdministrarPrestamosController implements Initializable {
   private TextField nombreEquipoTextField;
   @FXML
   private TableColumn<?, ?> columnaIdPrestamo;
+  
+  private final int maximoTextField = 45;
 
   /**
    * Initializes the controller class.
@@ -113,19 +117,28 @@ public class AdministrarPrestamosController implements Initializable {
     }
   }
 
+   @FXML
+  private void llenarTabla(ActionEvent event) {
+    
+  }
+  
   @FXML
   private void accionBotonAceptar(ActionEvent event) throws SQLException {
-    this.nombreTextField.getText();
-    this.matriculaTextField.getText();
-    this.equipoChoiceBox.getValue();
-    this.salonTextField.getText();
-
-    prestamo.registrarPrestamo(this.nombreTextField.getText(),
-            this.matriculaTextField.getText(), this.calcularFecha(),
-            this.calcularHora(), this.equipoChoiceBox.getValue().toString(),
-            this.salonTextField.getText());
-    this.limpiarCampos();
-
+    
+    if (this.validarCamposRegistrar()) {
+      
+      prestamo.registrarPrestamo(this.nombreTextField.getText(),
+          this.matriculaTextField.getText(), this.calcularFecha(),
+              this.calcularHora(), this.equipoChoiceBox.getValue().toString(),
+                this.salonTextField.getText());
+      this.limpiarCampos();
+  
+    } else {
+      JOptionPane.showMessageDialog(null, "Por favor introduzca su información de forma correcta y "
+          + "escoja un equipo");
+      
+    }
+    
   }
 
   private void limpiarCampos() {
@@ -133,6 +146,53 @@ public class AdministrarPrestamosController implements Initializable {
     this.matriculaTextField.setText("");
     this.equipoChoiceBox.setValue("");
     this.salonTextField.setText("");
+  }
+  
+  private boolean validarCamposRegistrar() {
+    return this.validarChooiseBox() &&
+        this.validarMatricula() && this.validarNombre()
+        && this.validarSalon();
+  }
+    
+  
+  
+  private boolean validarSalon() {
+    Pattern patron = Pattern.compile("[a-zA-Z-0-9- ]+");
+    Matcher encaja = 
+        patron.matcher(this.nombreTextField.getText());
+    return encaja.matches() && this.nombreTextField.getText().length() 
+        <= this.maximoTextField;
+  }
+
+
+  private boolean validarChooiseBox() {
+    boolean retorno = true;
+    if(this.equipoChoiceBox.getValue() == null) {
+      retorno = false;
+    } else {
+      String vacio = (String) this.equipoChoiceBox.getValue();
+      if ( vacio.equalsIgnoreCase("")) {
+        retorno = false;
+      }
+    }
+    
+      return retorno;  
+  }
+  
+  private boolean validarNombre() {
+    Pattern patron = Pattern.compile("[a-zA-Z-.- ]+");
+    Matcher encaja = 
+        patron.matcher(this.nombreTextField.getText());
+    return encaja.matches() && this.nombreTextField.getText().length() 
+        <= this.maximoTextField;
+  }
+  
+  private boolean validarMatricula() {
+    Pattern patron = Pattern.compile("[z-Z]+[s-S]+[0-9]");
+    Matcher encaja = 
+        patron.matcher(this.nombreTextField.getText());
+    return encaja.matches() && this.matriculaTextField.getText().length() 
+        <= this.maximoTextField;
   }
 
   @FXML
@@ -148,7 +208,8 @@ public class AdministrarPrestamosController implements Initializable {
     try {
       prestado.registrarDevolucion(id, this.calcularFecha(), this.calcularHora(), equipo);
     } catch (SQLException ex) {
-      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+      JOptionPane.showMessageDialog(null, 
+          "El sistema no está dispobible por el momento");
     }
 
   }
@@ -189,7 +250,6 @@ public class AdministrarPrestamosController implements Initializable {
         tablaPrestamos.getItems().add(prestamo);
       }
     } catch (SQLException ex) {
-      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
       JOptionPane.showMessageDialog(null, "No se pudieron recuperar los datos");
     }
   }
@@ -214,7 +274,6 @@ public class AdministrarPrestamosController implements Initializable {
         tablaPrestados.getItems().add(prestado);
       }
     } catch (SQLException ex) {
-      Logger.getLogger(AdministrarUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
       JOptionPane.showMessageDialog(null, "No se pudieron recuperar los datos");
     }
   }

@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.AdministrarUsuariosController">
+<AnchorPane fx:id="AnchorPane" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="centro.de.computo.AdministrarUsuariosController">
    <children>
-      <TableView fx:id="tabla" layoutX="49.0" layoutY="50.0" onSort="#llenarTabla" prefHeight="565.0" prefWidth="971.0">
+      <TableView fx:id="tabla" layoutX="49.0" layoutY="50.0" prefHeight="565.0" prefWidth="971.0">
         <columns>
           <TableColumn fx:id="columnNumero" prefWidth="103.0" text="No. Personal" />
           <TableColumn fx:id="columnNombre" prefWidth="303.0" text="Nombre" />

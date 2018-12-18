@@ -2,5 +2,5 @@ projectKey=centroDeComputo
 serverUrl=http://localhost:9000
 serverVersion=7.4.0.18908
 dashboardUrl=http://localhost:9000/dashboard?id=centroDeComputo
-ceTaskId=AWfAepsy6lV8ER4j8AWl
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWfAepsy6lV8ER4j8AWl
+ceTaskId=AWfDGwUd6lV8ER4j8AWm
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWfDGwUd6lV8ER4j8AWm
