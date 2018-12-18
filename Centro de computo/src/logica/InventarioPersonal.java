@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package logica;
 
 import java.sql.SQLException;
@@ -25,10 +26,10 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param usuario
-   * @return
-   * @throws SQLException
+   * comprueba si existe el persona.
+   * @param usuario Ide del personal
+   * @return si existe o no el personal
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public boolean comprobarIdPersonal(int usuario) throws SQLException {
@@ -36,10 +37,10 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param contrasenia
-   * @return
-   * @throws SQLException
+   *  comprieba la contraseña .
+   * @param contrasenia es la contraseña dek usuario
+   * @return si la contraseña conicide y es correcta.
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public boolean comprobarContrasenia(String contrasenia) throws SQLException {
@@ -47,10 +48,10 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param numeroDePersonal
-   * @return
-   * @throws SQLException
+   * obtiene el registro del personal.
+   * @param numeroDePersonal id del personal
+   * @return objeto personal
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public Personal obtenerPersonal(int numeroDePersonal) throws SQLException {
@@ -58,10 +59,10 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param numeroDePersonal
-   * @param contrasenia
-   * @return
+   * comprueba si los datos del usuario estan correctos.
+   * @param numeroDePersonal numero del personal
+   * @param contrasenia contraseña del usuario.
+   * @return regresa si los datos si existe y son correctos
    */
   @Override
   public boolean comprobarPersonal(int numeroDePersonal, String contrasenia) {
@@ -69,9 +70,9 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param usuario
-   * @return
+   * obtiene el puesto del personal indicado.
+   * @param usuario id del personal
+   * @return regresa el puesto del personal
    */
   @Override
   public String obtenerPuesto(int usuario) {
@@ -83,8 +84,9 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @return @throws SQLException
+   * obtiene todos los registros del personal.
+   * @return lista de objetos personal.
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public List<Personal> verPersonal() throws SQLException {
@@ -92,9 +94,9 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param personal
-   * @throws SQLException
+   * registra un nuevo objeto personal.
+   * @param personal objeto personal.
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public void registrarNuevoPersonal(Personal personal) throws SQLException {
@@ -107,10 +109,10 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param correo
-   * @return
-   * @throws SQLException
+   * comprueba si el correo existe.
+   * @param correo correo del personal
+   * @return si existe el correo
+   * @throws SQLException Por si causa problemas la base
    */
   @Override
   public boolean comprobarCorreo(String correo) throws SQLException {
@@ -118,19 +120,19 @@ public class InventarioPersonal implements InventarioPersonalInterface {
   }
 
   /**
-   *
-   * @param telefono
-   * @return
-   * @throws SQLException
-   */
+   * comprueba si el telefono no es repedido.
+   * @param telefono telefono del personal.
+   * @return regresa si existe el telefono.
+   * @throws SQLException Por si causa problemas la base
+   */ 
   @Override
   public boolean comprobarTelefono(String telefono) throws SQLException {
     return this.almacen.buscarTelefono(telefono);
   }
 
   /**
-   *
-   * @param personal
+   * edita un registro de un personal.
+   * @param personal recibe un objeto personal
    */
   @Override
   public void editarPersonal(Personal personal) {

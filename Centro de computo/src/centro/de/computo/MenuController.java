@@ -90,7 +90,7 @@ public class MenuController implements Initializable {
     stage.close();
   }
   
-  private void abrirOpcionesTecnico(){
+  private void abrirOpcionesTecnico() {
     this.bttPersonal.setVisible(false);
     this.bttEquipo.setVisible(false);
     
